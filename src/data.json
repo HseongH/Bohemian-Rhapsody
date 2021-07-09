@@ -1,0 +1,109 @@
+{
+  "search": {
+    "result": [
+      {
+        "postId": 1,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg"
+      },
+      {
+        "postId": 2,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 3,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 4,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 5,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 6,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 7,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 8,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 9,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 10,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      },
+      {
+        "postId": 11,
+        "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+      }
+    ]
+  },
+
+  "get": {
+    "posts": {
+      "result": [
+        {
+          "postId": 1,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032509540448772796294379_265.jpg"
+        },
+        {
+          "postId": 2,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 3,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 4,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 5,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 6,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 7,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 8,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 9,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 10,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        },
+        {
+          "postId": 11,
+          "img": "http://ui.ssgcdn.com/cmpt/banner/202103/2021032510103294732678601367_140.jpg"
+        }
+      ]
+    }
+  },
+
+  "post": {},
+
+  "detail": {},
+
+  "like": {},
+
+  "sign": {}
+}
