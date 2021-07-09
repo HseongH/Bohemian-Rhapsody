@@ -34,7 +34,7 @@ function App() {
         }}
       >
         <Header />
-
+        <p>안녕하세요</p>
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
           <Route path="/detail" exact component={Detail} />
@@ -45,7 +45,6 @@ function App() {
           <Route path="/likes" exact component={Likes} />
         </ConnectedRouter>
       </ThemeProvider>
-      안녕하세요
     </>
   );
 }
