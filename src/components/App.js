@@ -18,6 +18,7 @@ import Likes from '../pages/Likes';
 
 // COMPONENTS
 import Header from './Header';
+import Input from '../elements/Input';
 
 // STYLE
 import GlobalStyle from '../common/globalStyle';
@@ -34,7 +35,7 @@ function App() {
         }}
       >
         <Header />
-
+        <Input placeholder="잘 나오는지 확인" />
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
           <Route path="/detail" exact component={Detail} />

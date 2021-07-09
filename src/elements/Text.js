@@ -1,8 +1,11 @@
 // LIBRARY
 import React from 'react';
+import styled from 'styled-components';
 
-const Text = (props) => {
-  return <div></div>;
+const TextStyle = styled.p``;
+
+const Text = ({ children, ...props }) => {
+  return <TextStyle>{children}</TextStyle>;
 };
 
 Text.defaultProps = {};
