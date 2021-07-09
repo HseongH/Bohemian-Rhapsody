@@ -15,6 +15,6 @@
 
 - State Management: redux, react-redux
 - Style Work: styled-components
-- Route: react-router-dom
+- Route: react-router-dom, connected-react-router
 - Middleware: redux-thunk, redux-logger
 - History: history
