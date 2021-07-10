@@ -5,14 +5,13 @@ import styled from 'styled-components';
 import { Button } from '../elements/index';
 
 // ICON
-// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const DropDownStyle = styled.ul`
   width: 110px;
   position: absolute;
   top: ${(props) => props.top};
-  right: 0;
+  left: ${(props) => `calc(100% - ${props.pos});`};
   border-radius: 10px;
   padding: 10px 0;
   box-sizing: border-box;
@@ -81,6 +80,7 @@ const Dropdown = (props) => {
 
 Dropdown.defaultProps = {
   top: '48px',
+  pos: '100%',
 };
 
 export default Dropdown;
