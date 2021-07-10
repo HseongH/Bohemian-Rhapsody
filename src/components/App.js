@@ -19,8 +19,6 @@ import Likes from '../pages/Likes';
 // COMPONENTS
 import Header from './Header';
 
-import Favorite from '../elements/Favorite';
-
 // STYLE
 import GlobalStyle from '../common/globalStyle';
 
@@ -36,7 +34,7 @@ function App() {
         }}
       >
         <Header />
-        <Favorite />
+
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
           <Route path="/detail" exact component={Detail} />
