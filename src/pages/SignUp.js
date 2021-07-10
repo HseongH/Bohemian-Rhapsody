@@ -38,7 +38,7 @@ const SignUp = (props) => {
               }}
             />
           </Grid>
-          <Grid padding="16px 0px">
+          <Grid padding="16px 0px 50px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
               PASSWORD CHECK:
             </Text>
