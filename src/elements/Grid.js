@@ -17,6 +17,7 @@ Grid.defaultProps = {
   verSort: 'center',
   width: '100%',
   height: '100%',
+  overflow: 'hidden',
   padding: false,
   margin: false,
   align: false,
@@ -37,7 +38,7 @@ const GridBox = styled.div`
     ${(props) => (props.shadow ? `box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;` : '')}
     ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
     box-sizing: border-box;
-  overflow: hidden;
+  overflow: ${(props) => props.overflow};
   &:hover {
     background: ${(props) => props.hoverColor};
     ${(props) =>
