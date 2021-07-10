@@ -4,6 +4,9 @@ import React from 'react';
 //Elements
 import { Text, Title, Input, Grid, Button } from '../elements'
 
+// HISTORY
+import { history } from '../redux/configStore';
+
 const Login = (props) => {
   return (
     <React.Fragment>
@@ -15,7 +18,7 @@ const Login = (props) => {
         radius="20px"
         shadow
       >
-        <Grid padding='1px'>
+        <Grid padding='16px'>
           <Title>LOGIN</Title>
 
           <Grid padding="16px 0px">
@@ -29,7 +32,7 @@ const Login = (props) => {
             />
           </Grid>
 
-          <Grid padding="16px 0px">
+          <Grid padding="16px 0px 50px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
               PASSWORD :
             </Text>
@@ -40,7 +43,17 @@ const Login = (props) => {
             />
           </Grid>
 
-          <Grid padding="16px 0px">
+          <Grid padding="5px 0px">
+            <Text fontSize="12px" lineHeight="2" textIndent="15px">
+              혹시 회원이 아니신가요?
+            </Text>
+            <Button width="100%" height="auto" padding="12px 0" radius="20px"
+              bg="#EFEFEF"
+              hoverColor="#ccc"
+              color="inherit"
+              clickEvent={()=>{history.push('/signup');}}>회원가입 하러가기</Button>
+          </Grid>
+          <Grid padding="16px 0px 0px 0px">
             <Button width="100%" height="auto" padding="12px 0" radius="20px"
               clickEvent={() => { console.log("로그인!!"); }}>로그인 하기</Button>
           </Grid>
