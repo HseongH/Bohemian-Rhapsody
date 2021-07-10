@@ -4,6 +4,9 @@ import React from 'react';
 // ELEMENTS
 import { Button, Text, Grid, Title } from '../elements/index';
 
+// HISTORY
+import { history } from '../redux/configStore';
+
 const Likes = (props) => {
   return (
     <Grid>
@@ -24,6 +27,9 @@ const Likes = (props) => {
         radius="30px"
         margin="0 auto"
         display="flex"
+        clickEvent={() => {
+          history.push('/');
+        }}
       >
         게시물 추가하러 가기
       </Button>

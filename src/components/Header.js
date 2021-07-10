@@ -30,7 +30,14 @@ const Header = (props) => {
 
         <Dropdown
           contents={['로그인', '회원가입']}
-          clickEvent={[() => {history.push('/login');}, ()=>{history.push('/signup');}]}
+          clickEvent={[
+            () => {
+              history.push('/login');
+            },
+            () => {
+              history.push('/signup');
+            },
+          ]}
           icon={<PersonIcon />}
           top="83px"
           pos="110px"
