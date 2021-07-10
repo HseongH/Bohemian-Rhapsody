@@ -3,7 +3,7 @@ import React from 'react';
 // import styled from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button, Input } from '../elements/index';
+import { Grid, Button, Input, Text } from '../elements/index';
 
 const Write = (props) => {
   return (
@@ -14,9 +14,14 @@ const Write = (props) => {
       </Grid>
 
       <Grid>
-        <Input fontSize="23px" placeholder="제목을 입력해주세요." style={{ fontWeight: 700 }} />
-        <Input placeholder="가수 이름을 입력해주세요." />
-        <Input type="date" />
+        <Input
+          fontSize="23px"
+          placeholder="제목을 입력해주세요."
+          margin="0 0 20px"
+          style={{ fontWeight: 700 }}
+        />
+        <Input margin="0 0 20px" placeholder="가수 이름을 입력해주세요." />
+        <Input margin="0 0 20px" type="date" />
 
         <Button width="100%" height="auto" padding="12px 0" radius="20px">
           작성 완료

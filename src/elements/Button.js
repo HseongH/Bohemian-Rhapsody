@@ -9,6 +9,7 @@ const ButtonStyle = styled.button`
   padding: ${(props) => props.padding};
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
+  font-size: ${(props) => props.fontSize};
   box-sizing: border-box;
   border: none;
   cursor: pointer;
@@ -38,6 +39,7 @@ const Button = ({ children, clickEvent, ...props }) => {
 Button.defaultProps = {
   width: '60px',
   height: '60px',
+  fontSize: '16px',
   color: '#fff',
   padding: 0,
   radius: '50%',
