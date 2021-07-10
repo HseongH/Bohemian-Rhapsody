@@ -1,9 +1,19 @@
 // LIBRARY
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+
+// ELEMENT
+import { Button } from './index';
 
 const Favorite = (props) => {
-  return <div></div>;
+  console.log(props.palette);
+  const [text, setText] = useState('저장');
+  const [bg, setBg] = useState('#A336A3');
+
+  return (
+    <Button width="auto" height="auto" padding="10px 12px" radius="20px" bg={bg}>
+      {text}
+    </Button>
+  );
 };
 
 Favorite.defaultProps = {};

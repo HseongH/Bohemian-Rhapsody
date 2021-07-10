@@ -10,6 +10,8 @@ const ButtonStyle = styled.button`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
   box-sizing: border-box;
+  border: none;
+  cursor: pointer;
   display: inline-flex;
   justify-content: center;
   align-items: center;
@@ -19,7 +21,7 @@ const ButtonStyle = styled.button`
     return css`
       background: ${selected};
       &:hover {
-        #A336CC;
+        background: ${(props) => props.hoverColor};
       }
     `;
   }};
@@ -39,6 +41,7 @@ Button.defaultProps = {
   color: '#fff',
   padding: 0,
   radius: '50%',
+  hoverColor: '#a336cc',
   clickEvent: () => {},
 };
 
