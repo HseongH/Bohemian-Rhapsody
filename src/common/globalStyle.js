@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
         font-weight: 400;
         line-height: 1.25;
-        color: #2B2D42;
+        color: #212529;
     }
 `;
 
