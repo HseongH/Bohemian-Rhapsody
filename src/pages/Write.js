@@ -1,27 +1,70 @@
 // LIBRARY
-import React from 'react';
-// import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 
 // ELEMENTS
 import { Grid, Button, Input, Text } from '../elements/index';
 
+// ICON
+import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
+
+const LabelStyle = styled.label`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  font-size: 20px;
+  border: dashed #ddd;
+  border-radius: 10px;
+`;
+
+const InputFile = styled.input`
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
 const Write = (props) => {
+  const [height, setHeight] = useState('450px');
+
   return (
-    <Grid is_flex="space-between" margin="0 auto" padding="20px 30px" bg="#eee" radius="20px">
-      <Grid padding="10px" radius="10px">
-        <label htmlFor="input--file">이미지 추가</label>
-        <input type="file" id="input--file" />
+    <Grid
+      width="980px"
+      is_flex="space-between"
+      margin="50px auto"
+      padding="30px 40px"
+      bg="#eee"
+      radius="20px"
+    >
+      <Grid
+        width="380px"
+        bg="#fff"
+        padding="20px"
+        radius="10px"
+        margin="0 30px 0 0"
+        style={{ height: `${height}`, position: 'relative' }}
+      >
+        <LabelStyle htmlFor="input--file">
+          <InsertPhotoIcon />
+          이미지 추가
+        </LabelStyle>
+        <InputFile type="file" id="input--file" />
       </Grid>
 
-      <Grid>
+      <Grid style={{ flex: 1 }}>
         <Input
           fontSize="23px"
           placeholder="제목을 입력해주세요."
-          margin="0 0 20px"
+          margin="0 0 50px"
           style={{ fontWeight: 700 }}
         />
-        <Input margin="0 0 20px" placeholder="가수 이름을 입력해주세요." />
-        <Input margin="0 0 20px" type="date" />
+        <Input margin="0 0 40px" placeholder="가수 이름을 입력해주세요." />
+        <Input margin="0 0 40px" type="date" />
 
         <Button width="100%" height="auto" padding="12px 0" radius="20px">
           작성 완료
