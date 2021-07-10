@@ -23,7 +23,7 @@ const Detail = (props) => {
         <Image src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
       </Grid>
 
-      <Grid style={{ flex: 1, position: 'relative' }}>
+      <Grid style={{ flex: 1, position: 'relative' }} overflow="visible">
         <Grid is_flex="space-between">
           <Dropdown
             contents={['수정', '삭제']}
