@@ -8,6 +8,7 @@ const InputStyle = styled.input`
   width: ${(props) => props.width};
   background: ${(props) => props.bg};
   padding: ${(props) => props.padding};
+  margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
   font-size: ${(props) => props.fontSize};
   border: 1px solid #ccc;
@@ -55,6 +56,7 @@ Input.defaultProps = {
   width: '100%',
   bg: '#fff',
   padding: '8px 12px',
+  margin: 0,
   radius: '20px',
   fontSize: '16px',
   type: 'text',
