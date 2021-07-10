@@ -13,6 +13,8 @@ import { history } from '../redux/configStore';
 //Icons
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
+import SearchIcon from '@material-ui/icons/Search';
+
 
 const Header = (props) => {
   return (

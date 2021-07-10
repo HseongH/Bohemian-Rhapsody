@@ -16,7 +16,7 @@ const Post = (props) => {
         history.push('/detail');
       }}
     >
-      <Image src={post.img} />
+      <Image src={post.imgURL} />
     </Grid>
   );
 };
