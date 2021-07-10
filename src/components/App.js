@@ -17,6 +17,9 @@ import Likes from '../pages/Likes';
 
 // COMPONENTS
 import Header from './Header';
+import AddBtn from './AddBtn';
+
+// ELEMENTS
 import { Grid } from '../elements';
 
 // STYLE
@@ -38,6 +41,8 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
           <Route path="/likes" exact component={Likes} />
         </ConnectedRouter>
+
+        <AddBtn />
       </Grid>
     </>
   );

@@ -11,6 +11,7 @@ const ButtonStyle = styled.button`
   border-radius: ${(props) => props.radius};
   font-size: ${(props) => props.fontSize};
   background: ${(props) => props.bg};
+  box-shadow: ${(props) => props.shadow};
   box-sizing: border-box;
   border: none;
   cursor: pointer;
