@@ -79,7 +79,7 @@ const Write = (props) => {
       margin="50px auto"
       padding="30px 40px"
       radius="20px"
-      style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
+      shadow
     >
       <Grid width="320px" margin="0 30px 0 0">
         <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
