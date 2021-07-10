@@ -29,8 +29,8 @@ const Header = (props) => {
         <Input padding="20px 15px" placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
 
         <Dropdown
-          contents={['로그아웃']}
-          clickEvent={[() => {}]}
+          contents={['로그인', '회원가입']}
+          clickEvent={[() => {history.push('/login');}, ()=>{history.push('/signup');}]}
           icon={<PersonIcon />}
           top="83px"
         />
