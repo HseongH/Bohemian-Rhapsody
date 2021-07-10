@@ -1,6 +1,6 @@
 // LIBRARY
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const ButtonStyle = styled.button`
   width: ${(props) => props.width};
@@ -10,6 +10,7 @@ const ButtonStyle = styled.button`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
   font-size: ${(props) => props.fontSize};
+  background: ${(props) => props.bg};
   box-sizing: border-box;
   border: none;
   cursor: pointer;
@@ -17,15 +18,9 @@ const ButtonStyle = styled.button`
   justify-content: center;
   align-items: center;
 
-  ${(props) => {
-    const selected = props.theme.palette.mainColor;
-    return css`
-      background: ${selected};
-      &:hover {
-        background: ${(props) => props.hoverColor};
-      }
-    `;
-  }};
+  &:hover {
+    backgorund: ${(props) => props.hoverColor};
+  }
 `;
 
 const Button = ({ children, clickEvent, ...props }) => {
@@ -44,6 +39,7 @@ Button.defaultProps = {
   padding: 0,
   radius: '50%',
   hoverColor: '#a336cc',
+  bg: '#A336A3',
   clickEvent: () => {},
 };
 

@@ -24,7 +24,6 @@ const LabelStyle = styled.label`
   height: 100%;
   cursor: pointer;
   font-size: 20px;
-  border-radius: 10px;
   box-sizing: border-box;
   ${PosAbs()};
   z-index: 3;
@@ -49,24 +48,35 @@ const Write = (props) => {
       bg="#eee"
       radius="20px"
     >
-      <Grid
-        width="350px"
-        bg="#fff"
-        padding="20px"
-        radius="10px"
-        margin="0 30px 0 0"
-        style={{ height: `${height}`, position: 'relative' }}
-      >
-        <Grid style={{ border: ' border: dashed #ddd' }}>
-          <LabelStyle htmlFor="input--file">
-            <InsertPhotoIcon />
-            이미지 추가
-          </LabelStyle>
+      <Grid width="350px" margin="0 30px 0 0">
+        <Grid
+          bg="#fff"
+          padding="20px"
+          radius="10px"
+          style={{ height: `${height}`, position: 'relative' }}
+        >
+          <Grid radius="10px" style={{ border: 'dashed #ddd' }}>
+            <LabelStyle htmlFor="input--file">
+              <InsertPhotoIcon />
+              이미지 추가
+            </LabelStyle>
 
-          <InputFile type="file" id="input--file" />
+            <InputFile type="file" id="input--file" />
 
-          <Image style={{ position: 'absolute', left: 0, top: 0 }} />
+            <Image style={{ position: 'absolute', left: 0, top: 0 }} />
+          </Grid>
         </Grid>
+
+        <Button
+          width="100%"
+          height="auto"
+          padding="12px 0"
+          radius="20px"
+          margin="20px 0 0"
+          bg="#e9ecef"
+        >
+          URL로 추가하기
+        </Button>
       </Grid>
 
       <Grid style={{ flex: 1 }}>

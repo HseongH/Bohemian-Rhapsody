@@ -26,25 +26,17 @@ function App() {
   return (
     <>
       <GlobalStyle />
-      <ThemeProvider
-        theme={{
-          palette: {
-            mainColor: '#A336A3',
-          },
-        }}
-      >
-        <Header />
+      <Header />
 
-        <ConnectedRouter history={history}>
-          <Route path="/" exact component={Home} />
-          <Route path="/detail" exact component={Detail} />
-          <Route path="/write" exact component={Write} />
-          <Route path="/modify" exact component={Modify} />
-          <Route path="/login" exact component={LogIn} />
-          <Route path="/signup" exact component={SignUp} />
-          <Route path="/likes" exact component={Likes} />
-        </ConnectedRouter>
-      </ThemeProvider>
+      <ConnectedRouter history={history}>
+        <Route path="/" exact component={Home} />
+        <Route path="/detail" exact component={Detail} />
+        <Route path="/write" exact component={Write} />
+        <Route path="/modify" exact component={Modify} />
+        <Route path="/login" exact component={LogIn} />
+        <Route path="/signup" exact component={SignUp} />
+        <Route path="/likes" exact component={Likes} />
+      </ConnectedRouter>
     </>
   );
 }
