@@ -36,6 +36,37 @@ const InputFile = styled.input`
   ${PosAbs()};
 `;
 
+const InputArea = styled.textarea`
+  --lightcolor: #6c757d;
+
+  width: 100%;
+  height: 158px;
+  resize: none;
+  padding: 8px 15px;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+
+  &:focus {
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px inset;
+    outline: none;
+    border: none;
+  }
+
+  &::placeholder {
+    color: var(--lightcolor);
+  }
+
+  &::-webkit-input-placeholder {
+    color: var(--lightcolor);
+  }
+
+  &:-ms-input-placeholder {
+    color: var(--lightcolor);
+  }
+`;
+
 const Write = (props) => {
   const [height, setHeight] = useState('380px');
   const [visable, setVisable] = useState(true);
@@ -95,16 +126,18 @@ const Write = (props) => {
         <Input
           fontSize="23px"
           placeholder="제목을 입력해주세요."
-          margin="40px 0"
+          margin="0 0 20px"
           style={{ fontWeight: 700 }}
         />
 
-        <Input margin="0 0 40px" placeholder="가수 이름을 입력해주세요." />
+        <Input margin="0 0 20px" placeholder="가수 이름을 입력해주세요." />
 
         <Text fontSize="12px" lineHeight="2" textIndent="15px">
           발매 일자 / 공연 일자를 선택해 주세요.
         </Text>
-        <Input margin="0 0 40px" type="date" />
+        <Input margin="0 0 20px" type="date" />
+
+        <InputArea placeholder="간단한 내용을 입력해주세요."></InputArea>
 
         <Button width="100%" height="auto" padding="12px 0" radius="20px">
           작성 완료
