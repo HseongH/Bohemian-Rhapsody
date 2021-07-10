@@ -25,10 +25,6 @@ const Detail = (props) => {
 
       <Grid style={{ flex: 1, position: 'relative' }}>
         <Grid is_flex="space-between">
-          <Button width="auto" height="auto" padding="12px 15px" radius="30px">
-            저장
-          </Button>
-
           <Dropdown
             contents={['수정', '삭제']}
             clickEvent={[() => {}, () => {}]}
@@ -40,6 +36,10 @@ const Detail = (props) => {
             color="inherit"
             fontSize="22px"
           />
+
+          <Button width="auto" height="auto" padding="12px 15px" radius="30px">
+            저장
+          </Button>
         </Grid>
 
         <Title fontSize="28px" margin="30px 0">

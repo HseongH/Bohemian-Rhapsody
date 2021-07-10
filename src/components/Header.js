@@ -33,6 +33,7 @@ const Header = (props) => {
           clickEvent={[() => {history.push('/login');}, ()=>{history.push('/signup');}]}
           icon={<PersonIcon />}
           top="83px"
+          pos="110px"
         />
       </Grid>
     </React.Fragment>
