@@ -1,12 +1,20 @@
 // LIBRARY
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 // ELEMENTS
 import { Grid, Button, Input, Text, Image } from '../elements/index';
 
 // ICON
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
+
+const PosAbs = () => {
+  return css`
+    position: absolute;
+    top: 0;
+    left: 0;
+  `;
+};
 
 const LabelStyle = styled.label`
   display: flex;
@@ -16,18 +24,17 @@ const LabelStyle = styled.label`
   height: 100%;
   cursor: pointer;
   font-size: 20px;
-  border: dashed #ddd;
   border-radius: 10px;
   box-sizing: border-box;
+  ${PosAbs()};
+  z-index: 3;
 `;
 
 const InputFile = styled.input`
   width: 1px;
   height: 1px;
   overflow: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
+  ${PosAbs()};
 `;
 
 const Write = (props) => {
@@ -42,13 +49,23 @@ const Write = (props) => {
       bg="#eee"
       radius="20px"
     >
-      <Grid width="350px" bg="#fff" padding="20px" radius="10px" margin="0 30px 0 0">
-        <Grid style={{ height: `${height}`, position: 'relative' }}>
+      <Grid
+        width="350px"
+        bg="#fff"
+        padding="20px"
+        radius="10px"
+        margin="0 30px 0 0"
+        style={{ height: `${height}`, position: 'relative' }}
+      >
+        <Grid style={{ border: ' border: dashed #ddd' }}>
           <LabelStyle htmlFor="input--file">
             <InsertPhotoIcon />
             이미지 추가
           </LabelStyle>
+
           <InputFile type="file" id="input--file" />
+
+          <Image style={{ position: 'absolute', left: 0, top: 0 }} />
         </Grid>
       </Grid>
 
@@ -59,7 +76,9 @@ const Write = (props) => {
           margin="40px 0"
           style={{ fontWeight: 700 }}
         />
+
         <Input margin="0 0 40px" placeholder="가수 이름을 입력해주세요." />
+
         <Text fontSize="12px" lineHeight="2" textIndent="15px">
           발매 일자 / 공연 일자를 선택해 주세요.
         </Text>

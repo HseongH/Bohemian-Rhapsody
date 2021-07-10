@@ -35,7 +35,7 @@ const GridBox = styled.div`
     ${(props) => (props.shadow ? `box-shadow: 5px 9px 15px grey; ` : '')}
     ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
     box-sizing: border-box;
-  over-flow: hidden;
+  overflow: hidden;
 `;
 
 export default Grid;

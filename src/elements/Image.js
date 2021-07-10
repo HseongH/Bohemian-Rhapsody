@@ -10,6 +10,7 @@ const Image = (props) => {
   const { src, alt } = props;
 
   if (src) return <ImageStyle src={src} alt={alt} />;
+  else return null;
 };
 
 Image.defaultProps = {};
