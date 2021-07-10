@@ -66,6 +66,7 @@ const Dropdown = (props) => {
                   key={Date.now() + idx}
                   onClick={() => {
                     props.clickEvent[idx]();
+                    handleClose();
                   }}
                 >
                   {content}
