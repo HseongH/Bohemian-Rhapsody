@@ -1,5 +1,7 @@
 // LIBRARY
 import React from 'react';
+import StackGrid from 'react-stack-grid';
+
 import { Grid } from '../elements';
 import Post from '../components/Post';
 
@@ -26,13 +28,11 @@ const Home = (props) => {
   ];
 
   return (
-    <React.Fragment>
-      <Grid style={{ flexWrap: 'wrap' }} is_flex padding="10px 15px 15px 15px">
-        {result.map((post, idx) => {
-          return <Post post={post} key={idx} />;
-        })}
-      </Grid>
-    </React.Fragment>
+    <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
+      {result.map((post, idx) => {
+        return <Post post={post} key={idx} />;
+      })}
+    </StackGrid>
   );
 };
 
