@@ -1,12 +1,16 @@
 // LIBRARY
 import React from 'react';
-import { Input, Button } from '../elements';
+import { Input, Grid, Button } from '../elements';
 
 const Header = (props) => {
   return (
-  <React.Fragment>
-    <Input/>
-  </React.Fragment>
+    <React.Fragment>
+      <Grid is_flex>
+        <Button>HOME</Button>
+        <Input placeholder="Search"/>
+        <Button>Logout</Button>
+      </Grid>
+    </React.Fragment>
   )
 };
 
