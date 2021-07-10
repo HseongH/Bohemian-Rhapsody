@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // ELEMENTS
-import { Grid, Button, Input, Text } from '../elements/index';
+import { Grid, Button, Input, Text, Image } from '../elements/index';
 
 // ICON
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
@@ -18,6 +18,7 @@ const LabelStyle = styled.label`
   font-size: 20px;
   border: dashed #ddd;
   border-radius: 10px;
+  box-sizing: border-box;
 `;
 
 const InputFile = styled.input`
@@ -30,7 +31,7 @@ const InputFile = styled.input`
 `;
 
 const Write = (props) => {
-  const [height, setHeight] = useState('450px');
+  const [height, setHeight] = useState('420px');
 
   return (
     <Grid
@@ -41,19 +42,14 @@ const Write = (props) => {
       bg="#eee"
       radius="20px"
     >
-      <Grid
-        width="380px"
-        bg="#fff"
-        padding="20px"
-        radius="10px"
-        margin="0 30px 0 0"
-        style={{ height: `${height}`, position: 'relative' }}
-      >
-        <LabelStyle htmlFor="input--file">
-          <InsertPhotoIcon />
-          이미지 추가
-        </LabelStyle>
-        <InputFile type="file" id="input--file" />
+      <Grid width="350px" bg="#fff" padding="20px" radius="10px" margin="0 30px 0 0">
+        <Grid style={{ height: `${height}`, position: 'relative' }}>
+          <LabelStyle htmlFor="input--file">
+            <InsertPhotoIcon />
+            이미지 추가
+          </LabelStyle>
+          <InputFile type="file" id="input--file" />
+        </Grid>
       </Grid>
 
       <Grid style={{ flex: 1 }}>
