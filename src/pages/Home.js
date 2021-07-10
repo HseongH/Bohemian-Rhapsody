@@ -2,7 +2,7 @@
 import React from 'react';
 import StackGrid from 'react-stack-grid';
 
-import { Grid } from '../elements';
+// COMPONENTS
 import Post from '../components/Post';
 
 const Home = (props) => {
