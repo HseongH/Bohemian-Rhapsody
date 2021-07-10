@@ -18,7 +18,7 @@ const Login = (props) => {
         radius="20px"
         shadow
       >
-        <Grid padding='1px'>
+        <Grid padding='16px'>
           <Title>LOGIN</Title>
 
           <Grid padding="16px 0px">
