@@ -19,7 +19,7 @@ const ButtonStyle = styled.button`
   align-items: center;
 
   &:hover {
-    backgorund: ${(props) => props.hoverColor};
+    background: ${(props) => props.hoverColor};
   }
 `;
 
@@ -38,8 +38,8 @@ Button.defaultProps = {
   color: '#fff',
   padding: 0,
   radius: '50%',
-  hoverColor: '#a336cc',
-  bg: '#A336A3',
+  bg: '#5a189a',
+  hoverColor: '#2b1773',
   clickEvent: () => {},
 };
 

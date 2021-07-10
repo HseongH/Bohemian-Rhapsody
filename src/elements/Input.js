@@ -15,7 +15,7 @@ const InputStyle = styled.input`
   box-sizing: border-box;
 
   &:focus {
-    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px inset;
     outline: none;
     border: none;
   }
@@ -55,7 +55,7 @@ const Input = ({ placeholder, type, value, changeEvent, ...props }) => {
 Input.defaultProps = {
   width: '100%',
   bg: '#fff',
-  padding: '8px 12px',
+  padding: '8px 15px',
   margin: 0,
   radius: '20px',
   fontSize: '16px',

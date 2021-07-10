@@ -7,11 +7,11 @@ const Header = (props) => {
     <React.Fragment>
       <Grid is_flex>
         <Button>HOME</Button>
-        <Input placeholder="Search"/>
+        <Input placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
         <Button>Logout</Button>
       </Grid>
     </React.Fragment>
-  )
+  );
 };
 
 Header.defaultProps = {};
