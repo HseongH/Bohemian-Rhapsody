@@ -2,8 +2,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const ImageStyle = styled.img`
+  width: 100%;
+`;
+
 const Image = (props) => {
-  return <div></div>;
+  const { src, alt } = props;
+
+  return <ImageStyle src={src} alt={alt} />;
 };
 
 Image.defaultProps = {};

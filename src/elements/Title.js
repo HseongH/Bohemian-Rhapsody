@@ -2,15 +2,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const titleStyle = styled.h2`
+const TitleStyle = styled.h2`
   font-size: ${(props) => props.fontSize};
   font-weight: 700;
 `;
 
-const Title = (props) => {
-  return <div></div>;
+const Title = ({ children, ...props }) => {
+  return <TitleStyle {...props}>{children}</TitleStyle>;
 };
 
-Title.defaultProps = {};
+Title.defaultProps = {
+  fontSize: '16px',
+};
 
 export default Title;
