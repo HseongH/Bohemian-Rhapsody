@@ -45,12 +45,12 @@ const Write = (props) => {
       is_flex="space-between"
       margin="50px auto"
       padding="30px 40px"
-      bg="#EFEFEF"
       radius="20px"
+      style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
     >
       <Grid width="350px" margin="0 30px 0 0">
         <Grid
-          bg="#fff"
+          bg="#EFEFEF"
           padding="20px"
           radius="10px"
           style={{ height: `${height}`, position: 'relative' }}
@@ -73,7 +73,7 @@ const Write = (props) => {
           padding="12px 0"
           radius="20px"
           margin="20px 0 0"
-          bg="#fff"
+          bg="#EFEFEF"
           hoverColor="#ccc"
           color="inherit"
         >

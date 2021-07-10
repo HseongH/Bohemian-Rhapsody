@@ -7,6 +7,8 @@ const TextStyle = styled.p`
   color: ${(props) => props.color};
   line-height: ${(props) => props.lineHeight};
   text-indent: ${(props) => props.textIndent};
+  font-weight: ${(props) => props.fontWeight};
+  margin: ${(props) => props.margin};
   word-break: break-all;
   white-space: pre-line;
   display: -webkit-box;
@@ -19,10 +21,7 @@ const Text = ({ children, ...props }) => {
 };
 
 Text.defaultProps = {
-  fontSize: '16px',
   color: '#495057',
-  lineHeight: 1.25,
-  textIndent: 0,
 };
 
 export default Text;
