@@ -17,6 +17,7 @@ import Likes from '../pages/Likes';
 
 // COMPONENTS
 import Header from './Header';
+import { Grid } from '../elements';
 
 // STYLE
 import GlobalStyle from '../common/globalStyle';
@@ -24,18 +25,20 @@ import GlobalStyle from '../common/globalStyle';
 function App() {
   return (
     <>
-      <GlobalStyle />
-      <Header />
+      <Grid style={{ maxWidth: "1440px" }} margin="0px auto">
+        <GlobalStyle />
+        <Header />
 
-      <ConnectedRouter history={history}>
-        <Route path="/" exact component={Home} />
-        <Route path="/detail" exact component={Detail} />
-        <Route path="/write" exact component={Write} />
-        <Route path="/modify" exact component={Modify} />
-        <Route path="/login" exact component={LogIn} />
-        <Route path="/signup" exact component={SignUp} />
-        <Route path="/likes" exact component={Likes} />
-      </ConnectedRouter>
+        <ConnectedRouter history={history}>
+          <Route path="/" exact component={Home} />
+          <Route path="/detail" exact component={Detail} />
+          <Route path="/write" exact component={Write} />
+          <Route path="/modify" exact component={Modify} />
+          <Route path="/login" exact component={LogIn} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/likes" exact component={Likes} />
+        </ConnectedRouter>
+      </Grid>
     </>
   );
 }

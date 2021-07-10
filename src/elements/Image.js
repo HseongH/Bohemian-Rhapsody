@@ -13,6 +13,7 @@ const Image = (props) => {
   else return null;
 };
 
-Image.defaultProps = {};
+Image.defaultProps = {
+};
 
 export default Image;
