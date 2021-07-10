@@ -47,6 +47,7 @@ const InputArea = styled.textarea`
   border-radius: 20px;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  font-size: 16px;
 
   &:focus {
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px inset;

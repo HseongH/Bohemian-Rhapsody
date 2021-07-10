@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Button } from '../elements/index';
 
 // ICON
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+// import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 
 const DropDownStyle = styled.ul`
@@ -57,7 +57,7 @@ const Dropdown = (props) => {
         color="inherit"
         fontSize="22px"
       >
-        <MoreHorizIcon ref={anchorRef} />
+        {props.icon}
       </Button>
 
       {open && (
@@ -66,6 +66,7 @@ const Dropdown = (props) => {
             {props.contents.map((content, idx) => {
               return (
                 <li
+                  key={Date.now()}
                   onClick={() => {
                     props.clickEvent[idx]();
                   }}

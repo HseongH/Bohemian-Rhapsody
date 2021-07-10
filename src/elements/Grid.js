@@ -15,6 +15,7 @@ Grid.defaultProps = {
   children: null,
   is_flex: false,
   width: '100%',
+  height: '100%',
   padding: false,
   margin: false,
   align: false,
@@ -25,9 +26,9 @@ Grid.defaultProps = {
 
 const GridBox = styled.div`
   ${(props) =>
-    props.is_flex ? `display: flex; align-iems: center; justify-content: ${props.is_flex};` : ''}
+    props.is_flex ? `display: flex; align-items: center; justify-content: ${props.is_flex};` : ''}
   width: ${(props) => props.width};
-  height: 100%;
+  height: ${(props) => props.height};
   ${(props) => (props.padding ? `padding: ${props.padding};` : '')}
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
     ${(props) => (props.align ? `text-align: ${props.align};` : '')}

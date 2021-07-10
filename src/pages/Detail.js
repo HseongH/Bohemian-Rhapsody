@@ -3,6 +3,7 @@ import React from 'react';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text } from '../elements/index';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 // COMPONENTS
 import Dropdown from '../components/Dropdown';
@@ -23,7 +24,11 @@ const Detail = (props) => {
 
       <Grid style={{ flex: 1, position: 'relative' }}>
         <Grid is_flex="space-between">
-          <Dropdown contents={['수정', '삭제']} clickEvent={[() => {}, () => {}]} />
+          <Dropdown
+            contents={['수정', '삭제']}
+            clickEvent={[() => {}, () => {}]}
+            icon={<MoreHorizIcon />}
+          />
 
           <Button width="auto" height="auto" padding="12px 15px" radius="30px">
             저장
