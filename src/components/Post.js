@@ -1,8 +1,13 @@
 // LIBRARY
 import React from 'react';
+import { Image } from '../elements';
 
 const Post = (props) => {
-  return <div></div>;
+  return (
+    <React.Fragment>
+      <Image/>
+    </React.Fragment>
+  )
 };
 
 Post.defaultProps = {};
