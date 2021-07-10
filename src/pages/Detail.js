@@ -13,6 +13,7 @@ const Detail = (props) => {
     <Grid
       width="820px"
       is_flex="space-between"
+      verSort="start"
       margin="50px auto"
       padding="30px 40px"
       radius="20px"
@@ -24,15 +25,21 @@ const Detail = (props) => {
 
       <Grid style={{ flex: 1, position: 'relative' }}>
         <Grid is_flex="space-between">
+          <Button width="auto" height="auto" padding="12px 15px" radius="30px">
+            저장
+          </Button>
+
           <Dropdown
             contents={['수정', '삭제']}
             clickEvent={[() => {}, () => {}]}
             icon={<MoreHorizIcon />}
+            width="40px"
+            height="40px"
+            bg="#fff"
+            hoverColor="#EFEFEF"
+            color="inherit"
+            fontSize="22px"
           />
-
-          <Button width="auto" height="auto" padding="12px 15px" radius="30px">
-            저장
-          </Button>
         </Grid>
 
         <Title fontSize="28px" margin="30px 0">

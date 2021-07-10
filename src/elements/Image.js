@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 const ImageStyle = styled.img`
   width: 100%;
+  display: block;
   cursor: pointer;
 `;
 
@@ -14,7 +15,6 @@ const Image = (props) => {
   else return null;
 };
 
-Image.defaultProps = {
-};
+Image.defaultProps = {};
 
 export default Image;

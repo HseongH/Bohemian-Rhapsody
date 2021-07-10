@@ -25,7 +25,7 @@ import GlobalStyle from '../common/globalStyle';
 function App() {
   return (
     <>
-      <Grid style={{ maxWidth: "1440px" }} margin="0px auto">
+      <Grid style={{ maxWidth: '1440px', position: 'relative' }} margin="0px auto">
         <GlobalStyle />
         <Header />
 

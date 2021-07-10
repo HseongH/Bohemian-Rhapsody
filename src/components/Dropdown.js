@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // ELEMENTS
@@ -11,8 +11,8 @@ import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 const DropDownStyle = styled.ul`
   width: 110px;
   position: absolute;
-  top: 48px;
-  left: 0;
+  top: ${(props) => props.top};
+  right: 0;
   border-radius: 10px;
   padding: 10px 0;
   box-sizing: border-box;
@@ -33,16 +33,13 @@ const DropDownStyle = styled.ul`
 `;
 
 const Dropdown = (props) => {
-  const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
 
   const handleToggle = () => {
     setOpen((preOpen) => !preOpen);
   };
 
-  const handleClose = (event) => {
-    if (anchorRef.current && anchorRef.current.contains(event.target)) return;
-
+  const handleClose = () => {
     setOpen(false);
   };
 
@@ -50,23 +47,23 @@ const Dropdown = (props) => {
     <>
       <Button
         clickEvent={handleToggle}
-        width="40px"
-        height="40px"
-        bg="#fff"
-        hoverColor="#EFEFEF"
-        color="inherit"
-        fontSize="22px"
+        width={props.width}
+        height={props.height}
+        bg={props.bg}
+        hoverColor={props.hoverColor}
+        color={props.color}
+        fontSize={props.fontSize}
       >
         {props.icon}
       </Button>
 
       {open && (
         <ClickAwayListener onClickAway={handleClose}>
-          <DropDownStyle>
+          <DropDownStyle {...props}>
             {props.contents.map((content, idx) => {
               return (
                 <li
-                  key={Date.now()}
+                  key={Date.now() + idx}
                   onClick={() => {
                     props.clickEvent[idx]();
                   }}
@@ -82,6 +79,8 @@ const Dropdown = (props) => {
   );
 };
 
-Dropdown.defaultProps = {};
+Dropdown.defaultProps = {
+  top: '48px',
+};
 
 export default Dropdown;

@@ -14,6 +14,7 @@ const Grid = ({ children, _onClick, ...props }) => {
 Grid.defaultProps = {
   children: null,
   is_flex: false,
+  verSort: 'center',
   width: '100%',
   height: '100%',
   padding: false,
@@ -25,8 +26,8 @@ Grid.defaultProps = {
 };
 
 const GridBox = styled.div`
-  ${(props) =>
-    props.is_flex ? `display: flex; align-items: center; justify-content: ${props.is_flex};` : ''}
+  ${(props) => (props.is_flex ? `display: flex; justify-content: ${props.is_flex};` : '')};
+  align-items: ${(props) => props.verSort};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
   ${(props) => (props.padding ? `padding: ${props.padding};` : '')}
@@ -39,7 +40,10 @@ const GridBox = styled.div`
   overflow: hidden;
   &:hover {
     background: ${(props) => props.hoverColor};
-    ${(props) => (props.hoverShadow ? `box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;` : '')}
+    ${(props) =>
+      props.hoverShadow
+        ? `box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;`
+        : ''}
   }
 `;
 
