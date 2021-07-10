@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const TextStyle = styled.p`
   font-size: ${(props) => props.fontSize};
   color: ${(props) => props.color};
+  line-height: ${(props) => props.lineHeight};
+  text-indent: ${(props) => props.textIndent};
   word-break: break-all;
   white-space: pre-line;
   display: -webkit-box;
@@ -19,6 +21,8 @@ const Text = ({ children, ...props }) => {
 Text.defaultProps = {
   fontSize: '16px',
   color: '#495057',
+  lineHeight: 1.25,
+  textIndent: 0,
 };
 
 export default Text;

@@ -60,10 +60,13 @@ const Write = (props) => {
         <Input
           fontSize="23px"
           placeholder="제목을 입력해주세요."
-          margin="0 0 50px"
+          margin="40px 0"
           style={{ fontWeight: 700 }}
         />
         <Input margin="0 0 40px" placeholder="가수 이름을 입력해주세요." />
+        <Text fontSize="12px" lineHeight="2" textIndent="15px">
+          발매 일자 / 공연 일자를 선택해 주세요.
+        </Text>
         <Input margin="0 0 40px" type="date" />
 
         <Button width="100%" height="auto" padding="12px 0" radius="20px">
