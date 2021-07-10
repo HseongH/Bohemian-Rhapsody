@@ -37,48 +37,58 @@ const InputFile = styled.input`
 `;
 
 const Write = (props) => {
-  const [height, setHeight] = useState('420px');
+  const [height, setHeight] = useState('380px');
+  const [visable, setVisable] = useState(true);
 
   return (
     <Grid
-      width="980px"
+      width="820px"
       is_flex="space-between"
       margin="50px auto"
       padding="30px 40px"
       radius="20px"
       style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
     >
-      <Grid width="350px" margin="0 30px 0 0">
-        <Grid
-          bg="#EFEFEF"
-          padding="20px"
-          radius="10px"
-          style={{ height: `${height}`, position: 'relative' }}
-        >
-          <Grid radius="10px" style={{ border: 'dashed #ddd' }}>
-            <LabelStyle htmlFor="input--file">
-              <InsertPhotoIcon />
-              이미지 추가
-            </LabelStyle>
+      <Grid width="320px" margin="0 30px 0 0">
+        <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
+          <LabelStyle htmlFor="input--file">
+            <InsertPhotoIcon />
+            이미지 추가
+          </LabelStyle>
 
-            <InputFile type="file" id="input--file" />
+          <InputFile type="file" id="input--file" />
 
-            <Image style={{ position: 'absolute', left: 0, top: 0 }} />
-          </Grid>
+          <Image style={{ position: 'absolute', left: 0, top: 0 }} />
         </Grid>
 
-        <Button
-          width="100%"
-          height="auto"
-          padding="12px 0"
-          radius="20px"
-          margin="20px 0 0"
-          bg="#EFEFEF"
-          hoverColor="#ccc"
-          color="inherit"
-        >
-          URL로 추가하기
-        </Button>
+        <Grid margin="20px 0 0">
+          {visable ? (
+            <Button
+              width="100%"
+              height="auto"
+              padding="12px 0"
+              radius="20px"
+              bg="#EFEFEF"
+              hoverColor="#ccc"
+              color="inherit"
+              clickEvent={() => {
+                setVisable((display) => !display);
+              }}
+            >
+              URL로 추가하기
+            </Button>
+          ) : (
+            <Input
+              type="url"
+              placeholder=""
+              keyPress={(event) => {
+                if (event.key === 'Enter') {
+                  setVisable((display) => !display);
+                }
+              }}
+            />
+          )}
+        </Grid>
       </Grid>
 
       <Grid style={{ flex: 1 }}>

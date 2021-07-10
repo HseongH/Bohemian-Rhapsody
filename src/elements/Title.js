@@ -6,6 +6,7 @@ const TitleStyle = styled.h2`
   font-size: ${(props) => props.fontSize};
   margin: ${(props) => props.margin};
   line-height: ${(props) => props.lineHeight};
+  text-align: ${(props) => props.textAlign};
   font-weight: 700;
 `;
 

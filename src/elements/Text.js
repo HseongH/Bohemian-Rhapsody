@@ -9,6 +9,7 @@ const TextStyle = styled.p`
   text-indent: ${(props) => props.textIndent};
   font-weight: ${(props) => props.fontWeight};
   margin: ${(props) => props.margin};
+  text-align: ${(props) => props.textAlign};
   word-break: break-all;
   white-space: pre-line;
   display: -webkit-box;

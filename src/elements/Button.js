@@ -14,7 +14,7 @@ const ButtonStyle = styled.button`
   box-sizing: border-box;
   border: none;
   cursor: pointer;
-  display: inline-flex;
+  display: ${(props) => props.display};
   justify-content: center;
   align-items: center;
 
@@ -32,6 +32,7 @@ const Button = ({ children, clickEvent, ...props }) => {
 };
 
 Button.defaultProps = {
+  display: 'inline-flex',
   width: '60px',
   height: '60px',
   fontSize: '16px',
