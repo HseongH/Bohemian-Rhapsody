@@ -23,7 +23,7 @@ const initialState = {
 const createPostDB = (post) => {
   return function (dispatch) {
     instance
-      .post('/post', { ...post })
+      .post('/api/post', { ...post })
       .then((res) => {
         dispatch(createPost(post));
       })
@@ -64,7 +64,7 @@ const updatePostDB = (postId, post) => {
 const deletePostDB = (postId) => {
   return function (dispatch) {
     instance
-      .delete('/post', { postId })
+      .delete('/api/post', { postId })
       .then((res) => {
         dispatch(deletePost(postId));
       })
