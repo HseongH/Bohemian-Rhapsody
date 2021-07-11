@@ -1,14 +1,29 @@
 // LIBRARY
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text } from '../elements/index';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
+// REDUX
+import { postActions } from '../redux/modules/detailPost';
+
+// HISTORY
+import { history } from '../redux/configStore';
+
 // COMPONENTS
 import Dropdown from '../components/Dropdown';
 
-const Detail = (props) => {
+const Detail = ({ match }) => {
+  const { postId } = match.params;
+  const dispatch = useDispatch();
+  const postInfo = useSelector((state) => state.postDetail.post);
+
+  useEffect(() => {
+    dispatch(postActions.getOnePostDB(postId));
+  }, []);
+
   return (
     <Grid
       width="820px"
@@ -20,14 +35,19 @@ const Detail = (props) => {
       style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
     >
       <Grid width="350px" margin="0 30px 0 0" radius="20px">
-        <Image src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/grapefruit-slice-332-332.jpg" />
+        <Image src={postInfo.img} />
       </Grid>
 
       <Grid style={{ flex: 1, position: 'relative' }} overflow="visible">
         <Grid is_flex="space-between">
           <Dropdown
             contents={['수정', '삭제']}
-            clickEvent={[() => {}, () => {}]}
+            clickEvent={[
+              () => {
+                history.push('/modify');
+              },
+              () => {},
+            ]}
             icon={<MoreHorizIcon />}
             width="40px"
             height="40px"
@@ -43,18 +63,18 @@ const Detail = (props) => {
         </Grid>
 
         <Title fontSize="28px" margin="30px 0">
-          임시 타이틀
+          {postInfo.title}
         </Title>
 
         <Text fontSize="20px" margin="0 0 30px">
-          가수 이름
+          {postInfo.artist}
         </Text>
 
         <Text color="#a5a5a5" margin="0 0 30px">
-          2021.07.10
+          {postInfo.showDate}
         </Text>
 
-        <Text>상세 정보</Text>
+        <Text>{postInfo.description}</Text>
       </Grid>
     </Grid>
   );

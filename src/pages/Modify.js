@@ -1,14 +1,22 @@
 // LIBRARY
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+// REDUX
+import { postActions } from '../redux/modules/detailPost';
 
 // PAGES
 import Write from './Write';
 
 const Modify = (props) => {
-  const post = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const postInfo = useSelector((state) => state.postDetail.post);
 
-  return <Write />;
+  useEffect(() => {
+    dispatch(postActions.getOnePostDB(postInfo.postId));
+  }, []);
+
+  return <Write postInfo={postInfo} />;
 };
 
 Modify.defaultProps = {};

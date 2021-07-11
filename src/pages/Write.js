@@ -69,6 +69,7 @@ const InputArea = styled.textarea`
 `;
 
 const Write = (props) => {
+  const { postInfo } = props;
   const [height, setHeight] = useState('380px');
   const [visable, setVisable] = useState(true);
 
@@ -141,7 +142,7 @@ const Write = (props) => {
         <InputArea placeholder="간단한 내용을 입력해주세요."></InputArea>
 
         <Button width="100%" height="auto" padding="12px 0" radius="20px">
-          작성 완료
+          {postInfo ? '작성 완료' : '수정하기'}
         </Button>
       </Grid>
     </Grid>
