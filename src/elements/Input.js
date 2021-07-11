@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const InputStyle = styled.input`
@@ -34,20 +34,13 @@ const InputStyle = styled.input`
 `;
 
 const Input = ({ placeholder, type, value, changeEvent, keyPress, ...props }) => {
-  const changeValue = (event) => {
-    setText(event.target.value);
-    changeEvent();
-  };
-
-  const [text, setText] = useState(value || '');
-
   return (
     <InputStyle
       {...props}
       placeholder={placeholder}
       type={type}
-      value={text}
-      onChange={changeValue}
+      value={value}
+      onChange={changeEvent}
       onKeyPress={keyPress}
     />
   );
