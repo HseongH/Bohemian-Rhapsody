@@ -5,7 +5,7 @@ import { connectRouter } from 'connected-react-router';
 import thunk from 'redux-thunk';
 
 // REDUCER
-import user from './modules/user';
+import User from './modules/user';
 import post from './modules/post';
 import like from './modules/like';
 import image from './modules/image';
@@ -16,7 +16,7 @@ import postDetail from './modules/detailPost';
 export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
-  user,
+  user: User,
   post,
   like,
   image,
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   postDetail,
 });
 
-const middlewares = [thunk.withExtraArgument({ history })];
+const middlewares = [thunk.withExtraArgument({ history:history })];
 
 if (process.env.NODE_ENV === 'development') {
   const { logger } = require('redux-logger');
@@ -32,6 +32,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const enhancer = applyMiddleware(...middlewares);
-const store = compose(createStore(rootReducer, enhancer));
+let store = compose(createStore(rootReducer, enhancer));
 
 export default store;
