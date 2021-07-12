@@ -8,15 +8,11 @@ import { produce } from 'immer';
 // ACTION
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
-const GET_USER = 'GET_USER';
-const SET_USER = 'SET_USER';
 const CHECK_DUP = 'CHECK_DUP';
 
 // ACTION CREATORS
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
-const getUser = createAction(GET_USER, (user) => ({ user }));
-const setUser = createAction(SET_USER, (user) => ({ user }));
 const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 
 // INITIAL STATE
@@ -57,25 +53,21 @@ const nickCheck = (id) => {
   };
 };
 
-const signAction = (user) => {
-  return function (dispatch, getState, { history }) {
-    console.log(history);
-    dispatch(setUser(user));
-    history.push('/');
-  };
-};
-
 const signupDB = (id, pwd, pwdCheck) => {
   return function (dispatch, getState, { history }) {
     instance
       .post('/api/sign', { nickname: id, password: pwd, confirm: pwdCheck })
       .then((res) => {
         console.log(res);
+<<<<<<< HEAD
       })
       .catch((error) => {
+=======
+        window.alert("회원 가입이 완료되었습니다.")
+      }).catch((error) => {
+>>>>>>> c9aa70e0cb4e722c4003152b6d1846514b511a97
         var errorCode = error.code;
         var errorMessage = error.message;
-
         console.log(errorCode, errorMessage);
       });
   };
@@ -96,22 +88,26 @@ export default handleActions(
         draft.is_login = false;
       }),
 
+<<<<<<< HEAD
     [GET_USER]: (state, action) => produce(state, (draft) => {}),
 
     [CHECK_DUP]: (state, action) =>
       produce(state, (draft) => {
         draft.is_check = true;
       }),
+=======
+    [CHECK_DUP]: (state, action) => produce(state, (draft) => {
+      draft.is_check = true;
+    })
+>>>>>>> c9aa70e0cb4e722c4003152b6d1846514b511a97
   },
   initialState
 );
 
 const actionCreators = {
   logIn,
-  getUser,
   logOut,
   loginAction,
-  signAction,
   signupDB,
   nickCheck,
 };
