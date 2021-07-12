@@ -84,7 +84,9 @@ const Write = (props) => {
   const preview = postInfo ? postInfo.img : image.preview;
   const imgUrl = image.imageUrl;
 
-  const [height, setHeight] = useState('380px');
+  console.log(postInfo);
+
+  const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
     title: postInfo ? postInfo.title : '',
     artist: postInfo ? postInfo.artist : '',
@@ -165,6 +167,7 @@ const Write = (props) => {
 
       <Grid style={{ flex: 1 }}>
         <Input
+          value={contents.title}
           fontSize="23px"
           placeholder="제목을 입력해주세요."
           margin="0 0 20px"
@@ -175,6 +178,7 @@ const Write = (props) => {
         />
 
         <Input
+          value={contents.artist}
           margin="0 0 20px"
           placeholder="가수 이름을 입력해주세요."
           changeEvent={(event) => {
@@ -186,6 +190,7 @@ const Write = (props) => {
           발매 일자 / 공연 일자를 선택해 주세요.
         </Text>
         <Input
+          value={contents.showDate}
           margin="0 0 20px"
           type="date"
           changeEvent={(event) => {
@@ -194,6 +199,7 @@ const Write = (props) => {
         />
 
         <InputArea
+          value={contents.description}
           placeholder="간단한 내용을 입력해주세요."
           onChange={(event) => {
             setContents({ ...contents, description: event.target.value });

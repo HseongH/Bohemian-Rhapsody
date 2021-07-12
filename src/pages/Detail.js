@@ -28,12 +28,10 @@ const Detail = ({ match }) => {
   const postList = posts.list;
   const postInfo = posts.post;
 
-  console.log(postList);
-
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));
     dispatch(postActions.getPostListDB());
-  }, [postId]);
+  }, []);
 
   if (postInfo) {
     return (
@@ -57,7 +55,7 @@ const Detail = ({ match }) => {
                 contents={['수정', '삭제']}
                 clickEvent={[
                   () => {
-                    history.push('/modify');
+                    history.push(`/modify/${postId}`);
                   },
                   () => {
                     postActions.deletePostDB(postId);
@@ -97,7 +95,7 @@ const Detail = ({ match }) => {
 
         <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
           {postList.map((post) => {
-            if (post.postId === postId) return null;
+            if (post.postId === parseInt(postId)) return null;
 
             return <Post post={post} key={post.postId + Date.now()} />;
           })}

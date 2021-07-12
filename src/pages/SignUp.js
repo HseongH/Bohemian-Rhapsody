@@ -5,7 +5,7 @@ import React from 'react';
 import { Text, Title, Input, Grid, Button } from '../elements';
 
 //REDUX-ACTION & REACT-HOOK
-import { actionCreators as userActions } from '../redux/modules/user';
+import { userActions } from '../redux/modules/user';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SignUp = (props) => {
@@ -14,6 +14,8 @@ const SignUp = (props) => {
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
   const [pwd_check, setPwdCheck] = React.useState('');
+
+  const dupState = useSelector((state) => state.user.is_check);
 
   const signup = () => {
     if (id === '' || pwd === '') {
@@ -28,9 +30,9 @@ const SignUp = (props) => {
   };
 
   const nickname = () => {
+    console.log(id);
     dispatch(userActions.nickCheck(id));
   };
-  const dupState = useSelector((state) => state.user.is_check);
 
   return (
     <React.Fragment>
@@ -53,8 +55,8 @@ const SignUp = (props) => {
           <Grid is_flex padding="0px">
             <Input
               placeholder="새로 생성할 ID를 입력해 주세요."
-              keyPress={(e) => {
-                setId(e.target.value);
+              changeEvent={(event) => {
+                setId(event.target.value);
               }}
             />
             <Button
@@ -76,7 +78,7 @@ const SignUp = (props) => {
               label="패스워드"
               placeholder="패스워드를 입력해주세요. (6자 이상)"
               type="password"
-              keyPress={(e) => {
+              changeEvent={(e) => {
                 setPwd(e.target.value);
               }}
             />
@@ -89,7 +91,7 @@ const SignUp = (props) => {
               label="패스워드 확인"
               placeholder="패스워드를 한번 더 입력해주세요."
               type="password"
-              keyPress={(e) => {
+              changeEvent={(e) => {
                 setPwdCheck(e.target.value);
               }}
             />

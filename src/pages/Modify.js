@@ -15,7 +15,8 @@ const Modify = ({ match }) => {
     dispatch(postActions.getOnePostDB(postId));
   }, [postId]);
 
-  return <Write postInfo={postInfo} />;
+  if (postInfo) return <Write postInfo={postInfo} />;
+  else return null;
 };
 
 Modify.defaultProps = {};

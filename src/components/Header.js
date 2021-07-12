@@ -4,9 +4,6 @@ import React from 'react';
 //ELEMENTS
 import { Input, Grid, Button } from '../elements';
 
-//COOKIE
-import { getCookie, deleteCookie } from '../prac/Cookie';
-
 //COMPONENTS
 import Dropdown from './Dropdown';
 
@@ -14,7 +11,7 @@ import Dropdown from './Dropdown';
 import { history } from '../redux/configStore';
 
 //REDUX-ACTION & REACT-HOOK
-import { actionCreators as userActions } from '../redux/modules/user';
+import { userActions } from '../redux/modules/user';
 import { useSelector, useDispatch } from 'react-redux';
 
 //Icons

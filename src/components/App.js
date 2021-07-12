@@ -37,7 +37,7 @@ function App() {
           <Route path="/" exact component={Home} />
           <Route path="/detail/:postId" exact component={Detail} />
           <Route path="/write" exact component={Write} />
-          <Route path="/modify" exact component={Modify} />
+          <Route path="/modify/:postId" exact component={Modify} />
           <Route path="/login" exact component={LogIn} />
           <Route path="/signup" exact component={SignUp} />
           <Route path="/likes" exact component={Likes} />
