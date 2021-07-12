@@ -36,27 +36,25 @@ const Login = (props) => {
           <Title>LOGIN</Title>
 
           <Grid padding="16px 0px">
-            <Text fontSize="12px" lineHeight="2" textIndent="15px">
-              ID :
-            </Text>
+            <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
               placeholder="아이디를 입력해주세요."
               changeEvent={(event) => {
                 setUserInfo({ ...userInfo, nickname: event.target.value });
               }}
+              padding="14px 17px"
             />
           </Grid>
 
           <Grid padding="16px 0px 50px 0px">
-            <Text fontSize="12px" lineHeight="2" textIndent="15px">
-              PASSWORD :
-            </Text>
+            <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
               placeholder="패스워드를 입력해주세요."
               type="password"
               changeEvent={(event) => {
                 setUserInfo({ ...userInfo, password: event.target.value });
               }}
+              padding="14px 17px"
             />
           </Grid>
 

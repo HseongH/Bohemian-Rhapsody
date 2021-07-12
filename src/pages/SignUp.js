@@ -49,15 +49,16 @@ const SignUp = (props) => {
 
           <Grid padding="16px 0px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
-              ID : {dupState ? '사용 가능한 아이디입니다.' : null}
+              {dupState ? '사용 가능한 아이디입니다.' : null}
             </Text>
           </Grid>
-          <Grid is_flex padding="0px">
+          <Grid is_flex padding="16px 0px">
             <Input
               placeholder="새로 생성할 ID를 입력해 주세요."
               changeEvent={(event) => {
                 setId(event.target.value);
               }}
+              padding="14px 17px"
             />
             <Button
               margin="0px 0px 0px 6px"
@@ -71,9 +72,7 @@ const SignUp = (props) => {
             </Button>
           </Grid>
           <Grid padding="16px 0px">
-            <Text fontSize="12px" lineHeight="2" textIndent="15px">
-              PASSWORD :
-            </Text>
+            <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
               label="패스워드"
               placeholder="패스워드를 입력해주세요. (6자 이상)"
@@ -81,12 +80,11 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwd(e.target.value);
               }}
+              padding="14px 17px"
             />
           </Grid>
           <Grid padding="16px 0px 50px 0px">
-            <Text fontSize="12px" lineHeight="2" textIndent="15px">
-              PASSWORD CHECK:
-            </Text>
+            <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
               label="패스워드 확인"
               placeholder="패스워드를 한번 더 입력해주세요."
@@ -94,6 +92,7 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwdCheck(e.target.value);
               }}
+              padding="14px 17px"
             />
           </Grid>
 
