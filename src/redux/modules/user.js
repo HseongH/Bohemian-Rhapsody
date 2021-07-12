@@ -27,8 +27,8 @@ const initialState = {
 };
 
 const user_initial = {
-  nickname: "admin"
-}
+  nickname: 'admin',
+};
 
 // MIDDLEWARE
 const loginAction = (user) => {
@@ -49,20 +49,19 @@ const loginAction = (user) => {
 
 const nickCheck = (id) => {
   return function (dispatch, getstate, { history }) {
-
     instance
       .post('/api/sign/nickname', { nickname: id })
-      .then((res) => { 
+      .then((res) => {
         dispatch(checkDup(true));
-        } 
-      ).catch((error) => {
+      })
+      .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
-        window.alert("이미 사용 중인 ID 입니다.")
+        window.alert('이미 사용 중인 ID 입니다.');
         console.log(errorCode, errorMessage);
       });
-  }
-}
+  };
+};
 
 const signAction = (user) => {
   return function (dispatch, getState, { history }) {
@@ -74,20 +73,19 @@ const signAction = (user) => {
 
 const signupDB = (id, pwd, pwdCheck) => {
   return function (dispatch, getState, { history }) {
-
     instance
       .post('/api/sign', { nickname: id, password: pwd, confirm: pwdCheck })
       .then((res) => {
         console.log(res);
-      }).catch((error) => {
+      })
+      .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
 
         console.log(errorCode, errorMessage);
       });
-
-  }
-}
+  };
+};
 // REDUCER
 export default handleActions(
   {
@@ -104,11 +102,12 @@ export default handleActions(
         draft.is_login = false;
       }),
 
-    [GET_USER]: (state, action) => produce(state, (draft) => { }),
+    [GET_USER]: (state, action) => produce(state, (draft) => {}),
 
-    [CHECK_DUP]: (state, action) => produce(state, (draft) => {
-      draft.is_check = true;
-    })
+    [CHECK_DUP]: (state, action) =>
+      produce(state, (draft) => {
+        draft.is_check = true;
+      }),
   },
   initialState
 );
