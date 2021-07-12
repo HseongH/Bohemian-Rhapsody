@@ -33,7 +33,7 @@ const getPostListDB = () => {
       .get('/api/post/posts')
       .then((res) => {
         console.log(res);
-        // dispatch(getPostList(res.data.posts.result));
+        dispatch(getPostList(res.data.result));
       })
       .catch((error) => {
         console.error(error);
@@ -52,8 +52,9 @@ const createPostDB = (image, post) => {
         };
 
         instance
-          .post('/post', { ...postInfo })
+          .post('/api/post', { ...postInfo })
           .then((res) => {
+            console.log(res);
             dispatch(createPost(postInfo));
           })
           .catch((error) => {
@@ -130,7 +131,7 @@ const updatePostDB = (postId, post, image) => {
 };
 
 const deletePostDB = (postId) => {
-  return function (dispatch) {
+  return function (dispatch, getState) {
     instance
       .delete('/api/post', { postId })
       .then((res) => {
@@ -150,7 +151,7 @@ function postDetail(state = initialState, action) {
 
     case POST_CREATE:
       const newPostList = [action.post, ...state.list];
-      return { list: newPostList };
+      return { ...state, list: newPostList };
 
     case POST_DETAIL:
       if (action.post)

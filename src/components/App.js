@@ -18,6 +18,7 @@ import Likes from '../pages/Likes';
 // COMPONENTS
 import Header from './Header';
 import AddBtn from './AddBtn';
+import Permit from './Permit';
 
 // ELEMENTS
 import { Grid } from '../elements';
@@ -42,7 +43,9 @@ function App() {
           <Route path="/likes" exact component={Likes} />
         </ConnectedRouter>
 
-        <AddBtn />
+        <Permit>
+          <AddBtn />
+        </Permit>
       </Grid>
     </>
   );

@@ -22,9 +22,9 @@ import Dropdown from '../components/Dropdown';
 const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
+
   const posts = useSelector((state) => state.postDetail);
   const postList = posts.postList;
-  console.log(postList);
   const postInfo = posts.post;
 
   useEffect(() => {

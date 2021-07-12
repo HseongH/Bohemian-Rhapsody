@@ -95,6 +95,11 @@ const Write = (props) => {
   const fileInput = useRef();
 
   const createPost = () => {
+    if (!fileInput.current.value) {
+      window.alert('이미지를 추가해 주세요.');
+      return;
+    }
+
     dispatch(postActions.createPostDB(fileInput.current.files[0], contents));
     dispatch(imgActions.setPreview(null));
     history.push('/');
