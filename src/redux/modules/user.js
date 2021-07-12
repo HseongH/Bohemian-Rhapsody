@@ -65,13 +65,8 @@ const signupDB = (id, pwd, pwdCheck) => {
       .post('/api/sign', { nickname: id, password: pwd, confirm: pwdCheck })
       .then((res) => {
         console.log(res);
-<<<<<<< HEAD
       })
       .catch((error) => {
-=======
-        window.alert("회원 가입이 완료되었습니다.")
-      }).catch((error) => {
->>>>>>> c9aa70e0cb4e722c4003152b6d1846514b511a97
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(errorCode, errorMessage);
@@ -94,18 +89,10 @@ export default handleActions(
         draft.is_login = false;
       }),
 
-<<<<<<< HEAD
-    [GET_USER]: (state, action) => produce(state, (draft) => {}),
-
     [CHECK_DUP]: (state, action) =>
       produce(state, (draft) => {
         draft.is_check = true;
       }),
-=======
-    [CHECK_DUP]: (state, action) => produce(state, (draft) => {
-      draft.is_check = true;
-    })
->>>>>>> c9aa70e0cb4e722c4003152b6d1846514b511a97
   },
   initialState
 );
