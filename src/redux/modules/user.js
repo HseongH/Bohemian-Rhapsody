@@ -15,7 +15,7 @@ const getUser = createAction(GET_USER, (user) => ({ user }));
 // INITIAL STATE
 const initialState = {
   user: null,
-  is_login: localStorage.getItem("token")? true:false
+  is_login: localStorage.getItem("token") ? true : false
 };
 
 // MIDDLEWARE
