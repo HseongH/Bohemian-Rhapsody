@@ -35,7 +35,7 @@ function App() {
 
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
-          <Route path="/detail" exact component={Detail} />
+          <Route path="/detail/:postId" exact component={Detail} />
           <Route path="/write" exact component={Write} />
           <Route path="/modify" exact component={Modify} />
           <Route path="/login" exact component={LogIn} />

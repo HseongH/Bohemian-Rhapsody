@@ -7,6 +7,6 @@ const instance = axios.create({
 
 const TOKEN = localStorage.getItem('token');
 
-if (TOKEN) instance.defaults.headers.common['Authorization'] = TOKEN;
+// if (TOKEN) instance.defaults.headers.common['Authorization'] = TOKEN;
 
 export default instance;

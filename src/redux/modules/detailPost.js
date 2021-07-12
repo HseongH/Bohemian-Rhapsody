@@ -68,10 +68,10 @@ const createPostDB = (image, post) => {
 const getOnePostDB = (postId) => {
   return function (dispatch) {
     instance
-      .get(`/detail/:${postId}`)
+      .get(`/detail/${postId}`)
       .then((res) => {
-        console.log(res);
-        dispatch(getOnePost(res));
+        console.log(res.data);
+        dispatch(getOnePost(res.data));
       })
       .catch((error) => {
         console.error(error);
@@ -154,6 +154,8 @@ function postDetail(state = initialState, action) {
       return { ...state, list: newPostList };
 
     case POST_DETAIL:
+      console.log(action.post);
+
       if (action.post)
         return {
           ...state,

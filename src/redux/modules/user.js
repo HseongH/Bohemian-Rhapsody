@@ -26,10 +26,6 @@ const initialState = {
   is_check: false,
 };
 
-const user_initial = {
-  nickname: 'admin',
-};
-
 // MIDDLEWARE
 const loginAction = (user) => {
   return function (dispatch, getState, { history }) {
@@ -48,17 +44,15 @@ const loginAction = (user) => {
 };
 
 const nickCheck = (id) => {
-  return function (dispatch, getstate, { history }) {
+  return function (dispatch) {
     instance
       .post('/api/sign/nickname', { nickname: id })
       .then((res) => {
+        console.log(res);
         dispatch(checkDup(true));
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        window.alert('이미 사용 중인 ID 입니다.');
-        console.log(errorCode, errorMessage);
+        console.error(error);
       });
   };
 };
