@@ -47,7 +47,6 @@
       }
     ]
   },
-
   "get": {
     "posts": {
       "result": [
@@ -98,12 +97,14 @@
       ]
     }
   },
-
-  "post": {},
-
+  "post": {
+    "title": "ㅇㅇㅇ",
+    "artist": "ㅇㅇㅇ",
+    "showDate": "2021-07-31",
+    "description": "ㅇㅇㅇㅇㅇ",
+    "img": null
+  },
   "detail": {},
-
   "like": {},
-
   "sign": {}
 }

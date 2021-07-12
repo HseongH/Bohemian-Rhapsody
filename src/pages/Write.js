@@ -1,9 +1,14 @@
 // LIBRARY
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
+import { useDispatch, useSelector } from 'react-redux';
 
 // ELEMENTS
 import { Grid, Button, Input, Text, Image } from '../elements/index';
+
+// REDUX
+import { imgActions } from '../redux/modules/image';
+import { postActions } from '../redux/modules/detailPost';
 
 // ICON
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';
@@ -70,8 +75,33 @@ const InputArea = styled.textarea`
 
 const Write = (props) => {
   const { postInfo } = props;
+
+  const dispatch = useDispatch();
+  const preview = useSelector((state) => state.image.preview);
+
   const [height, setHeight] = useState('380px');
-  const [visable, setVisable] = useState(true);
+  const [contents, setContents] = useState({
+    title: '',
+    artist: '',
+    showDate: '',
+    description: '',
+  });
+
+  const fileInput = useRef();
+
+  const selectFile = (event) => {
+    const reader = new FileReader();
+    const file = event.target.files[0];
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        dispatch(imgActions.setPreview(reader.result));
+        setHeight('auto');
+      };
+    }
+  };
 
   return (
     <Grid
@@ -85,42 +115,23 @@ const Write = (props) => {
       <Grid width="320px" margin="0 30px 0 0">
         <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
           <LabelStyle htmlFor="input--file">
-            <InsertPhotoIcon />
-            이미지 추가
+            {!preview ? (
+              <>
+                <InsertPhotoIcon />
+                이미지 추가
+              </>
+            ) : null}
           </LabelStyle>
 
-          <InputFile type="file" id="input--file" />
+          <InputFile
+            type="file"
+            id="input--file"
+            ref={fileInput}
+            accept="image/png, image/jpeg"
+            onChange={selectFile}
+          />
 
-          <Image style={{ position: 'absolute', left: 0, top: 0 }} />
-        </Grid>
-
-        <Grid margin="20px 0 0">
-          {visable ? (
-            <Button
-              width="100%"
-              height="auto"
-              padding="12px 0"
-              radius="20px"
-              bg="#EFEFEF"
-              hoverColor="#ccc"
-              color="inherit"
-              clickEvent={() => {
-                setVisable((display) => !display);
-              }}
-            >
-              URL로 추가하기
-            </Button>
-          ) : (
-            <Input
-              type="url"
-              placeholder=""
-              keyPress={(event) => {
-                if (event.key === 'Enter') {
-                  setVisable((display) => !display);
-                }
-              }}
-            />
-          )}
+          <Image style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
         </Grid>
       </Grid>
 
@@ -130,19 +141,47 @@ const Write = (props) => {
           placeholder="제목을 입력해주세요."
           margin="0 0 20px"
           style={{ fontWeight: 700 }}
+          changeEvent={(event) => {
+            setContents({ ...contents, title: event.target.value });
+          }}
         />
 
-        <Input margin="0 0 20px" placeholder="가수 이름을 입력해주세요." />
+        <Input
+          margin="0 0 20px"
+          placeholder="가수 이름을 입력해주세요."
+          changeEvent={(event) => {
+            setContents({ ...contents, artist: event.target.value });
+          }}
+        />
 
         <Text fontSize="12px" lineHeight="2" textIndent="15px">
           발매 일자 / 공연 일자를 선택해 주세요.
         </Text>
-        <Input margin="0 0 20px" type="date" />
+        <Input
+          margin="0 0 20px"
+          type="date"
+          changeEvent={(event) => {
+            setContents({ ...contents, showDate: event.target.value });
+          }}
+        />
 
-        <InputArea placeholder="간단한 내용을 입력해주세요."></InputArea>
+        <InputArea
+          placeholder="간단한 내용을 입력해주세요."
+          onChange={(event) => {
+            setContents({ ...contents, description: event.target.value });
+          }}
+        ></InputArea>
 
-        <Button width="100%" height="auto" padding="12px 0" radius="20px">
-          {postInfo ? '작성 완료' : '수정하기'}
+        <Button
+          width="100%"
+          height="auto"
+          padding="12px 0"
+          radius="20px"
+          clickEvent={() => {
+            dispatch(postActions.createPostDB(fileInput.current.files[0], contents));
+          }}
+        >
+          {postInfo ? '수정하기' : '작성 완료'}
         </Button>
       </Grid>
     </Grid>
