@@ -48,7 +48,7 @@ const Header = (props) => {
                 history.push('/login');
               },
               () => {
-                history.push('/detail');
+                history.push('/likes');
               },
             ]}
             icon={<PersonIcon />}
