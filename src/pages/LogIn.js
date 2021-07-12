@@ -13,19 +13,10 @@ import { useDispatch } from "react-redux";
 
 const Login = (props) => {
   const dispatch = useDispatch();
-  const [id, setID] = React.useState('');
-  const [pwd, setPWD] = React.useState('');
-
-  const changeID = (e) => {
-    setID(e.target.value);
-  }
-
-  const changePWD = (e) => {
-    setPWD(e.target.value);
-  }
 
   const login = () => {
-    dispatch(userActions.loginAction({nickname: "admin"}));
+    localStorage.setItem("token", "admin")
+    dispatch(userActions.loginAction({ nickname: "admin" }));
   }
 
   return (
@@ -45,18 +36,14 @@ const Login = (props) => {
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
               ID :
             </Text>
-            <Input value={id} placeholder="아이디를 입력해주세요."
-              changeEvent={changeID}
-            />
+            <Input placeholder="아이디를 입력해주세요."/>
           </Grid>
 
           <Grid padding="16px 0px 50px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
               PASSWORD :
             </Text>
-            <Input value={pwd} placeholder="패스워드를 입력해주세요." type="password"
-              changeEvent={changePWD}
-            />
+            <Input placeholder="패스워드를 입력해주세요." type="password"         />
           </Grid>
 
           <Grid padding="5px 0px">
