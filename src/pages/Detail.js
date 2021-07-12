@@ -54,7 +54,9 @@ const Detail = ({ match }) => {
                 () => {
                   history.push('/modify');
                 },
-                () => {},
+                () => {
+                  postActions.deletePostDB(postId);
+                },
               ]}
               icon={<MoreHorizIcon />}
               width="40px"
@@ -87,10 +89,10 @@ const Detail = ({ match }) => {
       </Grid>
 
       <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-        {postList.map((post, idx) => {
-          if (post.postId !== postId) {
-            return <Post post={post} key={idx} />;
-          }
+        {postList.map((post) => {
+          if (post.postId === postId) return null;
+
+          return <Post post={post} key={post.postId + Date.now()} />;
         })}
       </StackGrid>
     </>

@@ -19,8 +19,8 @@ const Home = (props) => {
 
   return (
     <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-      {postList.map((post, idx) => {
-        return <Post post={post} key={idx} />;
+      {postList.map((post) => {
+        return <Post post={post} key={post.postId + Date.now()} />;
       })}
     </StackGrid>
   );
