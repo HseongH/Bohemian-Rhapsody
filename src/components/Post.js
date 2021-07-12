@@ -13,10 +13,10 @@ const Post = (props) => {
       margin="10px"
       hoverShadow
       _onClick={() => {
-        history.push('/detail');
+        history.push(`/detail/:${post.postId}`);
       }}
     >
-      <Image src={post.imgURL} />
+      <Image src={post.img} />
     </Grid>
   );
 };

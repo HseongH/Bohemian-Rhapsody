@@ -20,7 +20,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //Icons
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
-
+import { postActions } from '../redux/modules/detailPost';
 
 const Header = (props) => {
   const dispatch = useDispatch();
@@ -71,7 +71,17 @@ const Header = (props) => {
           <HomeIcon />
         </Button>
 
-        <Input padding="20px 15px" placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
+        <Input
+          padding="20px 15px"
+          placeholder="Search"
+          margin="0 20px 0"
+          style={{ flex: 1 }}
+          keyPress={(event) => {
+            if (event.key === 'Enter' && event.target.value) {
+              postActions.searchPostDB(event.target.value);
+            }
+          }}
+        />
 
         <Dropdown
           contents={['로그인', '회원가입']}

@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:4000/',
+  baseURL: 'http://astelen.shop:3000/',
+  // headers: { 'Access-Control-Allow-Origin': '*' },
   timeout: 3000,
 });
 

@@ -3,6 +3,9 @@ import React, { useRef, useState } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 
+// HISTORY
+import { history } from '../redux/configStore';
+
 // ELEMENTS
 import { Grid, Button, Input, Text, Image } from '../elements/index';
 
@@ -77,17 +80,37 @@ const Write = (props) => {
   const { postInfo } = props;
 
   const dispatch = useDispatch();
-  const preview = useSelector((state) => state.image.preview);
+  const image = useSelector((state) => state.image);
+  const preview = postInfo ? postInfo.img : image.preview;
+  const imgUrl = image.imageUrl;
 
   const [height, setHeight] = useState('380px');
   const [contents, setContents] = useState({
-    title: '',
-    artist: '',
-    showDate: '',
-    description: '',
+    title: postInfo ? postInfo.title : '',
+    artist: postInfo ? postInfo.artist : '',
+    showDate: postInfo ? postInfo.showDate : '',
+    description: postInfo ? postInfo.description : '',
   });
 
   const fileInput = useRef();
+
+  const createPost = () => {
+    dispatch(postActions.createPostDB(fileInput.current.files[0], contents));
+    dispatch(imgActions.setPreview(null));
+    history.push('/');
+  };
+
+  const modifyPost = () => {
+    if (preview !== imgUrl) {
+      const newPostInfo = { ...postInfo, img: null };
+
+      dispatch(postActions.updatePostDB(postInfo.postId, newPostInfo, fileInput.current.files[0]));
+    } else {
+      dispatch(postActions.updatePostDB(postInfo.postId, postInfo));
+    }
+
+    history.push('/');
+  };
 
   const selectFile = (event) => {
     const reader = new FileReader();
@@ -177,9 +200,7 @@ const Write = (props) => {
           height="auto"
           padding="12px 0"
           radius="20px"
-          clickEvent={() => {
-            dispatch(postActions.createPostDB(fileInput.current.files[0], contents));
-          }}
+          clickEvent={postInfo ? modifyPost : createPost}
         >
           {postInfo ? '수정하기' : '작성 완료'}
         </Button>
