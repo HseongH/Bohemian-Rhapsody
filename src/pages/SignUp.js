@@ -74,7 +74,6 @@ const SignUp = (props) => {
           <Grid padding="16px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
-              label="패스워드"
               placeholder="패스워드를 입력해주세요. (6자 이상)"
               type="password"
               changeEvent={(e) => {
@@ -86,7 +85,6 @@ const SignUp = (props) => {
           <Grid padding="16px 0px 50px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px"></Text>
             <Input
-              label="패스워드 확인"
               placeholder="패스워드를 한번 더 입력해주세요."
               type="password"
               changeEvent={(e) => {
