@@ -152,12 +152,10 @@ function post(state = initialState, action) {
       return { ...state, list: newPostList };
 
     case POST_DETAIL:
-      if (action.post)
-        return {
-          ...state,
-          post: action.post,
-        };
-      return null;
+      return {
+        ...state,
+        post: action.post,
+      };
 
     case SEARCH_POST:
       return { ...state, list: action.postList };

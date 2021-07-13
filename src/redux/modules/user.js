@@ -9,11 +9,13 @@ import { produce } from 'immer';
 import { getToken, setToken, removeToken } from '../../common/token';
 
 // ACTION
+const DID_I_WRITE = 'DID_I_WRITE';
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
 const CHECK_DUP = 'CHECK_DUP';
 
 // ACTION CREATORS
+const checkDidIWrite = createAction(DID_I_WRITE, (user) => ({}));
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
@@ -23,9 +25,24 @@ const initialState = {
   user: null,
   is_login: getToken() ? true : false,
   is_check: false,
+  didIWrite: false,
+  nickname: null,
 };
 
 // MIDDLEWARE
+const checkDidIWriteDB = () => {
+  return function (dispatch) {
+    instance
+      .post('/api/user/me')
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
 const loginAction = (user) => {
   return function (dispatch, getState, { history }) {
     instance
@@ -58,7 +75,7 @@ const nickCheck = (id) => {
 const signupDB = (id, pwd, pwdCheck) => {
   return function (dispatch, getState, { history }) {
     instance
-      .post('/api/sign', { nickname: id, password: pwd, confirm: pwdCheck })
+      .post('/api/sign', { nickname: id, password: pwd, confirmPassword: pwdCheck })
       .then((res) => {
         console.log(res);
       })
@@ -98,6 +115,7 @@ const userActions = {
   logIn,
   logOut,
   loginAction,
+  checkDidIWrite,
   signupDB,
   nickCheck,
 };

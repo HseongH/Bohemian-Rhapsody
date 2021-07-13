@@ -1,5 +1,5 @@
 // LIBRARY
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
@@ -7,6 +7,9 @@ import { css } from 'styled-components';
 
 // HISTORY
 import { history } from '../redux/configStore';
+
+// REDUX
+import { userActions } from '../redux/modules/user';
 
 // STYLE
 import GlobalStyle from '../common/globalStyle';
@@ -28,8 +31,15 @@ import Permit from './Permit';
 
 // ELEMENTS
 import { Grid } from '../elements/index';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(userActions.checkDidIWrite());
+  });
+
   return (
     <ThemeProvider theme={theme}>
       <Grid

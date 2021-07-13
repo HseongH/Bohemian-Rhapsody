@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { postActions } from '../redux/modules/post';
+import moment from 'moment';
 
 // PAGES
 import Write from './Write';
@@ -15,8 +16,12 @@ const Modify = ({ match }) => {
     dispatch(postActions.getOnePostDB(postId));
   }, [postId]);
 
-  if (postInfo) return <Write postInfo={postInfo} />;
-  else return null;
+  if (postInfo) {
+    const date = moment.utc(postInfo.showDate).format('YYYY-MM-DD');
+    const post = { ...postInfo, showDate: date };
+
+    return <Write postInfo={post} />;
+  } else return null;
 };
 
 Modify.defaultProps = {};

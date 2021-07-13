@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
 import { css } from 'styled-components';
+import moment from 'moment';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text } from '../elements/index';
@@ -30,11 +31,18 @@ const Detail = ({ match }) => {
   const postInfo = posts.post;
 
   useEffect(() => {
-    dispatch(postActions.getOnePostDB(postId));
     dispatch(postActions.getPostListDB());
+    dispatch(postActions.getOnePostDB(postId));
+
+    return () => {
+      dispatch(postActions.getPostList([]));
+      dispatch(postActions.getOnePost(null));
+    };
   }, [postId]);
 
   if (postInfo) {
+    const date = moment.utc(postInfo.showDate).format('YYYY.MM.DD');
+
     return (
       <>
         <Grid
@@ -80,7 +88,7 @@ const Detail = ({ match }) => {
                     history.push(`/modify/${postId}`);
                   },
                   () => {
-                    postActions.deletePostDB(postId);
+                    dispatch(postActions.deletePostDB(postId));
                   },
                 ]}
                 icon={<MoreHorizIcon />}
@@ -108,7 +116,7 @@ const Detail = ({ match }) => {
             </Text>
 
             <Text color="#a5a5a5" margin="0 0 30px">
-              {postInfo.showDate}
+              {date}
             </Text>
 
             <Text>{postInfo.description}</Text>

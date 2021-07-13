@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IndeterminateCheckBox } from '@material-ui/icons';
 
 //VALIDATION
-import { idVal, pwdVal } from '../common/validation'
+import { idVal, pwdVal } from '../common/validation';
 
 const SignUp = (props) => {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ const SignUp = (props) => {
       return window.alert('패스워드를 다시 확인해 주세요.');
     }
 
-    dispatch(userActions.signupDB(id, pwd));
+    dispatch(userActions.signupDB(id, pwd, pwd_check));
   };
 
   const nickname = () => {
@@ -51,8 +51,10 @@ const SignUp = (props) => {
           <Title>SIGN UP</Title>
 
           <Grid padding="16px 0px 0px">
-            {dupState ? (<Text fontSize="12px" color="green" lineHeight="2" textIndent="15px">
-              사용 가능한 아이디입니다.</Text>
+            {dupState ? (
+              <Text fontSize="12px" color="green" lineHeight="2" textIndent="15px">
+                사용 가능한 아이디입니다.
+              </Text>
             ) : null}
           </Grid>
           <Grid is_flex padding="0px 0px 16px">
@@ -76,14 +78,14 @@ const SignUp = (props) => {
           </Grid>
           <Grid padding="16px 0px">
             <Text fontSize="12px" color="red" lineHeight="2" textIndent="15px">
-              숫자, 영어 대/소문자 6 ~ 30자로 입력해주세요.</Text>
+              숫자, 영어 대/소문자 6 ~ 30자로 입력해주세요.
+            </Text>
             <Input
               placeholder="패스워드를 입력해주세요. (6자 이상)"
               type="password"
               changeEvent={(e) => {
                 setPwd(e.target.value);
               }}
-
               padding="14px 17px"
             />
           </Grid>
