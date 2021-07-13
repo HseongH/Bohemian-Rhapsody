@@ -31,7 +31,7 @@ const SignUp = (props) => {
   const [pwdWarning, setPwdWarColor] = React.useState('red');
   const [pwdCheckWarning, setPwdCheckWarColor] = React.useState('red');
 
-  const signup = () => {
+  const checkID = (id) => {
     if (id === '') {
       setIdWarColor('red');
       setIdConfirm('아이디가 입력되지 않았습니다.');
@@ -44,7 +44,9 @@ const SignUp = (props) => {
     }
     setIdWarColor('green');
     setIdConfirm('사용가능한 아이디 입니다.');
+  }
 
+  const checkPWD = (pwd) => {
     if (pwd === '') {
       setPwdWarColor('red');
       setPwdConfirm('패스워드가 입력되지 않았습니다.');
@@ -57,16 +59,24 @@ const SignUp = (props) => {
     }
     setPwdWarColor('green');
     setPwdConfirm('사용가능한 패스워드 입니다.');
+  }
+
+  const checkPWD2nd = (pwd) => {
     if (pwd !== pwdCheck) {
       setPwdCheckWarColor('red');
       setPwdCheckNoti('입력된 패스워드가 서로 다릅니다.');
       return;
     }
+    if (pwd === '') {
+      setPwdCheckWarColor('red');
+      setPwdCheckNoti('');
+      return;
+    }
     setPwdCheckWarColor('green');
     setPwdCheckNoti('패스워드가 올바르게 입력되었습니다.');
+  }
 
-
-
+  const signup = () => {
 
     dispatch(userActions.signupDB(id, pwd, pwdCheck));
 
@@ -116,7 +126,7 @@ const SignUp = (props) => {
                 setId(event.target.value);
               }}
               keyUp={(e) => {
-                setPwd(e.target.value);
+                checkID(e.target.value);
               }}
               padding="14px 17px"
             />
@@ -142,7 +152,7 @@ const SignUp = (props) => {
                 setPwd(e.target.value);
               }}
               keyUp={(e) => {
-                setPwd(e.target.value);
+                checkPWD(e.target.value);
               }}
               padding="14px 17px"
             />
@@ -158,7 +168,7 @@ const SignUp = (props) => {
                 setPwdCheck(e.target.value);
               }}
               keyUp={(e) => {
-                setPwdCheck(e.target.value);
+                checkPWD2nd(e.target.value);
               }}
               padding="14px 17px"
             />
