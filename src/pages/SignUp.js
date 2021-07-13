@@ -60,7 +60,11 @@ const SignUp = (props) => {
               <Text fontSize="12px" color="green" lineHeight="2" textIndent="15px">
                 사용 가능한 아이디입니다.
               </Text>
-            ) : null}
+            ) : (
+              <Text fontSize="12px" color="red" lineHeight="2" textIndent="15px">
+                이미 사용 중이거나 형식에 맞지 않는 아이디입니다.
+              </Text>
+            )}
           </Grid>
           <Grid is_flex padding="0px 0px 16px">
             <Input
