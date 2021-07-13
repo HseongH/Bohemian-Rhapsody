@@ -4,6 +4,9 @@ import React from 'react';
 //Elements
 import { Text, Title, Input, Grid, Button } from '../elements';
 
+//HISTORY
+import { history } from '../redux/configStore';
+
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +33,8 @@ const SignUp = (props) => {
     }
 
     dispatch(userActions.signupDB(id, pwd, pwd_check));
+    window.alert("회원가입이 완료되었습니다. 다시 로그인해 주세요.")
+    history.push('/login')
   };
 
   const nickname = () => {
@@ -55,7 +60,11 @@ const SignUp = (props) => {
               <Text fontSize="12px" color="green" lineHeight="2" textIndent="15px">
                 사용 가능한 아이디입니다.
               </Text>
-            ) : null}
+            ) : (
+              <Text fontSize="12px" color="red" lineHeight="2" textIndent="15px">
+                이미 사용 중이거나 형식에 맞지 않는 아이디입니다.
+              </Text>
+            )}
           </Grid>
           <Grid is_flex padding="0px 0px 16px">
             <Input
