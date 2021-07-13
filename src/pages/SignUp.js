@@ -19,45 +19,69 @@ import { idVal, pwdVal } from '../common/validation';
 const SignUp = (props) => {
   const dispatch = useDispatch();
 
+  const dupState = useSelector((state) => state.user.is_check);
+
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
-  const [idBlank, setIdBlank] = React.useState('');
-  const [pwdBlank, setPwdBlank] = React.useState('');
-  const [idVali, setIdVali] = React.useState('');
-  const [pwdVali, setPwdVali] = React.useState('');
-  const dupState = useSelector((state) => state.user.is_check);
   const [pwdCheck, setPwdCheck] = React.useState('');
-  const [pwdCheckNoti, setPwdCheckNoti] = React.useState('');
+  const [idConfirm, setIdConfirm] = React.useState('');
+  const [pwdConfirm, setPwdConfirm] = React.useState('');
+  const [pwdCheckConfirm, setPwdCheckConfirm] = React.useState('');
+  const [idWarning, setIdWarColor] = React.useState('red');
+  const [pwdWarning, setPwdWarColor] = React.useState('red');
+  const [pwdCheckWarning, setPwdCheckWarColor] = React.useState('red');
 
-  const [warning, setWarColor] = React.useState('red');
+  const checkID = (val) => {
+    if (val === '') {
+      setIdWarColor('red');
+      setIdConfirm('아이디가 입력되지 않았습니다.');
+      return;
+    }
+    if (!idVal(val)) {
+      setIdWarColor('red');
+      setIdConfirm('아이디가 형식에 맞지 않습니다. (영어, 알파벳 4~20자)');
+      return;
+    }
+    setIdWarColor('green');
+    setIdConfirm('중복 확인을 해주세요.');
+  }
+
+  const checkPWD = (val) => {
+    if (val === '') {
+      setPwdWarColor('red');
+      setPwdConfirm('패스워드가 입력되지 않았습니다.');
+      return;
+    }
+    if (!pwdVal(val)) {
+      setPwdWarColor('red');
+      setPwdConfirm('패스워드가 형식에 맞지 않습니다. (영어, 알파벳 6~30자)');
+      return;
+    }
+    setPwdWarColor('green');
+    setPwdConfirm('사용가능한 패스워드 입니다.');
+  }
+
+  const checkPWD2nd = (val) => {
+    if (val === '') {
+      setPwdCheckWarColor('red');
+      setPwdCheckConfirm('패스워드 확인란이 입력되지 않았습니다.');
+      return;
+    }
+    if (val.length < 6) {
+      setPwdCheckWarColor('red');
+      setPwdCheckConfirm('');
+      return;
+    }
+    if (val !== pwd) {
+      setPwdCheckWarColor('red');
+      setPwdCheckConfirm('입력된 패스워드가 서로 다릅니다.');
+      return;
+    }
+    setPwdCheckWarColor('green');
+    setPwdCheckConfirm('패스워드가 올바르게 입력되었습니다.');
+  }
 
   const signup = () => {
-    console.log(id);
-    if (id === '') {
-      setIdBlank('아이디가 입력되지 않았습니다.');
-      return;
-    }
-    if (pwd === '') {
-      setPwdBlank('패스워드가 입력되지 않았습니다.');
-      return;
-    }
-    if (!idVal(id)) {
-      setIdVali('아이디가 형식에 맞지 않습니다. (영어, 알파벳 4~20자)');
-      return;
-    }
-    if (!pwdVal(pwd)) {
-      setIdVali('패스워드가 형식에 맞지 않습니다. (영어, 알파벳 6~30자)');
-      return;
-    }
-    if (pwd !== pwdCheck) {
-      setPwdCheckNoti('입력된 패스워드가 서로 다릅니다.');
-      return;
-    }
-
-    setWarColor('green');
-    setIdVali('사용가능한 아이디 입니다.');
-    setPwdVali('사용가능한 패스워드 입니다.');
-    setPwdCheckNoti('패스워드가 올바르게 입력되었습니다.');
 
     dispatch(userActions.signupDB(id, pwd, pwdCheck));
 
@@ -66,8 +90,17 @@ const SignUp = (props) => {
   };
 
   const nickname = () => {
-    console.log(id);
+
     dispatch(userActions.nickCheck(id));
+
+    if (dupState) {
+      setIdWarColor('green');
+      setIdConfirm('사용 가능한 아이디입니다.')
+      return;
+    }
+    setIdWarColor('red');
+    setIdConfirm('이미 사용 중인 아이디입니다.')
+    
   };
 
   return (
@@ -95,10 +128,8 @@ const SignUp = (props) => {
           <Title>SIGN UP</Title>
 
           <Grid padding="16px 0px 0px">
-            <Text fontSize="12px" color={warning} lineHeight="2" textIndent="15px">
-              {idBlank}
-              {idVali}
-              {dupState}
+            <Text fontSize="12px" color={idWarning} lineHeight="2" textIndent="15px">
+              {idConfirm}
             </Text>
           </Grid>
           <Grid is_flex padding="0px 0px 16px">
@@ -106,6 +137,9 @@ const SignUp = (props) => {
               placeholder="새로 생성할 ID를 입력해 주세요."
               changeEvent={(event) => {
                 setId(event.target.value);
+              }}
+              keyUp={(e) => {
+                checkID(e.target.value);
               }}
               padding="14px 17px"
             />
@@ -121,9 +155,8 @@ const SignUp = (props) => {
             </Button>
           </Grid>
           <Grid padding="16px 0px">
-            <Text fontSize="12px" color="red" lineHeight="2" textIndent="15px">
-              {pwdBlank}
-              {pwdVali}
+            <Text fontSize="12px" color={pwdWarning} lineHeight="2" textIndent="15px">
+              {pwdConfirm}
             </Text>
             <Input
               placeholder="패스워드를 입력해주세요. (6자 이상)"
@@ -131,15 +164,15 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwd(e.target.value);
               }}
-              blurEvent={(e) => {
-                setPwd(e.target.value);
+              keyUp={(e) => {
+                checkPWD(e.target.value);
               }}
               padding="14px 17px"
             />
           </Grid>
           <Grid padding="16px 0px 50px 0px">
-            <Text fontSize="12px" color="red" lineHeight="2" textIndent="15px">
-              {pwdCheckNoti}
+            <Text fontSize="12px" color={pwdCheckWarning} lineHeight="2" textIndent="15px">
+              {pwdCheckConfirm}
             </Text>
             <Input
               placeholder="패스워드를 한번 더 입력해주세요."
@@ -147,8 +180,8 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwdCheck(e.target.value);
               }}
-              blurEvent={(e) => {
-                setPwdCheck(e.target.value);
+              keyUp={(e) => {
+                checkPWD2nd(e.target.value);
               }}
               padding="14px 17px"
             />

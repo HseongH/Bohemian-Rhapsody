@@ -33,7 +33,7 @@ const InputStyle = styled.input`
   }
 `;
 
-const Input = ({ placeholder, type, value, changeEvent, blurEvent, keyPress, ...props }) => {
+const Input = ({ placeholder, type, value, changeEvent, keyUp, ...props }) => {
   return (
     <InputStyle
       {...props}
@@ -41,8 +41,7 @@ const Input = ({ placeholder, type, value, changeEvent, blurEvent, keyPress, ...
       type={type}
       value={value}
       onChange={changeEvent}
-      onblur={blurEvent}
-      onKeyPress={keyPress}
+      onKeyUp={keyUp}
     />
   );
 };
@@ -56,8 +55,7 @@ Input.defaultProps = {
   fontSize: '16px',
   type: 'text',
   changeEvent: () => {},
-  blurEvent: () => {},
-  keyPress: () => {},
+  keyUp: () => {},
   placeholder: '텍스트를 입력해주세요',
 };
 

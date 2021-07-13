@@ -24,7 +24,7 @@ const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 const initialState = {
   token: null,
   is_login: false,
-  is_check: false,
+  is_check: null,
   userId: null,
   nickname: null,
 };
@@ -76,7 +76,7 @@ const nickCheck = (id) => {
         dispatch(checkDup(true));
       })
       .catch((error) => {
-        console.error(error);
+        dispatch(checkDup(false));
       });
   };
 };
