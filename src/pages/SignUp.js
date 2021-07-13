@@ -4,6 +4,9 @@ import React from 'react';
 //Elements
 import { Text, Title, Input, Grid, Button } from '../elements';
 
+//HISTORY
+import { history } from '../redux/configStore';
+
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +33,7 @@ const SignUp = (props) => {
     }
 
     dispatch(userActions.signupDB(id, pwd, pwd_check));
+    history.push('/')
   };
 
   const nickname = () => {
