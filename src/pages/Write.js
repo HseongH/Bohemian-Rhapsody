@@ -84,8 +84,6 @@ const Write = (props) => {
   const preview = postInfo ? postInfo.img : image.preview;
   const imgUrl = image.imageUrl;
 
-  console.log(postInfo);
-
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
     title: postInfo ? postInfo.title : '',

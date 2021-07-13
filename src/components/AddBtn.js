@@ -13,7 +13,7 @@ import BookmarkIcon from '@material-ui/icons/Bookmark';
 const AddBtn = (props) => {
   return (
     <Grid
-      style={{ position: 'fixed', bottom: '30px', right: '55px', zIndex: 99 }}
+      style={{ position: 'fixed', bottom: '30px', right: '3%', zIndex: 99 }}
       width="60px"
       height="130px"
       overflow="visible"

@@ -10,6 +10,15 @@ const OuterStyle = styled.div`
   max-width: 1440px;
   position: relative;
   margin: 0 auto;
+
+  @media ${(props) => props.theme.laptop} {
+    max-width: none;
+    width: 90%;
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    width: 95%;
+  }
 `;
 
 const Layout = ({ children }) => {
