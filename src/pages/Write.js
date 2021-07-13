@@ -139,8 +139,23 @@ const Write = (props) => {
       padding="30px 40px"
       radius="20px"
       shadow
+      tabletStyle={() => {
+        return css`
+          display: block;
+          width: auto;
+          max-width: 430px;
+        `;
+      }}
     >
-      <Grid width="320px" margin="0 30px 0 0">
+      <Grid
+        width="320px"
+        margin="0 30px 0 0"
+        tabletStyle={() => {
+          return css`
+            margin: 0 auto;
+          `;
+        }}
+      >
         <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
           <LabelStyle htmlFor="input--file">
             {!preview ? (
@@ -163,7 +178,14 @@ const Write = (props) => {
         </Grid>
       </Grid>
 
-      <Grid style={{ flex: 1 }}>
+      <Grid
+        style={{ flex: 1 }}
+        tabletStyle={() => {
+          return css`
+            margin-top: 20px;
+          `;
+        }}
+      >
         <Input
           value={contents.title}
           fontSize="23px"

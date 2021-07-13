@@ -3,11 +3,13 @@ import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
+import { css } from 'styled-components';
 
 // HISTORY
 import { history } from '../redux/configStore';
 
 // STYLE
+import GlobalStyle from '../common/globalStyle';
 import theme from '../common/style';
 
 // PAGES
@@ -23,12 +25,30 @@ import Likes from '../pages/Likes';
 import Header from './Header';
 import AddBtn from './AddBtn';
 import Permit from './Permit';
-import Layout from './Layout';
+
+// ELEMENTS
+import { Grid } from '../elements/index';
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Layout>
+      <Grid
+        margin="0 auto"
+        overflow="visible"
+        style={{ maxWidth: '1440px', position: 'relative', minHeight: '100vh' }}
+        laptoptStyle={() => {
+          return css`
+            max-width: none;
+            width: 90%;
+          `;
+        }}
+        mobileStyle={() => {
+          return css`
+            width: 95%;
+          `;
+        }}
+      >
+        <GlobalStyle />
         <Header />
 
         <ConnectedRouter history={history}>
@@ -44,7 +64,7 @@ function App() {
         <Permit>
           <AddBtn />
         </Permit>
-      </Layout>
+      </Grid>
     </ThemeProvider>
   );
 }

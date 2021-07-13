@@ -69,7 +69,6 @@ const getOnePostDB = (postId) => {
     instance
       .get(`/detail/${postId}`)
       .then((res) => {
-        console.log(res.data);
         dispatch(getOnePost(res.data));
       })
       .catch((error) => {
@@ -153,8 +152,6 @@ function post(state = initialState, action) {
       return { ...state, list: newPostList };
 
     case POST_DETAIL:
-      console.log(action.post);
-
       if (action.post)
         return {
           ...state,

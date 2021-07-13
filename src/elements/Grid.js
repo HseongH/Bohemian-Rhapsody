@@ -22,8 +22,11 @@ Grid.defaultProps = {
   margin: false,
   align: false,
   bg: false,
-  _onClick: () => {},
   shadow: false,
+  _onClick: () => {},
+  laptoptStyle: () => {},
+  tabletStyle: () => {},
+  mobileStyle: () => {},
 };
 
 const GridBox = styled.div`
@@ -39,12 +42,25 @@ const GridBox = styled.div`
     ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
     box-sizing: border-box;
   overflow: ${(props) => props.overflow};
+
   &:hover {
     background: ${(props) => props.hoverColor};
     ${(props) =>
       props.hoverShadow
         ? `box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;`
         : ''}
+  }
+
+  @media ${(props) => props.theme.laptop} {
+    ${(props) => props.laptoptStyle()}
+  }
+
+  @media ${(props) => props.theme.tablet} {
+    ${(props) => props.tabletStyle()}
+  }
+
+  @media ${(props) => props.theme.mobile} {
+    ${(props) => props.mobileStyle()}
   }
 `;
 

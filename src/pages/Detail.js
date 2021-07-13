@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
+import { css } from 'styled-components';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text } from '../elements/index';
@@ -44,12 +45,33 @@ const Detail = ({ match }) => {
           padding="30px 40px"
           radius="20px"
           shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
+          tabletStyle={() => {
+            return css`
+              display: block;
+              width: auto;
+              max-width: 430px;
+            `;
+          }}
+          mobileStyle={() => {
+            return css`
+              width: 390px;
+              padding: 20px;
+            `;
+          }}
         >
           <Grid width="350px" margin="0 30px 0 0" radius="20px">
             <Image src={postInfo.img} />
           </Grid>
 
-          <Grid style={{ flex: 1, position: 'relative' }} overflow="visible">
+          <Grid
+            style={{ flex: 1, position: 'relative' }}
+            overflow="visible"
+            tabletStyle={() => {
+              return css`
+                margin-top: 20px;
+              `;
+            }}
+          >
             <Grid is_flex="space-between">
               <Dropdown
                 contents={['수정', '삭제']}
