@@ -43,7 +43,7 @@ const SignUp = (props) => {
       return;
     }
     setIdWarColor('green');
-    setIdConfirm('사용가능한 아이디 입니다.');
+    setIdConfirm('중복 확인을 해주세요.');
   }
 
   const checkPWD = (val) => {
@@ -90,8 +90,17 @@ const SignUp = (props) => {
   };
 
   const nickname = () => {
-    console.log(id);
+
     dispatch(userActions.nickCheck(id));
+
+    if (dupState) {
+      setIdWarColor('green');
+      setIdConfirm('사용 가능한 아이디입니다.')
+      return;
+    }
+    setIdWarColor('red');
+    setIdConfirm('이미 사용 중인 아이디입니다.')
+    
   };
 
   return (
@@ -121,7 +130,6 @@ const SignUp = (props) => {
           <Grid padding="16px 0px 0px">
             <Text fontSize="12px" color={idWarning} lineHeight="2" textIndent="15px">
               {idConfirm}
-              {dupState}
             </Text>
           </Grid>
           <Grid is_flex padding="0px 0px 16px">
