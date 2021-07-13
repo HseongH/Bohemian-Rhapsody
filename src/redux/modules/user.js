@@ -16,13 +16,13 @@ const CHECK_DUP = 'CHECK_DUP';
 
 // ACTION CREATORS
 const checkDidIWrite = createAction(DID_I_WRITE, (userInfo) => ({ userInfo }));
-const logIn = createAction(LOG_IN, (user) => ({ user }));
+const logIn = createAction(LOG_IN, (token) => ({ token }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 
 // INITIAL STATE
 const initialState = {
-  user: null,
+  token: null,
   is_login: false,
   is_check: false,
   userId: null,
@@ -48,9 +48,11 @@ const loginAction = (user) => {
     instance
       .post('/api/login', user)
       .then((res) => {
+        dispatch(checkDidIWrite(res.data));
         dispatch(logIn(res.data.token));
+
         setToken(res.data.token);
-        instance.defaults.headers.common['authorization'] = `Bearer ${res.data.token}`;
+
         history.push('/');
       })
       .catch((error) => {
@@ -61,12 +63,7 @@ const loginAction = (user) => {
 
 const logInCheck = (token) => {
   return function (dispatch) {
-    if (token) {
-      dispatch(logIn(token));
-      instance.defaults.headers.common['authorization'] = `Bearer ${token}`;
-    } else {
-      dispatch(logOut());
-    }
+    if (token) dispatch(logIn(token));
   };
 };
 
@@ -110,7 +107,7 @@ export default handleActions(
 
     [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
-        draft.user = action.payload.user;
+        draft.token = action.payload.token;
         draft.is_login = true;
       }),
 
@@ -119,7 +116,7 @@ export default handleActions(
         removeToken();
         draft.userId = null;
         draft.nickname = null;
-        draft.user = null;
+        draft.token = null;
         draft.is_login = false;
       }),
 

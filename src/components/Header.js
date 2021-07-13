@@ -21,8 +21,8 @@ import PersonIcon from '@material-ui/icons/Person';
 
 const Header = (props) => {
   const dispatch = useDispatch();
-
   const is_login = useSelector((state) => state.user.is_login);
+
   return (
     <React.Fragment>
       <Grid is_flex height="100px">
@@ -34,7 +34,17 @@ const Header = (props) => {
           <EmojiSymbolsIcon style={{ fontSize: '35px' }} />
         </Button>
 
-        <Input padding="20px 15px" placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
+        <Input
+          padding="20px 15px"
+          placeholder="Search"
+          margin="0 20px 0"
+          style={{ flex: 1 }}
+          keyPress={(event) => {
+            if (event.key === 'Enter' && event.target.value) {
+              dispatch(postActions.searchPostDB(event.target.value));
+            }
+          }}
+        />
 
         {is_login ? (
           <Dropdown

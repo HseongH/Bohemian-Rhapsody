@@ -30,6 +30,7 @@ const getPostListDB = () => {
     instance
       .get('/api/post/posts')
       .then((res) => {
+        console.log(res);
         dispatch(getPostList(res.data.result));
       })
       .catch((error) => {
@@ -92,7 +93,7 @@ const createPostDB = (image, post) => {
           .post('/api/post', { ...postInfo })
           .then((res) => {
             console.log(res);
-            dispatch(createPost(postInfo));
+            dispatch(createPost({ img: imgUrl }));
           })
           .catch((error) => {
             console.error(error);

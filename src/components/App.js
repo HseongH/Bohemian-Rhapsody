@@ -5,9 +5,6 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { css } from 'styled-components';
 
-// AXIOS
-import { setAthorization } from '../common/axios';
-
 // HISTORY
 import { history } from '../redux/configStore';
 
@@ -41,15 +38,14 @@ import { useDispatch } from 'react-redux';
 
 function App() {
   const dispatch = useDispatch();
+  const token = getToken();
 
   useEffect(() => {
-    const token = getToken();
-
     if (token) {
       dispatch(userActions.checkDidIWriteDB());
       dispatch(userActions.logInCheck(token));
     }
-  });
+  }, [token]);
 
   return (
     <ThemeProvider theme={theme}>

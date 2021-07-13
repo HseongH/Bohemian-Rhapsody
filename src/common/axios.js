@@ -11,7 +11,8 @@ const instance = axios.create({
     Accept: '*/*',
     'X-Requested-With': 'XMLHttpRequest',
   },
-  // timeout: 3000,
 });
+
+instance.defaults.headers.common['authorization'] = `Bearer ${getToken()}`;
 
 export default instance;

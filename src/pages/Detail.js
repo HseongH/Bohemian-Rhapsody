@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
 import { css } from 'styled-components';
@@ -12,6 +12,7 @@ import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 // COMPONENTS
 import Post from '../components/Post';
 import Permit from '../components/Permit';
+import Comment from '../components/Comment';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
@@ -31,8 +32,10 @@ const Detail = ({ match }) => {
   const postList = posts.list;
   const postInfo = posts.post;
 
+  const [visible, setVisible] = useState(false);
+
   const postLike = () => {
-    postLikeDB(postId);
+    dispatch(postLikeDB(postId));
   };
 
   useEffect(() => {
@@ -131,6 +134,24 @@ const Detail = ({ match }) => {
             </Text>
 
             <Text>{postInfo.description}</Text>
+
+            <Button
+              width="auto"
+              height="auto"
+              padding="0"
+              bg="none"
+              radius="0"
+              color="#6c757d"
+              margin="30px 0 20px"
+              hoverColor="none"
+              clickEvent={() => {
+                setVisible((visible) => !visible);
+              }}
+            >
+              {visible ? '댓글 보기' : '댓글 숨기기'}
+            </Button>
+
+            {visible ? <Comment /> : null}
           </Grid>
         </Grid>
 

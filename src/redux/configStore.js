@@ -7,8 +7,8 @@ import thunk from 'redux-thunk';
 // REDUCER
 import User from './modules/user';
 import post from './modules/post';
-// import like from './modules/like';
 import image from './modules/image';
+import comment from './modules/comment';
 
 // HISTORY
 export const history = createBrowserHistory();
@@ -16,8 +16,8 @@ export const history = createBrowserHistory();
 const rootReducer = combineReducers({
   user: User,
   post,
-  // like,
   image,
+  comment,
   router: connectRouter(history),
 });
 
