@@ -50,6 +50,7 @@ const loginAction = (user) => {
       .then((res) => {
         dispatch(logIn(res.data.token));
         setToken(res.data.token);
+        instance.defaults.headers.common['authorization'] = `Bearer ${res.data.token}`;
         history.push('/');
       })
       .catch((error) => {
@@ -62,6 +63,7 @@ const logInCheck = (token) => {
   return function (dispatch) {
     if (token) {
       dispatch(logIn(token));
+      instance.defaults.headers.common['authorization'] = `Bearer ${token}`;
     } else {
       dispatch(logOut());
     }

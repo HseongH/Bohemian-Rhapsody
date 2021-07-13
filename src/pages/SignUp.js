@@ -1,5 +1,6 @@
 // LIBRARY
 import React from 'react';
+import { css } from 'styled-components';
 
 //Elements
 import { Text, Title, Input, Grid, Button } from '../elements';
@@ -31,15 +32,14 @@ const SignUp = (props) => {
 
   const [warning, setWarColor] = React.useState('red');
 
-
   const signup = () => {
-    console.log(id)
+    console.log(id);
     if (id === '') {
-      setIdBlank('아이디가 입력되지 않았습니다.')
+      setIdBlank('아이디가 입력되지 않았습니다.');
       return;
     }
     if (pwd === '') {
-      setPwdBlank('패스워드가 입력되지 않았습니다.')
+      setPwdBlank('패스워드가 입력되지 않았습니다.');
       return;
     }
     if (!idVal(id)) {
@@ -51,19 +51,19 @@ const SignUp = (props) => {
       return;
     }
     if (pwd !== pwdCheck) {
-      setPwdCheckNoti('입력된 패스워드가 서로 다릅니다.')
+      setPwdCheckNoti('입력된 패스워드가 서로 다릅니다.');
       return;
     }
 
-    setWarColor('green')
-    setIdVali('사용가능한 아이디 입니다.')
-    setPwdVali('사용가능한 패스워드 입니다.')
-    setPwdCheckNoti('패스워드가 올바르게 입력되었습니다.')
+    setWarColor('green');
+    setIdVali('사용가능한 아이디 입니다.');
+    setPwdVali('사용가능한 패스워드 입니다.');
+    setPwdCheckNoti('패스워드가 올바르게 입력되었습니다.');
 
     dispatch(userActions.signupDB(id, pwd, pwdCheck));
 
-    window.alert("회원가입이 완료되었습니다. 다시 로그인해 주세요.")
-    history.push('/login')
+    window.alert('회원가입이 완료되었습니다. 다시 로그인해 주세요.');
+    history.push('/login');
   };
 
   const nickname = () => {
@@ -80,6 +80,17 @@ const SignUp = (props) => {
         padding="30px 40px"
         radius="20px"
         shadow
+        tabletStyle={() => {
+          return css`
+            width: 95%;
+          `;
+        }}
+        mobileStyle={() => {
+          return css`
+            padding: 15px 20px;
+            width: 100%;
+          `;
+        }}
       >
         <Grid padding="16px">
           <Title>SIGN UP</Title>

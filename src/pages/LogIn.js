@@ -1,5 +1,6 @@
 //LIBRARY
 import React, { useState } from 'react';
+import { css } from 'styled-components';
 
 //ELEMENTS
 import { Text, Title, Input, Grid, Button } from '../elements';
@@ -31,6 +32,17 @@ const Login = (props) => {
         padding="30px 40px"
         radius="20px"
         shadow
+        tabletStyle={() => {
+          return css`
+            width: 95%;
+          `;
+        }}
+        mobileStyle={() => {
+          return css`
+            padding: 15px 20px;
+            width: 100%;
+          `;
+        }}
       >
         <Grid padding="16px">
           <Title>LOGIN</Title>

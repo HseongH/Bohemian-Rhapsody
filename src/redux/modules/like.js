@@ -1,25 +1,21 @@
-// ACTION
-const LIKE = 'LIKE';
+// AXIOS
+import instance from '../../common/axios';
 
-// ACTION CREATER
-export const readLike = (like) => ({ type: LIKE, like });
-
-// INITIAL STATE
-const initialState = {
-  like: [],
-};
+// REDUX
+import { postActions } from './post';
 
 // MIDDLEWARE
+const postLikeDB = (postId) => {
+  return function (dispatch) {
+    instance
+      .post('/api/like', { postId })
+      .then((res) => {
+        dispatch(postActions.getOnePostDB(postId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
 
-// REDUCER
-function like(state = initialState, action) {
-  switch (action.type) {
-    case LIKE:
-      return state;
-
-    default:
-      return state;
-  }
-}
-
-export default like;
+export default postLikeDB;
