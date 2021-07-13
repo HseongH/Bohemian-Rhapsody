@@ -7,7 +7,6 @@ import moment from 'moment';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text } from '../elements/index';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 // COMPONENTS
 import Post from '../components/Post';
@@ -23,6 +22,9 @@ import { history } from '../redux/configStore';
 
 // COMPONENTS
 import Dropdown from '../components/Dropdown';
+
+// ICON
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
 const Detail = ({ match }) => {
   const { postId } = match.params;
@@ -151,7 +153,7 @@ const Detail = ({ match }) => {
               {visible ? '댓글 보기' : '댓글 숨기기'}
             </Button>
 
-            {visible ? <Comment /> : null}
+            {visible ? <Comment postId={postId} /> : null}
           </Grid>
         </Grid>
 
