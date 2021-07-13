@@ -7,6 +7,10 @@ import { Text, Title, Input, Grid, Button } from '../elements';
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useDispatch, useSelector } from 'react-redux';
+import { IndeterminateCheckBox } from '@material-ui/icons';
+
+//VALIDATION
+import { idCheck, pwdCheck } from '../common/validation'
 
 const SignUp = (props) => {
   const dispatch = useDispatch();
@@ -21,7 +25,6 @@ const SignUp = (props) => {
     if (id === '' || pwd === '') {
       return window.alert('아이디, 패스워드를 모두 입력해 주세요.');
     }
-
     if (pwd !== pwd_check) {
       return window.alert('패스워드를 다시 확인해 주세요.');
     }
