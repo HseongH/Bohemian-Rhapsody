@@ -19,35 +19,27 @@ import Likes from '../pages/Likes';
 import Header from './Header';
 import AddBtn from './AddBtn';
 import Permit from './Permit';
-
-// ELEMENTS
-import { Grid } from '../elements';
-
-// STYLE
-import GlobalStyle from '../common/globalStyle';
+import Layout from './Layout';
 
 function App() {
   return (
-    <>
-      <Grid style={{ maxWidth: '1440px', position: 'relative' }} margin="0px auto">
-        <GlobalStyle />
-        <Header />
+    <Layout>
+      <Header />
 
-        <ConnectedRouter history={history}>
-          <Route path="/" exact component={Home} />
-          <Route path="/detail/:postId" exact component={Detail} />
-          <Route path="/write" exact component={Write} />
-          <Route path="/modify/:postId" exact component={Modify} />
-          <Route path="/login" exact component={LogIn} />
-          <Route path="/signup" exact component={SignUp} />
-          <Route path="/likes" exact component={Likes} />
-        </ConnectedRouter>
+      <ConnectedRouter history={history}>
+        <Route path="/" exact component={Home} />
+        <Route path="/detail/:postId" exact component={Detail} />
+        <Route path="/write" exact component={Write} />
+        <Route path="/modify/:postId" exact component={Modify} />
+        <Route path="/login" exact component={LogIn} />
+        <Route path="/signup" exact component={SignUp} />
+        <Route path="/likes" exact component={Likes} />
+      </ConnectedRouter>
 
-        <Permit>
-          <AddBtn />
-        </Permit>
-      </Grid>
-    </>
+      <Permit>
+        <AddBtn />
+      </Permit>
+    </Layout>
   );
 }
 

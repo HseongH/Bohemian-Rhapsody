@@ -28,12 +28,11 @@ const initialState = {
 // MIDDLEWARE
 const loginAction = (user) => {
   return function (dispatch, getState, { history }) {
-    console.log(user);
     instance
       .post('/api/login', user)
       .then((res) => {
-        dispatch(logIn(res));
-        setToken(res);
+        dispatch(logIn(res.data.token));
+        setToken(res.data.token);
         history.push('/');
       })
       .catch((error) => {
