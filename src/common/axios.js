@@ -10,7 +10,6 @@ const instance = axios.create({
     'Content-type': 'application/json; charset=utf-8',
     Accept: '*/*',
     'X-Requested-With': 'XMLHttpRequest',
-    // 'content-type': '',
   },
   // timeout: 3000,
 });

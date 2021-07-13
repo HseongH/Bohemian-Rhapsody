@@ -5,6 +5,9 @@ import instance from '../../common/axios';
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
+// FUNCTION
+import { getToken, setToken, removeToken } from '../../common/token';
+
 // ACTION
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
@@ -18,7 +21,7 @@ const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 // INITIAL STATE
 const initialState = {
   user: null,
-  is_login: localStorage.getItem('token') ? true : false,
+  is_login: getToken() ? true : false,
   is_check: false,
 };
 
@@ -30,7 +33,7 @@ const loginAction = (user) => {
       .post('/api/login', user)
       .then((res) => {
         dispatch(logIn(res));
-        localStorage.setItem('token', res.token);
+        setToken(res);
         history.push('/');
       })
       .catch((error) => {
@@ -61,8 +64,9 @@ const signupDB = (id, pwd, pwdCheck) => {
         console.log(res);
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
         console.log(errorCode, errorMessage);
       });
   };
@@ -78,7 +82,7 @@ export default handleActions(
 
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        localStorage.removeItem('token');
+        removeToken();
         draft.user = null;
         draft.is_login = false;
       }),
