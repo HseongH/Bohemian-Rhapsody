@@ -64,7 +64,7 @@ const SignUp = (props) => {
               margin="0px 0px 0px 6px"
               width="30%"
               height="auto"
-              padding="7px 0"
+              padding="10px 0"
               radius="20px"
               clickEvent={nickname}
             >
