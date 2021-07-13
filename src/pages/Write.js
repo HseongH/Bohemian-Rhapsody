@@ -81,7 +81,7 @@ const Write = (props) => {
 
   const dispatch = useDispatch();
   const image = useSelector((state) => state.image);
-  const preview = image ? image.preview : postInfo.img;
+  const preview = image.preview;
 
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({

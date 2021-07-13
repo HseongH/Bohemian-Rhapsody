@@ -48,6 +48,7 @@ const loginAction = (user) => {
     instance
       .post('/api/login', user)
       .then((res) => {
+        console.log(res);
         dispatch(checkDidIWrite(res.data));
         dispatch(logIn(res.data.token));
 
@@ -122,7 +123,7 @@ export default handleActions(
 
     [CHECK_DUP]: (state, action) =>
       produce(state, (draft) => {
-        draft.is_check = true;
+        draft.is_check = action.payload.nickname;
       }),
   },
   initialState
