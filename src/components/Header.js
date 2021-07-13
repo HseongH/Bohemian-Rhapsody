@@ -17,7 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //Icons
 import HomeIcon from '@material-ui/icons/Home';
 import PersonIcon from '@material-ui/icons/Person';
-import { postActions } from '../redux/modules/detailPost';
+import { postActions } from '../redux/modules/post';
 
 const Header = (props) => {
   const dispatch = useDispatch();

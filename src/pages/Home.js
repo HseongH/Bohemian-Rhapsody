@@ -4,14 +4,14 @@ import StackGrid from 'react-stack-grid';
 import { useDispatch, useSelector } from 'react-redux';
 
 // REDUX
-import { postActions } from '../redux/modules/detailPost';
+import { postActions } from '../redux/modules/post';
 
 // COMPONENTS
 import Post from '../components/Post';
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const postList = useSelector((state) => state.postDetail.list);
+  const postList = useSelector((state) => state.post.list);
 
   useEffect(() => {
     dispatch(postActions.getPostListDB());
