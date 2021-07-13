@@ -6,7 +6,7 @@ import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
 // FUNCTION
-import { getToken, setToken, removeToken } from '../../common/token';
+import { setToken, removeToken } from '../../common/token';
 
 // ACTION
 const DID_I_WRITE = 'DID_I_WRITE';
@@ -15,7 +15,7 @@ const LOG_OUT = 'LOG_OUT';
 const CHECK_DUP = 'CHECK_DUP';
 
 // ACTION CREATORS
-const checkDidIWrite = createAction(DID_I_WRITE, (user) => ({}));
+const checkDidIWrite = createAction(DID_I_WRITE, (userInfo) => ({ userInfo }));
 const logIn = createAction(LOG_IN, (user) => ({ user }));
 const logOut = createAction(LOG_OUT, (user) => ({ user }));
 const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
@@ -23,9 +23,9 @@ const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 // INITIAL STATE
 const initialState = {
   user: null,
-  is_login: getToken() ? true : false,
+  is_login: false,
   is_check: false,
-  didIWrite: false,
+  userId: null,
   nickname: null,
 };
 
@@ -35,7 +35,7 @@ const checkDidIWriteDB = () => {
     instance
       .post('/api/user/me')
       .then((res) => {
-        console.log(res);
+        dispatch(checkDidIWrite(res.data));
       })
       .catch((error) => {
         console.error(error);
@@ -55,6 +55,16 @@ const loginAction = (user) => {
       .catch((error) => {
         console.error(error);
       });
+  };
+};
+
+const logInCheck = (token) => {
+  return function (dispatch) {
+    if (token) {
+      dispatch(logIn(token));
+    } else {
+      dispatch(logOut());
+    }
   };
 };
 
@@ -90,6 +100,12 @@ const signupDB = (id, pwd, pwdCheck) => {
 // REDUCER
 export default handleActions(
   {
+    [DID_I_WRITE]: (state, action) =>
+      produce(state, (draft) => {
+        draft.userId = action.payload.userInfo.userId;
+        draft.nickname = action.payload.userInfo.nickname;
+      }),
+
     [LOG_IN]: (state, action) =>
       produce(state, (draft) => {
         draft.user = action.payload.user;
@@ -99,6 +115,8 @@ export default handleActions(
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
         removeToken();
+        draft.userId = null;
+        draft.nickname = null;
         draft.user = null;
         draft.is_login = false;
       }),
@@ -113,9 +131,10 @@ export default handleActions(
 
 const userActions = {
   logIn,
+  logInCheck,
   logOut,
   loginAction,
-  checkDidIWrite,
+  checkDidIWriteDB,
   signupDB,
   nickCheck,
 };

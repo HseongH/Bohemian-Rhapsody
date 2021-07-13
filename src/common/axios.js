@@ -14,8 +14,8 @@ const instance = axios.create({
   // timeout: 3000,
 });
 
-const TOKEN = getToken();
+const token = getToken();
 
-if (TOKEN) instance.defaults.headers.common['authorization'] = `Bearer ${TOKEN}`;
+if (token) instance.defaults.headers.common['authorization'] = `Bearer ${token}`;
 
 export default instance;

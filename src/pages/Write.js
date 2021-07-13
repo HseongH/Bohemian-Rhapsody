@@ -78,7 +78,6 @@ const InputArea = styled.textarea`
 
 const Write = (props) => {
   const { postInfo } = props;
-  console.log(postInfo);
 
   const dispatch = useDispatch();
   const image = useSelector((state) => state.image);

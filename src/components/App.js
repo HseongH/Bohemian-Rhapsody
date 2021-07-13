@@ -5,11 +5,17 @@ import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 import { css } from 'styled-components';
 
+// AXIOS
+import { setAthorization } from '../common/axios';
+
 // HISTORY
 import { history } from '../redux/configStore';
 
 // REDUX
 import { userActions } from '../redux/modules/user';
+
+// FUNCTION
+import { getToken } from '../common/token';
 
 // STYLE
 import GlobalStyle from '../common/globalStyle';
@@ -37,7 +43,12 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(userActions.checkDidIWrite());
+    const token = getToken();
+
+    if (token) {
+      dispatch(userActions.checkDidIWriteDB());
+      dispatch(userActions.logInCheck(token));
+    }
   });
 
   return (
