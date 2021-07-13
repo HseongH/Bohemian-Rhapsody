@@ -5,9 +5,6 @@ import instance from '../../common/axios';
 import { createAction, handleActions } from 'redux-actions';
 import { produce } from 'immer';
 
-// FUNCTION
-import { getToken, setToken, removeToken } from '../../common/token';
-
 // ACTION
 const LOG_IN = 'LOG_IN';
 const LOG_OUT = 'LOG_OUT';
@@ -21,7 +18,7 @@ const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 // INITIAL STATE
 const initialState = {
   user: null,
-  is_login: getToken() ? true : false,
+  is_login: localStorage.getItem('token') ? true : false,
   is_check: false,
 };
 
@@ -30,32 +27,16 @@ const loginAction = (user) => {
   return function (dispatch, getState, { history }) {
     console.log(user);
     instance
-      .post('/api/login', { ...user })
+      .post('/api/login', user)
       .then((res) => {
         dispatch(logIn(res));
-        setToken(res);
+        localStorage.setItem('token', res.token);
         history.push('/');
       })
       .catch((error) => {
         console.error(error);
       });
   };
-
-  // const xhr = new XMLHttpRequest();
-
-  // xhr.open('POST', 'http://astelen.shop:3000/api/login');
-
-  // xhr.setRequestHeader('content-type', 'application/json');
-
-  // xhr.send(JSON.stringify(user));
-
-  // xhr.onload = () => {
-  //   if (xhr.status === 200 || xhr.status === 201) {
-  //     console.log(JSON.parse(xhr.response));
-  //   } else {
-  //     console.error(xhr.status, xhr.statusText);
-  //   }
-  // };
 };
 
 const nickCheck = (id) => {
@@ -80,9 +61,8 @@ const signupDB = (id, pwd, pwdCheck) => {
         console.log(res);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
+        var errorCode = error.code;
+        var errorMessage = error.message;
         console.log(errorCode, errorMessage);
       });
   };
@@ -98,7 +78,7 @@ export default handleActions(
 
     [LOG_OUT]: (state, action) =>
       produce(state, (draft) => {
-        removeToken();
+        localStorage.removeItem('token');
         draft.user = null;
         draft.is_login = false;
       }),
