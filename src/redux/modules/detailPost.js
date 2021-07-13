@@ -82,7 +82,7 @@ const getOnePostDB = (postId) => {
 const searchPostDB = (keyword) => {
   return function (dispatch) {
     instance
-      .get(`/api/search/:${keyword}`)
+      .get(`/api/search/${keyword}`)
       .then((res) => {
         console.log(res);
         dispatch(searchPost(res));

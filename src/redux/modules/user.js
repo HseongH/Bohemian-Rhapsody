@@ -27,7 +27,7 @@ const loginAction = (user) => {
   return function (dispatch, getState, { history }) {
     console.log(user);
     instance
-      .post('/api/login', user)
+      .post('/api/login', { ...user })
       .then((res) => {
         dispatch(logIn(res));
         localStorage.setItem('token', res.token);
@@ -37,6 +37,22 @@ const loginAction = (user) => {
         console.error(error);
       });
   };
+
+  // const xhr = new XMLHttpRequest();
+
+  // xhr.open('POST', 'http://astelen.shop:3000/api/login');
+
+  // xhr.setRequestHeader('content-type', 'application/json');
+
+  // xhr.send(JSON.stringify(user));
+
+  // xhr.onload = () => {
+  //   if (xhr.status === 200 || xhr.status === 201) {
+  //     console.log(JSON.parse(xhr.response));
+  //   } else {
+  //     console.error(xhr.status, xhr.statusText);
+  //   }
+  // };
 };
 
 const nickCheck = (id) => {

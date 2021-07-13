@@ -31,7 +31,7 @@ const Detail = ({ match }) => {
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));
     dispatch(postActions.getPostListDB());
-  }, []);
+  }, [postId]);
 
   if (postInfo) {
     return (

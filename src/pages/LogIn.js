@@ -19,7 +19,7 @@ const Login = (props) => {
   const login = () => {
     if (!(userInfo.nickname && userInfo.password)) return;
 
-    dispatch(userActions.loginAction(userInfo));
+    userActions.loginAction(userInfo);
   };
 
   return (
