@@ -15,6 +15,7 @@ import Permit from '../components/Permit';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
+import postLikeDB from '../redux/modules/like';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -29,6 +30,10 @@ const Detail = ({ match }) => {
   const posts = useSelector((state) => state.post);
   const postList = posts.list;
   const postInfo = posts.post;
+
+  const postLike = () => {
+    postLikeDB(postId);
+  };
 
   useEffect(() => {
     dispatch(postActions.getPostListDB());
@@ -101,7 +106,13 @@ const Detail = ({ match }) => {
               />
 
               <Permit>
-                <Button width="auto" height="auto" padding="12px 15px" radius="30px">
+                <Button
+                  width="auto"
+                  height="auto"
+                  padding="12px 15px"
+                  radius="30px"
+                  clickEvent={postLike}
+                >
                   저장
                 </Button>
               </Permit>

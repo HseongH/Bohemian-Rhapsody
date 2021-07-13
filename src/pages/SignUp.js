@@ -1,5 +1,6 @@
 // LIBRARY
 import React from 'react';
+import { css } from 'styled-components';
 
 //Elements
 import { Text, Title, Input, Grid, Button } from '../elements';
@@ -33,8 +34,8 @@ const SignUp = (props) => {
     }
 
     dispatch(userActions.signupDB(id, pwd, pwd_check));
-    window.alert("회원가입이 완료되었습니다. 다시 로그인해 주세요.")
-    history.push('/login')
+    window.alert('회원가입이 완료되었습니다. 다시 로그인해 주세요.');
+    history.push('/login');
   };
 
   const nickname = () => {
@@ -51,6 +52,17 @@ const SignUp = (props) => {
         padding="30px 40px"
         radius="20px"
         shadow
+        tabletStyle={() => {
+          return css`
+            width: 95%;
+          `;
+        }}
+        mobileStyle={() => {
+          return css`
+            padding: 15px 20px;
+            width: 100%;
+          `;
+        }}
       >
         <Grid padding="16px">
           <Title>SIGN UP</Title>

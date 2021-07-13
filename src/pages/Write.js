@@ -81,8 +81,7 @@ const Write = (props) => {
 
   const dispatch = useDispatch();
   const image = useSelector((state) => state.image);
-  const preview = postInfo ? postInfo.img : image.preview;
-  const imgUrl = image.imageUrl;
+  const preview = image.preview ? image.preview : postInfo.img;
 
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
@@ -106,7 +105,7 @@ const Write = (props) => {
   };
 
   const modifyPost = () => {
-    if (preview !== imgUrl) {
+    if (preview !== postInfo.img) {
       const newPostInfo = { ...postInfo, img: null };
 
       dispatch(postActions.updatePostDB(postInfo.postId, newPostInfo, fileInput.current.files[0]));

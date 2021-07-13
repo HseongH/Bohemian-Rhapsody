@@ -8,7 +8,6 @@ import { imgActions } from './image';
 const GET_POST = 'GET_POST';
 const POST_CREATE = 'POST_CREATE';
 const POST_DETAIL = 'POST_DETAIL';
-const SEARCH_POST = 'SEARCH_POST';
 const POST_UPDATE = 'POST_UPDATE';
 const POST_DELETE = 'POST_DELETE';
 
@@ -16,7 +15,6 @@ const POST_DELETE = 'POST_DELETE';
 const getPostList = (postList) => ({ type: GET_POST, postList });
 const createPost = (post) => ({ type: POST_CREATE, post });
 const getOnePost = (post) => ({ type: POST_DETAIL, post });
-const searchPost = (postList) => ({ type: SEARCH_POST, postList });
 const updatePost = (postId, post) => ({ type: POST_UPDATE, postId, post });
 const deletePost = (postId) => ({ type: POST_DELETE, postId });
 
@@ -31,6 +29,46 @@ const getPostListDB = () => {
   return function (dispatch) {
     instance
       .get('/api/post/posts')
+      .then((res) => {
+        dispatch(getPostList(res.data.result));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+const getOnePostDB = (postId) => {
+  return function (dispatch) {
+    instance
+      .get(`/detail/${postId}`)
+      .then((res) => {
+        dispatch(getOnePost(res.data));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+const searchPostDB = (keyword) => {
+  return function (dispatch) {
+    instance
+      .get(`/api/search/${keyword}`)
+      .then((res) => {
+        console.log(res);
+        dispatch(getPostList(res.data.result));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+const getLikeListDB = () => {
+  return function (dispatch) {
+    instance
+      .get('/api/like')
       .then((res) => {
         dispatch(getPostList(res.data.result));
       })
@@ -61,33 +99,6 @@ const createPostDB = (image, post) => {
           });
       })
     );
-  };
-};
-
-const getOnePostDB = (postId) => {
-  return function (dispatch) {
-    instance
-      .get(`/detail/${postId}`)
-      .then((res) => {
-        dispatch(getOnePost(res.data));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-};
-
-const searchPostDB = (keyword) => {
-  return function (dispatch) {
-    instance
-      .get(`/api/search/${keyword}`)
-      .then((res) => {
-        console.log(res);
-        dispatch(searchPost(res));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   };
 };
 
@@ -157,9 +168,6 @@ function post(state = initialState, action) {
         post: action.post,
       };
 
-    case SEARCH_POST:
-      return { ...state, list: action.postList };
-
     case POST_UPDATE:
       const updateList = state.list.map((post) => {
         if (post.postId === action.postId) {
@@ -186,13 +194,13 @@ export const postActions = {
   getPostList,
   createPost,
   getOnePost,
-  searchPost,
   updatePost,
   deletePost,
   getPostListDB,
-  createPostDB,
   getOnePostDB,
   searchPostDB,
+  getLikeListDB,
+  createPostDB,
   updatePostDB,
   deletePostDB,
 };
