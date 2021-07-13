@@ -148,7 +148,7 @@ const Detail = ({ match }) => {
                 setVisible((visible) => !visible);
               }}
             >
-              {visible ? '댓글 보기' : '댓글 숨기기'}
+              {visible ? '댓글 숨기기' : '댓글 보기'}
             </Button>
 
             {visible ? <Comment /> : null}
