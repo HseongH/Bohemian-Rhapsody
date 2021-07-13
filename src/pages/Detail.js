@@ -43,7 +43,7 @@ const Detail = ({ match }) => {
           margin="50px auto"
           padding="30px 40px"
           radius="20px"
-          style={{ boxShadow: 'rgba(100, 100, 111, 0.2) 0px 7px 29px 0px' }}
+          shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
         >
           <Grid width="350px" margin="0 30px 0 0" radius="20px">
             <Image src={postInfo.img} />

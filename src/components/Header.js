@@ -13,30 +13,30 @@ import { history } from '../redux/configStore';
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useSelector, useDispatch } from 'react-redux';
+import { postActions } from '../redux/modules/post';
 
 //Icons
-import HomeIcon from '@material-ui/icons/Home';
+import EmojiSymbolsIcon from '@material-ui/icons/EmojiSymbols';
 import PersonIcon from '@material-ui/icons/Person';
-import { postActions } from '../redux/modules/post';
 
 const Header = (props) => {
   const dispatch = useDispatch();
+
   const is_login = useSelector((state) => state.user.is_login);
+  return (
+    <React.Fragment>
+      <Grid is_flex height="100px">
+        <Button
+          clickEvent={() => {
+            history.push('/');
+          }}
+        >
+          <EmojiSymbolsIcon style={{ fontSize: '35px' }} />
+        </Button>
 
-  if (is_login) {
-    return (
-      <React.Fragment>
-        <Grid is_flex height="100px">
-          <Button
-            clickEvent={() => {
-              history.push('/');
-            }}
-          >
-            <HomeIcon />
-          </Button>
+        <Input padding="20px 15px" placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
 
-          <Input padding="20px 15px" placeholder="Search" margin="0 20px 0" style={{ flex: 1 }} />
-
+        {is_login ? (
           <Dropdown
             contents={['로그아웃', '즐겨찾기']}
             clickEvent={[
@@ -52,48 +52,22 @@ const Header = (props) => {
             top="83px"
             pos="110px"
           />
-        </Grid>
-      </React.Fragment>
-    );
-  }
-
-  return (
-    <React.Fragment>
-      <Grid is_flex height="100px">
-        <Button
-          clickEvent={() => {
-            history.push('/');
-          }}
-        >
-          <HomeIcon />
-        </Button>
-
-        <Input
-          padding="20px 15px"
-          placeholder="Search"
-          margin="0 20px 0"
-          style={{ flex: 1 }}
-          keyPress={(event) => {
-            if (event.key === 'Enter' && event.target.value) {
-              postActions.searchPostDB(event.target.value);
-            }
-          }}
-        />
-
-        <Dropdown
-          contents={['로그인', '회원가입']}
-          clickEvent={[
-            () => {
-              history.push('/login');
-            },
-            () => {
-              history.push('/signup');
-            },
-          ]}
-          icon={<PersonIcon />}
-          top="83px"
-          pos="110px"
-        />
+        ) : (
+          <Dropdown
+            contents={['로그인', '회원가입']}
+            clickEvent={[
+              () => {
+                history.push('/login');
+              },
+              () => {
+                history.push('/signup');
+              },
+            ]}
+            icon={<PersonIcon />}
+            top="83px"
+            pos="110px"
+          />
+        )}
       </Grid>
     </React.Fragment>
   );

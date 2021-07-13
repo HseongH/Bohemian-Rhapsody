@@ -1,10 +1,14 @@
 // LIBRARY
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 import { ConnectedRouter } from 'connected-react-router';
 import { Route } from 'react-router-dom';
 
 // HISTORY
 import { history } from '../redux/configStore';
+
+// STYLE
+import theme from '../common/style';
 
 // PAGES
 import Home from '../pages/Home';
@@ -23,23 +27,25 @@ import Layout from './Layout';
 
 function App() {
   return (
-    <Layout>
-      <Header />
+    <ThemeProvider theme={theme}>
+      <Layout>
+        <Header />
 
-      <ConnectedRouter history={history}>
-        <Route path="/" exact component={Home} />
-        <Route path="/detail/:postId" exact component={Detail} />
-        <Route path="/write" exact component={Write} />
-        <Route path="/modify/:postId" exact component={Modify} />
-        <Route path="/login" exact component={LogIn} />
-        <Route path="/signup" exact component={SignUp} />
-        <Route path="/likes" exact component={Likes} />
-      </ConnectedRouter>
+        <ConnectedRouter history={history}>
+          <Route path="/" exact component={Home} />
+          <Route path="/detail/:postId" exact component={Detail} />
+          <Route path="/write" exact component={Write} />
+          <Route path="/modify/:postId" exact component={Modify} />
+          <Route path="/login" exact component={LogIn} />
+          <Route path="/signup" exact component={SignUp} />
+          <Route path="/likes" exact component={Likes} />
+        </ConnectedRouter>
 
-      <Permit>
-        <AddBtn />
-      </Permit>
-    </Layout>
+        <Permit>
+          <AddBtn />
+        </Permit>
+      </Layout>
+    </ThemeProvider>
   );
 }
 
