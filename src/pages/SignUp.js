@@ -23,11 +23,10 @@ const SignUp = (props) => {
 
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
+  const [pwdCheck, setPwdCheck] = React.useState('');
   const [idConfirm, setIdConfirm] = React.useState('');
   const [pwdConfirm, setPwdConfirm] = React.useState('');
-  const [pwdCheck, setPwdCheck] = React.useState('');
-  const [pwdCheckNoti, setPwdCheckNoti] = React.useState('');
-
+  const [pwdCheckConfirm, setPwdCheckNoti] = React.useState('');
   const [idWarning, setIdWarColor] = React.useState('red');
   const [pwdWarning, setPwdWarColor] = React.useState('red');
   const [pwdCheckWarning, setPwdCheckWarColor] = React.useState('red');
@@ -150,7 +149,7 @@ const SignUp = (props) => {
           </Grid>
           <Grid padding="16px 0px 50px 0px">
             <Text fontSize="12px" color={pwdCheckWarning} lineHeight="2" textIndent="15px">
-              {pwdCheckNoti}
+              {pwdCheckConfirm}
             </Text>
             <Input
               placeholder="패스워드를 한번 더 입력해주세요."
