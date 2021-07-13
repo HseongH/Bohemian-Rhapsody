@@ -12,7 +12,7 @@ import Post from '../components/Post';
 import Permit from '../components/Permit';
 
 // REDUX
-import { postActions } from '../redux/modules/detailPost';
+import { postActions } from '../redux/modules/post';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -24,7 +24,7 @@ const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.postDetail);
+  const posts = useSelector((state) => state.post);
   const postList = posts.list;
   const postInfo = posts.post;
 

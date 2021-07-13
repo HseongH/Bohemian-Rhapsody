@@ -1,7 +1,7 @@
 // LIBRARY
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { postActions } from '../redux/modules/detailPost';
+import { postActions } from '../redux/modules/post';
 
 // PAGES
 import Write from './Write';
@@ -9,7 +9,7 @@ import Write from './Write';
 const Modify = ({ match }) => {
   const dispatch = useDispatch();
   const { postId } = match.params;
-  const postInfo = useSelector((state) => state.postDetail.post);
+  const postInfo = useSelector((state) => state.post.post);
 
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));

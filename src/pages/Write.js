@@ -11,7 +11,7 @@ import { Grid, Button, Input, Text, Image } from '../elements/index';
 
 // REDUX
 import { imgActions } from '../redux/modules/image';
-import { postActions } from '../redux/modules/detailPost';
+import { postActions } from '../redux/modules/post';
 
 // ICON
 import InsertPhotoIcon from '@material-ui/icons/InsertPhoto';

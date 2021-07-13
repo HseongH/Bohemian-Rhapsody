@@ -27,7 +27,6 @@ const initialState = {
 // MIDDLEWARE
 const uploadImageDB = (image, callNext) => {
   return function (dispatch) {
-    console.log(111);
     dispatch(uploading(true));
 
     const upload = new AWS.S3.ManagedUpload({
