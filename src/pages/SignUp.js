@@ -18,13 +18,14 @@ import { idVal, pwdVal } from '../common/validation';
 const SignUp = (props) => {
   const dispatch = useDispatch();
 
+  const dupState = useSelector((state) => state.user.is_check);
+
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
   const [idBlank, setIdBlank] = React.useState('');
   const [pwdBlank, setPwdBlank] = React.useState('');
   const [idVali, setIdVali] = React.useState('');
   const [pwdVali, setPwdVali] = React.useState('');
-  const dupState = useSelector((state) => state.user.is_check);
   const [pwdCheck, setPwdCheck] = React.useState('');
   const [pwdCheckNoti, setPwdCheckNoti] = React.useState('');
 
