@@ -33,6 +33,7 @@ const SignUp = (props) => {
     }
 
     dispatch(userActions.signupDB(id, pwd, pwd_check));
+    window.alert("회원가입이 완료되었습니다.")
     history.push('/')
   };
 
