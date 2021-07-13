@@ -31,13 +31,13 @@ const SignUp = (props) => {
   const [pwdWarning, setPwdWarColor] = React.useState('red');
   const [pwdCheckWarning, setPwdCheckWarColor] = React.useState('red');
 
-  const checkID = (id) => {
-    if (id === '') {
+  const checkID = (val) => {
+    if (val === '') {
       setIdWarColor('red');
       setIdConfirm('아이디가 입력되지 않았습니다.');
       return;
     }
-    if (!idVal(id)) {
+    if (!idVal(val)) {
       setIdWarColor('red');
       setIdConfirm('아이디가 형식에 맞지 않습니다. (영어, 알파벳 4~20자)');
       return;
@@ -46,13 +46,13 @@ const SignUp = (props) => {
     setIdConfirm('사용가능한 아이디 입니다.');
   }
 
-  const checkPWD = (pwd) => {
-    if (pwd === '') {
+  const checkPWD = (val) => {
+    if (val === '') {
       setPwdWarColor('red');
       setPwdConfirm('패스워드가 입력되지 않았습니다.');
       return;
     }
-    if (!pwdVal(pwd)) {
+    if (!pwdVal(val)) {
       setPwdWarColor('red');
       setPwdConfirm('패스워드가 형식에 맞지 않습니다. (영어, 알파벳 6~30자)');
       return;
@@ -61,15 +61,20 @@ const SignUp = (props) => {
     setPwdConfirm('사용가능한 패스워드 입니다.');
   }
 
-  const checkPWD2nd = (pwd) => {
-    if (pwd !== pwdCheck) {
+  const checkPWD2nd = (val) => {
+    if (val === '') {
       setPwdCheckWarColor('red');
-      setPwdCheckConfirm('입력된 패스워드가 서로 다릅니다.');
+      setPwdCheckConfirm('패스워드 확인란이 입력되지 않았습니다.');
       return;
     }
-    if (pwd === '') {
+    if (val.length < 6) {
       setPwdCheckWarColor('red');
       setPwdCheckConfirm('');
+      return;
+    }
+    if (val !== pwd) {
+      setPwdCheckWarColor('red');
+      setPwdCheckConfirm('입력된 패스워드가 서로 다릅니다.');
       return;
     }
     setPwdCheckWarColor('green');
