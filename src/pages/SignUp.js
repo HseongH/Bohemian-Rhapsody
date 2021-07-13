@@ -26,7 +26,7 @@ const SignUp = (props) => {
   const [pwdCheck, setPwdCheck] = React.useState('');
   const [idConfirm, setIdConfirm] = React.useState('');
   const [pwdConfirm, setPwdConfirm] = React.useState('');
-  const [pwdCheckConfirm, setPwdCheckNoti] = React.useState('');
+  const [pwdCheckConfirm, setPwdCheckConfirm] = React.useState('');
   const [idWarning, setIdWarColor] = React.useState('red');
   const [pwdWarning, setPwdWarColor] = React.useState('red');
   const [pwdCheckWarning, setPwdCheckWarColor] = React.useState('red');
@@ -64,16 +64,16 @@ const SignUp = (props) => {
   const checkPWD2nd = (pwd) => {
     if (pwd !== pwdCheck) {
       setPwdCheckWarColor('red');
-      setPwdCheckNoti('입력된 패스워드가 서로 다릅니다.');
+      setPwdCheckConfirm('입력된 패스워드가 서로 다릅니다.');
       return;
     }
     if (pwd === '') {
       setPwdCheckWarColor('red');
-      setPwdCheckNoti('');
+      setPwdCheckConfirm('');
       return;
     }
     setPwdCheckWarColor('green');
-    setPwdCheckNoti('패스워드가 올바르게 입력되었습니다.');
+    setPwdCheckConfirm('패스워드가 올바르게 입력되었습니다.');
   }
 
   const signup = () => {
