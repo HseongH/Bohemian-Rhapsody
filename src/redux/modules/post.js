@@ -88,6 +88,8 @@ const createPostDB = (image, post) => {
           img: imgUrl,
         };
 
+        console.log(postInfo);
+
         instance
           .post('/api/post', { ...postInfo })
           .then((res) => {
@@ -139,7 +141,7 @@ const updatePostDB = (postId, post, image) => {
 };
 
 const deletePostDB = (postId) => {
-  return function (dispatch, getState) {
+  return function (dispatch) {
     instance
       .delete('/api/post', { postId })
       .then((res) => {

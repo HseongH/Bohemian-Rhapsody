@@ -59,7 +59,9 @@ const Likes = (props) => {
       ) : (
         <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
           {likeList.map((post) => {
-            return <Post post={post} key={post.post + Date.now()} />;
+            const postInfo = { ...post, favorite: 'TRUE' };
+
+            return <Post post={postInfo} key={post.postId + Date.now()} />;
           })}
         </StackGrid>
       )}
