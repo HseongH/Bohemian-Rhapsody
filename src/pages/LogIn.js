@@ -20,12 +20,12 @@ const Login = (props) => {
 
   const login = () => {
     if (!userInfo.nickname) {
-      setWarningText('아이디를 입력해주세요');
+      setWarningText('아이디가 입력되지 않았습니다.');
       return;
     }
 
     if (!userInfo.password) {
-      setWarningText('비밀번호를 입력해주세요');
+      setWarningText('패스워드가 입력되지 않았습니다.');
       return;
     }
 
@@ -85,12 +85,10 @@ const Login = (props) => {
                 }
               }}
             />
-
-            <Text fontSize="12px" lineHeight="2" textIndent="15px" color="red">
-              {warningText}
-            </Text>
           </Grid>
-
+          <Text textAlign="center" fontSize="12px" lineHeight="2" textIndent="15px" color="red">
+            {warningText}
+          </Text>
           <Grid padding="5px 0px">
             <Text fontSize="12px" lineHeight="2" textIndent="15px">
               혹시 회원이 아니신가요?

@@ -77,6 +77,8 @@ const InputArea = styled.textarea`
 `;
 
 const Write = (props) => {
+
+
   let { postInfo } = props;
 
   const dispatch = useDispatch();
@@ -152,115 +154,120 @@ const Write = (props) => {
     }
   };
 
-  return (
-    <Grid
-      width="820px"
-      is_flex="space-between"
-      margin="50px auto"
-      padding="30px 40px"
-      radius="20px"
-      shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
-      tabletStyle={() => {
-        return css`
-          display: block;
-          width: auto;
-          max-width: 430px;
-        `;
-      }}
-    >
+  const isLogin = useSelector((state) => state.user.is_login);
+
+  if (isLogin) {
+    return (
       <Grid
-        width="320px"
-        margin="0 30px 0 0"
+        width="820px"
+        is_flex="space-between"
+        margin="50px auto"
+        padding="30px 40px"
+        radius="20px"
+        shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
         tabletStyle={() => {
           return css`
-            margin: 0 auto;
+            display: block;
+            width: auto;
+            max-width: 430px;
           `;
         }}
       >
-        <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
-          <LabelStyle htmlFor="input--file">
-            {!preview ? (
-              <>
-                <InsertPhotoIcon />
-                이미지 추가
-              </>
-            ) : null}
-          </LabelStyle>
+        <Grid
+          width="320px"
+          margin="0 30px 0 0"
+          tabletStyle={() => {
+            return css`
+              margin: 0 auto;
+            `;
+          }}
+        >
+          <Grid bg="#EFEFEF" radius="10px" style={{ height: `${height}`, position: 'relative' }}>
+            <LabelStyle htmlFor="input--file">
+              {!preview ? (
+                <>
+                  <InsertPhotoIcon />
+                  이미지 추가
+                </>
+              ) : null}
+            </LabelStyle>
 
-          <InputFile
-            type="file"
-            id="input--file"
-            ref={fileInput}
-            accept="image/png, image/jpeg"
-            onChange={selectFile}
+            <InputFile
+              type="file"
+              id="input--file"
+              ref={fileInput}
+              accept="image/png, image/jpeg"
+              onChange={selectFile}
+            />
+
+            <Image style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
+          </Grid>
+        </Grid>
+
+        <Grid
+          style={{ flex: 1 }}
+          overflow="visible"
+          tabletStyle={() => {
+            return css`
+              margin-top: 20px;
+            `;
+          }}
+        >
+          <Input
+            value={contents.title}
+            fontSize="23px"
+            placeholder="제목을 입력해주세요."
+            margin="0 0 20px"
+            style={{ fontWeight: 700 }}
+            changeEvent={(event) => {
+              setContents({ ...contents, title: event.target.value });
+            }}
           />
 
-          <Image style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
+          <Input
+            value={contents.artist}
+            margin="0 0 20px"
+            placeholder="가수 이름을 입력해주세요."
+            changeEvent={(event) => {
+              setContents({ ...contents, artist: event.target.value });
+            }}
+          />
+
+          <Text fontSize="12px" lineHeight="2" textIndent="15px">
+            발매 일자 / 공연 일자를 선택해 주세요.
+          </Text>
+          <Input
+            value={contents.showDate}
+            margin="0 0 20px"
+            type="date"
+            changeEvent={(event) => {
+              setContents({ ...contents, showDate: event.target.value });
+            }}
+          />
+
+          <InputArea
+            value={contents.description}
+            placeholder="간단한 내용을 입력해주세요."
+            onChange={(event) => {
+              setContents({ ...contents, description: event.target.value });
+            }}
+          ></InputArea>
+
+          <Button
+            width="100%"
+            height="auto"
+            padding="12px 0"
+            radius="20px"
+            clickEvent={postInfo ? modifyPost : createPost}
+          >
+            {postInfo ? '수정하기' : '작성 완료'}
+          </Button>
         </Grid>
       </Grid>
-
-      <Grid
-        style={{ flex: 1 }}
-        overflow="visible"
-        tabletStyle={() => {
-          return css`
-            margin-top: 20px;
-          `;
-        }}
-      >
-        <Input
-          value={contents.title}
-          fontSize="23px"
-          placeholder="제목을 입력해주세요."
-          margin="0 0 20px"
-          style={{ fontWeight: 700 }}
-          changeEvent={(event) => {
-            setContents({ ...contents, title: event.target.value });
-          }}
-        />
-
-        <Input
-          value={contents.artist}
-          margin="0 0 20px"
-          placeholder="가수 이름을 입력해주세요."
-          changeEvent={(event) => {
-            setContents({ ...contents, artist: event.target.value });
-          }}
-        />
-
-        <Text fontSize="12px" lineHeight="2" textIndent="15px">
-          발매 일자 / 공연 일자를 선택해 주세요.
-        </Text>
-        <Input
-          value={contents.showDate}
-          margin="0 0 20px"
-          type="date"
-          changeEvent={(event) => {
-            setContents({ ...contents, showDate: event.target.value });
-          }}
-        />
-
-        <InputArea
-          value={contents.description}
-          placeholder="간단한 내용을 입력해주세요."
-          onChange={(event) => {
-            setContents({ ...contents, description: event.target.value });
-          }}
-        ></InputArea>
-
-        <Button
-          width="100%"
-          height="auto"
-          padding="12px 0"
-          radius="20px"
-          clickEvent={postInfo ? modifyPost : createPost}
-        >
-          {postInfo ? '수정하기' : '작성 완료'}
-        </Button>
-      </Grid>
-    </Grid>
-  );
-};
+    );
+  }
+  return ("로그인이 필요합니다.")
+}
 
 Write.defaultProps = {};
 
