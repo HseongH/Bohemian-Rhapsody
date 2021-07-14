@@ -80,8 +80,7 @@ const Write = (props) => {
   const { postInfo } = props;
 
   const dispatch = useDispatch();
-  const image = useSelector((state) => state.image);
-  const preview = image.preview;
+  const preview = useSelector((state) => state.image.preview);
 
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
@@ -161,7 +160,7 @@ const Write = (props) => {
       margin="50px auto"
       padding="30px 40px"
       radius="20px"
-      shadow
+      shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
       tabletStyle={() => {
         return css`
           display: block;

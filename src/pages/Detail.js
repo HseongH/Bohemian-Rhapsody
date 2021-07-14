@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
 import { css } from 'styled-components';
 import moment from 'moment';
@@ -15,6 +15,7 @@ import Comment from '../components/Comment';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
+import { commentActions } from '../redux/modules/comment';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -29,17 +30,24 @@ const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
 
-  const posts = useSelector((state) => state.post);
-  const postList = posts.list;
-  const postInfo = posts.post;
+  const { postList, postInfo, commentList } = useSelector(
+    (state) => ({
+      postList: state.post.list,
+      postInfo: state.post.post,
+      commentList: state.comment.list,
+    }),
+    shallowEqual
+  );
 
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));
+    dispatch(commentActions.getCommentListDB(postId));
 
     return () => {
       dispatch(postActions.getOnePost(null));
+      dispatch(commentActions.getCommentList([]));
     };
   }, [postId]);
 
@@ -138,7 +146,7 @@ const Detail = ({ match }) => {
               {visible ? '댓글 숨기기' : '댓글 보기'}
             </Button>
 
-            {visible ? <Comment postId={postId} /> : null}
+            {visible ? <Comment postId={postId} commentList={commentList} /> : null}
           </Grid>
         </Grid>
 

@@ -1,6 +1,6 @@
 // LIBRARY
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
 
 // COMPONENTS
@@ -16,9 +16,13 @@ import { postActions } from '../redux/modules/post';
 const Likes = (props) => {
   const dispatch = useDispatch();
 
-  const state = useSelector((state) => state);
-  const nickname = state.user.nickname;
-  const likeList = state.post.list;
+  const { nickname, likeList } = useSelector(
+    (state) => ({
+      nickname: state.user.nickname,
+      likeList: state.post.list,
+    }),
+    shallowEqual
+  );
 
   useEffect(() => {
     dispatch(postActions.getLikeListDB());

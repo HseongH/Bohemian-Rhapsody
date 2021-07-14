@@ -1,5 +1,5 @@
 // LIBRARY
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // REDUX
@@ -13,7 +13,7 @@ import Dropdown from './Dropdown';
 
 // ICON
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 const NicknameStyle = styled.strong`
   width: 150px;
@@ -22,14 +22,13 @@ const NicknameStyle = styled.strong`
   text-overflow: ellipsis;
 `;
 
-const Comment = ({ postId }) => {
+const Comment = (props) => {
+  const { postId, commentList } = props;
+
   const dispatch = useDispatch();
 
   const [comment, setComment] = useState('');
   const [modifyBox, setModifyBox] = useState(false);
-
-  //   const commentState = useSelector((state) => state.comment);
-  //   const commentList = useSelector((state) => state.comment.commentState.list);
 
   const createComment = (contents) => {
     dispatch(commentActions.addCommentDB(postId, contents));
@@ -42,10 +41,6 @@ const Comment = ({ postId }) => {
   const deleteComment = (commentId) => {
     dispatch(commentActions.delCommentDB(commentId));
   };
-
-  useEffect(() => {
-    dispatch(commentActions.getCommentListDB(postId));
-  });
 
   return (
     <>

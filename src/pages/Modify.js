@@ -8,13 +8,14 @@ import moment from 'moment';
 import Write from './Write';
 
 const Modify = ({ match }) => {
-  const dispatch = useDispatch();
   const { postId } = match.params;
+
+  const dispatch = useDispatch();
   const postInfo = useSelector((state) => state.post.post);
 
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));
-  }, [postId]);
+  }, []);
 
   if (postInfo) {
     const date = moment.utc(postInfo.showDate).format('YYYY-MM-DD');
