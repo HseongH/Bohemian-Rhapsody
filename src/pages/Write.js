@@ -84,7 +84,7 @@ const Write = (props) => {
   const fileInput = useRef();
 
   const image = useSelector((state) => state.image);
-  const preview = postInfo && !fileInput.current ? postInfo.img : image.preview;
+  const preview = !image.preview && postInfo ? postInfo.img : image.preview;
 
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
