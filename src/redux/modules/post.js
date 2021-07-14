@@ -105,6 +105,7 @@ const createPostDB = (image, post) => {
 
 const updatePostDB = (postId, post, image) => {
   return function (dispatch, getState) {
+    console.log(post);
     if (post.img) {
       const { title, artist, showDate, description, img } = post;
 

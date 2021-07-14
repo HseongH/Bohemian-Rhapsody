@@ -125,11 +125,11 @@ const Write = (props) => {
     }
 
     if (preview !== postInfo.img) {
-      const newPostInfo = { ...postInfo, img: null };
-
-      dispatch(postActions.updatePostDB(postInfo.postId, newPostInfo, fileInput.current.files[0]));
+      dispatch(postActions.updatePostDB(postInfo.postId, contents, fileInput.current.files[0]));
     } else {
-      dispatch(postActions.updatePostDB(postInfo.postId, postInfo));
+      const newPostInfo = { ...contents, img: postInfo.img };
+
+      dispatch(postActions.updatePostDB(postInfo.postId, newPostInfo));
     }
 
     dispatch(imgActions.setPreview(null));
