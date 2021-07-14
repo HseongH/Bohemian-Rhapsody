@@ -193,6 +193,7 @@ function post(state = initialState, action) {
       return { ...state, list: updateList };
 
     case POST_DELETE:
+      console.log(action.postId);
       const deleteList = state.list.filter((post) => post.postId !== action.postId);
 
       return { ...state, list: deleteList };

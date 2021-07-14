@@ -1,6 +1,9 @@
 // AXIOS
 import instance from '../../common/axios';
 
+// REDUX
+import { postActions } from './post';
+
 // MIDDLEWARE
 const postLikeDB = (postId) => {
   instance
@@ -14,14 +17,16 @@ const postLikeDB = (postId) => {
 };
 
 const postRemoveListDB = (postId) => {
-  instance
-    .delete('/api/like', { data: { postId } })
-    .then((res) => {
-      console.log(res);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
+  return function (dispatch) {
+    instance
+      .delete('/api/like', { data: { postId } })
+      .then((res) => {
+        dispatch(postActions.deletePost(postId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 };
 
 export const likeActions = {

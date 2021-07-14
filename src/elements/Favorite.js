@@ -1,5 +1,6 @@
 // LIBRARY
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 // ELEMENT
 import { Button } from './index';
@@ -8,6 +9,7 @@ import { Button } from './index';
 import { likeActions } from '../redux/modules/like';
 
 const Favorite = ({ postId, favorite }) => {
+  const dispatch = useDispatch();
   const [active, setActive] = useState(favorite === 'FALSE' ? false : true);
 
   const likePost = () => {
@@ -15,7 +17,7 @@ const Favorite = ({ postId, favorite }) => {
   };
 
   const removeLike = () => {
-    likeActions.postRemoveListDB(postId);
+    dispatch(likeActions.postRemoveListDB(postId));
   };
 
   return (
