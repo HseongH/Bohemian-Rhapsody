@@ -132,6 +132,7 @@ const Write = (props) => {
       dispatch(postActions.updatePostDB(postInfo.postId, postInfo));
     }
 
+    dispatch(imgActions.setPreview(null));
     history.push('/');
   };
 

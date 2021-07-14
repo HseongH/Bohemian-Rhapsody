@@ -106,8 +106,10 @@ const createPostDB = (image, post) => {
 const updatePostDB = (postId, post, image) => {
   return function (dispatch, getState) {
     if (post.img) {
+      const { title, artist, showDate, description, img } = post;
+
       instance
-        .put(`/api/post/${postId}`, { ...post })
+        .put(`/api/post/${postId}`, { title, artist, showDate, description, img })
         .then((res) => {
           dispatch(updatePost(postId, post));
         })
@@ -125,9 +127,11 @@ const updatePostDB = (postId, post, image) => {
           ...post,
           img: imgUrl,
         };
+        const { title, artist, showDate, description, img } = postInfo;
+        console.log(title, artist, showDate, description, img);
 
         instance
-          .put(`/api/post/:${postId}`, { ...postInfo })
+          .put(`/api/post/${postId}`, { title, artist, showDate, description, img })
           .then((res) => {
             console.log(res);
             dispatch(updatePost(postId, postInfo));
@@ -141,11 +145,12 @@ const updatePostDB = (postId, post, image) => {
 };
 
 const deletePostDB = (postId) => {
-  return function (dispatch) {
+  return function (dispatch, getState, { history }) {
     instance
-      .delete('/api/post', { postId })
+      .delete('/api/post', { data: { postId } })
       .then((res) => {
         dispatch(deletePost(postId));
+        history.push('/');
       })
       .catch((error) => {
         console.error(error);

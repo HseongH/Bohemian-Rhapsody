@@ -66,7 +66,7 @@ const updateCommentDB = (commentId, comment) => {
 const delCommentDB = (commentId) => {
   return function (dispatch) {
     instance
-      .delete('/api/comment', { commentId })
+      .delete('/api/comment', { data: { commentId } })
       .then((res) => {
         dispatch(delComment(commentId));
       })

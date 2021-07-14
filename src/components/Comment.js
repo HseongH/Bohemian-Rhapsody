@@ -60,7 +60,7 @@ const Comment = ({ comment }) => {
                     setComment(comment.comment);
                   },
                   () => {
-                    deleteComment(comment);
+                    deleteComment(comment.commentId);
                   },
                 ]}
                 icon={<MoreVertIcon />}

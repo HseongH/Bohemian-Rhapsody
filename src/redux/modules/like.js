@@ -15,7 +15,7 @@ const postLikeDB = (postId) => {
 
 const postRemoveListDB = (postId) => {
   instance
-    .delete('/api/like', { postId })
+    .delete('/api/like', { data: { postId } })
     .then((res) => {
       console.log(res);
     })
