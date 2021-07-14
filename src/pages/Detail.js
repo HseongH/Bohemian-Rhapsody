@@ -52,6 +52,14 @@ const Detail = ({ match }) => {
     };
   }, [postId]);
 
+  useEffect(() => {
+    dispatch(postActions.getPostListDB());
+
+    return () => {
+      dispatch(postActions.getPostList([]));
+    };
+  }, []);
+
   if (postInfo) {
     const date = moment.utc(postInfo.showDate).format('YYYY.MM.DD');
 

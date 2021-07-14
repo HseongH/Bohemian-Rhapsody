@@ -25,10 +25,12 @@ const Favorite = ({ postId, favorite }) => {
       padding="10px 12px"
       radius="20px"
       bg={active ? '#111111' : '#5a189a'}
-      clickEvent={() => {
+      clickEvent={(event) => {
         setActive((active) => !active);
 
         active ? removeLike() : likePost();
+
+        event.stopPropagation();
       }}
     >
       {active ? '저장됨' : '저장'}
