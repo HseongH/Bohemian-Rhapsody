@@ -111,7 +111,12 @@ const updatePostDB = (postId, post, image) => {
       instance
         .put(`/api/post/${postId}`, { title, artist, showDate, description, img })
         .then((res) => {
-          dispatch(updatePost(postId, post));
+          const newPost = {
+            img: post.img,
+            postId,
+          };
+
+          dispatch(updatePost(postId, newPost));
         })
         .catch((error) => {
           console.error(error);
@@ -128,13 +133,16 @@ const updatePostDB = (postId, post, image) => {
           img: imgUrl,
         };
         const { title, artist, showDate, description, img } = postInfo;
-        console.log(title, artist, showDate, description, img);
 
         instance
           .put(`/api/post/${postId}`, { title, artist, showDate, description, img })
           .then((res) => {
-            console.log(res);
-            dispatch(updatePost(postId, postInfo));
+            const newPost = {
+              img: postInfo.img,
+              postId,
+            };
+
+            dispatch(updatePost(postId, newPost));
           })
           .catch((error) => {
             console.error(error);
@@ -177,7 +185,7 @@ function post(state = initialState, action) {
     case POST_UPDATE:
       const updateList = state.list.map((post) => {
         if (post.postId === action.postId) {
-          return action.post;
+          return { ...action.post, favorite: post.favorite };
         }
         return post;
       });

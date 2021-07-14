@@ -77,8 +77,6 @@ const InputArea = styled.textarea`
 `;
 
 const Write = (props) => {
-
-
   let { postInfo } = props;
 
   const dispatch = useDispatch();
@@ -266,8 +264,8 @@ const Write = (props) => {
       </Grid>
     );
   }
-  return ("로그인이 필요합니다.")
-}
+  return '로그인이 필요합니다.';
+};
 
 Write.defaultProps = {};
 
