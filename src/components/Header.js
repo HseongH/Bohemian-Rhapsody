@@ -1,5 +1,6 @@
 //LIBRARY
 import React, { useEffect, useState } from 'react';
+import { css } from 'styled-components';
 
 //ELEMENTS
 import { Input, Grid, Button } from '../elements';
@@ -51,7 +52,13 @@ const Header = (props) => {
       is_flex
       height="100px"
       shadow={shadow}
-      style={{ position: 'fixed', top: 0, left: 0, zIndex: 9 }}
+      style={{ position: 'fixed', top: 0, left: 0, zIndex: 9, minWidth: '450px' }}
+      padding="0 5%"
+      mobileStyle={() => {
+        return css`
+          padding: 0 2.5%;
+        `;
+      }}
     >
       <Button
         clickEvent={() => {
