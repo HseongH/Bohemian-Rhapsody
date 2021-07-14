@@ -41,6 +41,7 @@ const Header = (props) => {
           style={{ flex: 1 }}
           keyPress={(event) => {
             if (event.key === 'Enter' && event.target.value) {
+              history.push(`/search?keyword=${event.target.value}`);
               dispatch(postActions.searchPostDB(event.target.value));
             }
           }}

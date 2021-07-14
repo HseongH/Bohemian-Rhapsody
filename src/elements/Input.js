@@ -11,6 +11,7 @@ const InputStyle = styled.input`
   margin: ${(props) => props.margin};
   border-radius: ${(props) => props.radius};
   font-size: ${(props) => props.fontSize};
+  box-shadow: ${(props) => props.shadow};
   border: 1px solid #ccc;
   box-sizing: border-box;
 

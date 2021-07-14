@@ -55,10 +55,9 @@ const getOnePostDB = (postId) => {
 const searchPostDB = (keyword) => {
   return function (dispatch) {
     instance
-      .get(`/api/search/${keyword}`)
+      .get(`/api/search?keyword=${keyword}`)
       .then((res) => {
-        console.log(res);
-        dispatch(getPostList(res.data.result));
+        dispatch(getPostList(res.data));
       })
       .catch((error) => {
         console.error(error);

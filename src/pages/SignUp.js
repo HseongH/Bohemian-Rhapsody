@@ -12,7 +12,6 @@ import { history } from '../redux/configStore';
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useDispatch, useSelector } from 'react-redux';
-import { IndeterminateCheckBox } from '@material-ui/icons';
 
 //VALIDATION
 import { idVal, pwdVal } from '../common/validation';

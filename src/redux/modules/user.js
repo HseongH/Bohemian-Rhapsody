@@ -85,7 +85,7 @@ const nickCheck = (id) => {
 };
 
 const signupDB = (id, pwd, pwdCheck) => {
-  return function (dispatch, getState, { history }) {
+  return function () {
     instance
       .post('/api/sign', { nickname: id, password: pwd, confirmPassword: pwdCheck })
       .then((res) => {

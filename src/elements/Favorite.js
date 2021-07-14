@@ -4,14 +4,34 @@ import React, { useState } from 'react';
 // ELEMENT
 import { Button } from './index';
 
-const Favorite = (props) => {
-  console.log(props.palette);
-  const [text, setText] = useState('저장');
-  const [bg, setBg] = useState('#A336A3');
+// REDUX
+import { likeActions } from '../redux/modules/like';
+
+const Favorite = ({ postId }) => {
+  const [active, setActive] = useState(false);
+
+  const likePost = () => {
+    likeActions.postLikeDB(postId);
+  };
+
+  const removeLike = () => {
+    likeActions.postRemoveListDB(postId);
+  };
 
   return (
-    <Button width="auto" height="auto" padding="10px 12px" radius="20px" bg={bg}>
-      {text}
+    <Button
+      width="auto"
+      height="auto"
+      padding="10px 12px"
+      radius="20px"
+      bg={active ? '#111111' : '#5a189a'}
+      clickEvent={() => {
+        setActive((active) => !active);
+
+        active ? removeLike() : likePost();
+      }}
+    >
+      {active ? '저장됨' : '저장'}
     </Button>
   );
 };

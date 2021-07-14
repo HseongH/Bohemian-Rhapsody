@@ -18,4 +18,20 @@ const postLikeDB = (postId) => {
   };
 };
 
-export default postLikeDB;
+const postRemoveListDB = (postId) => {
+  return function (dispatch) {
+    instance
+      .delete('/api/like', { postId })
+      .then((res) => {
+        dispatch(postActions.getOnePostDB(postId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+export const likeActions = {
+  postLikeDB,
+  postRemoveListDB,
+};

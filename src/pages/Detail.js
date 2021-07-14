@@ -6,7 +6,7 @@ import { css } from 'styled-components';
 import moment from 'moment';
 
 // ELEMENTS
-import { Button, Grid, Image, Title, Text } from '../elements/index';
+import { Button, Grid, Image, Title, Text, Favorite } from '../elements/index';
 
 // COMPONENTS
 import Post from '../components/Post';
@@ -15,7 +15,6 @@ import Comment from '../components/Comment';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
-import postLikeDB from '../redux/modules/like';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -36,16 +35,10 @@ const Detail = ({ match }) => {
 
   const [visible, setVisible] = useState(false);
 
-  const postLike = () => {
-    dispatch(postLikeDB(postId));
-  };
-
   useEffect(() => {
-    dispatch(postActions.getPostListDB());
     dispatch(postActions.getOnePostDB(postId));
 
     return () => {
-      dispatch(postActions.getPostList([]));
       dispatch(postActions.getOnePost(null));
     };
   }, [postId]);
@@ -111,15 +104,7 @@ const Detail = ({ match }) => {
               />
 
               <Permit>
-                <Button
-                  width="auto"
-                  height="auto"
-                  padding="12px 15px"
-                  radius="30px"
-                  clickEvent={postLike}
-                >
-                  저장
-                </Button>
+                <Favorite postId={postId} />
               </Permit>
             </Grid>
 

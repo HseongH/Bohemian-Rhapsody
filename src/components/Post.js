@@ -1,23 +1,59 @@
 // LIBRARY
 import React from 'react';
-import { Grid, Image } from '../elements';
+import styled from 'styled-components';
+
+// ELEMENTS
+import { Image, Favorite } from '../elements';
+
+// HISTORY
 import { history } from '../redux/configStore';
+
+const PostStyle = styled.div`
+  width: 252px;
+  border-radius: 20px;
+  margin: 10px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+
+    button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+  }
+
+  &:hover {
+    & div {
+      display: block;
+    }
+  }
+`;
 
 const Post = (props) => {
   const post = props.post;
 
   return (
-    <Grid
-      width="252px"
-      radius="20px"
-      margin="10px"
-      hoverShadow
-      _onClick={() => {
+    <PostStyle
+      onClick={() => {
         history.push(`/detail/${post.postId}`);
       }}
     >
       <Image src={post.img} />
-    </Grid>
+
+      <div>
+        <Favorite postId={post.postId} />
+      </div>
+    </PostStyle>
   );
 };
 

@@ -20,6 +20,7 @@ import theme from '../common/style';
 
 // PAGES
 import Home from '../pages/Home';
+import Search from '../pages/Search';
 import Detail from '../pages/Detail';
 import Write from '../pages/Write';
 import Modify from '../pages/Modify';
@@ -70,6 +71,7 @@ function App() {
 
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
+          <Route path="/search" exact component={Search} />
           <Route path="/detail/:postId" exact component={Detail} />
           <Route path="/write" exact component={Write} />
           <Route path="/modify/:postId" exact component={Modify} />

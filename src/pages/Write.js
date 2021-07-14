@@ -93,9 +93,27 @@ const Write = (props) => {
 
   const fileInput = useRef();
 
+  const isItPossibleToAdd = () => {
+    if (
+      !(
+        fileInput.current.value &&
+        contents.title &&
+        contents.artist &&
+        contents.showDate &&
+        contents.description
+      )
+    ) {
+      return false;
+    }
+
+    return true;
+  };
+
   const createPost = () => {
-    if (!fileInput.current.value) {
-      window.alert('이미지를 추가해 주세요.');
+    const isAvailable = isItPossibleToAdd();
+
+    if (!isAvailable) {
+      window.alert('입력되지 않은 내용이 있습니다. 모든 내용을 입력해주세요.');
       return;
     }
 
@@ -105,6 +123,12 @@ const Write = (props) => {
   };
 
   const modifyPost = () => {
+    const isAvailable = isItPossibleToAdd();
+
+    if (!isAvailable) {
+      return;
+    }
+
     if (preview !== postInfo.img) {
       const newPostInfo = { ...postInfo, img: null };
 
@@ -179,6 +203,7 @@ const Write = (props) => {
 
       <Grid
         style={{ flex: 1 }}
+        overflow="visible"
         tabletStyle={() => {
           return css`
             margin-top: 20px;
