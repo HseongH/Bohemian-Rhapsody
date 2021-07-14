@@ -24,7 +24,7 @@ const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 const initialState = {
   token: null,
   is_login: false,
-  is_check: null,
+  is_check: false,
   userId: null,
   nickname: null,
 };
@@ -58,6 +58,7 @@ const loginAction = (user) => {
       })
       .catch((error) => {
         console.error(error);
+        window.alert('아이디 또는 비밀번호가 올바르지 않습니다.');
       });
   };
 };
@@ -73,11 +74,12 @@ const nickCheck = (id) => {
     instance
       .post('/api/sign/nickname', { nickname: id })
       .then((res) => {
-        console.log(res);
         dispatch(checkDup(true));
+        window.alert('사용 가능한 아이디입니다.');
       })
       .catch((error) => {
         dispatch(checkDup(false));
+        window.alert('이미 존재하는 아이디입니다.');
       });
   };
 };

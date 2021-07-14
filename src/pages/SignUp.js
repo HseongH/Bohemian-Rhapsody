@@ -1,5 +1,6 @@
 // LIBRARY
 import React from 'react';
+import _ from 'lodash';
 import { css } from 'styled-components';
 
 //Elements
@@ -20,6 +21,8 @@ const SignUp = (props) => {
   const dispatch = useDispatch();
 
   const dupState = useSelector((state) => state.user.is_check);
+
+  const debounce = _.debounce((value, setValue) => setValue(value), 300);
 
   const [id, setId] = React.useState('');
   const [pwd, setPwd] = React.useState('');
@@ -42,9 +45,10 @@ const SignUp = (props) => {
       setIdConfirm('아이디가 형식에 맞지 않습니다. (영어, 알파벳 4~20자)');
       return;
     }
+
     setIdWarColor('green');
-    setIdConfirm('중복 확인을 해주세요.');
-  }
+    setIdConfirm('중복 검사를 해주세요');
+  };
 
   const checkPWD = (val) => {
     if (val === '') {
@@ -59,7 +63,7 @@ const SignUp = (props) => {
     }
     setPwdWarColor('green');
     setPwdConfirm('사용가능한 패스워드 입니다.');
-  }
+  };
 
   const checkPWD2nd = (val) => {
     if (val === '') {
@@ -79,9 +83,13 @@ const SignUp = (props) => {
     }
     setPwdCheckWarColor('green');
     setPwdCheckConfirm('패스워드가 올바르게 입력되었습니다.');
-  }
+  };
 
   const signup = () => {
+    if (
+      !(dupState && idWarning === 'green' && pwdWarning === 'green' && pwdCheckWarning === 'green')
+    )
+      return;
 
     dispatch(userActions.signupDB(id, pwd, pwdCheck));
 
@@ -90,17 +98,8 @@ const SignUp = (props) => {
   };
 
   const nickname = () => {
-
     dispatch(userActions.nickCheck(id));
-
-    if (dupState) {
-      setIdWarColor('green');
-      setIdConfirm('사용 가능한 아이디입니다.')
-      return;
-    }
-    setIdWarColor('red');
-    setIdConfirm('이미 사용 중인 아이디입니다.')
-    
+    setIdConfirm('');
   };
 
   return (
@@ -138,8 +137,8 @@ const SignUp = (props) => {
               changeEvent={(event) => {
                 setId(event.target.value);
               }}
-              keyUp={(e) => {
-                checkID(e.target.value);
+              keyUp={(event) => {
+                debounce(event.target.value, checkID);
               }}
               padding="14px 17px"
             />
@@ -164,8 +163,8 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwd(e.target.value);
               }}
-              keyUp={(e) => {
-                checkPWD(e.target.value);
+              keyUp={(event) => {
+                debounce(event.target.value, checkPWD);
               }}
               padding="14px 17px"
             />
@@ -180,8 +179,8 @@ const SignUp = (props) => {
               changeEvent={(e) => {
                 setPwdCheck(e.target.value);
               }}
-              keyUp={(e) => {
-                checkPWD2nd(e.target.value);
+              keyUp={(event) => {
+                debounce(event.target.value, checkPWD2nd);
               }}
               padding="14px 17px"
             />
