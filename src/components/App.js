@@ -10,6 +10,7 @@ import { history } from '../redux/configStore';
 
 // REDUX
 import { userActions } from '../redux/modules/user';
+import { postActions } from '../redux/modules/post';
 
 // FUNCTION
 import { getToken } from '../common/token';
@@ -46,15 +47,18 @@ function App() {
       dispatch(userActions.checkDidIWriteDB());
       dispatch(userActions.logInCheck(token));
     }
-  }, [token]);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <Header />
+
       <Grid
         margin="0 auto"
         padding="110px 0 0"
-        overflow="visible"
-        style={{ maxWidth: '1440px', minWidth: '450px', position: 'relative', minHeight: '100vh' }}
+        width="1440px"
+        style={{ minWidth: '450px', position: 'relative', minHeight: '100vh' }}
         laptoptStyle={() => {
           return css`
             max-width: none;
@@ -67,9 +71,6 @@ function App() {
           `;
         }}
       >
-        <GlobalStyle />
-        <Header />
-
         <ConnectedRouter history={history}>
           <Route path="/" exact component={Home} />
           <Route path="/search" exact component={Search} />
@@ -80,11 +81,11 @@ function App() {
           <Route path="/signup" exact component={SignUp} />
           <Route path="/likes" exact component={Likes} />
         </ConnectedRouter>
-
-        <Permit>
-          <AddBtn />
-        </Permit>
       </Grid>
+
+      <Permit>
+        <AddBtn />
+      </Permit>
     </ThemeProvider>
   );
 }

@@ -77,10 +77,14 @@ const InputArea = styled.textarea`
 `;
 
 const Write = (props) => {
-  const { postInfo } = props;
+  let { postInfo } = props;
 
   const dispatch = useDispatch();
-  const preview = useSelector((state) => state.image.preview);
+
+  const fileInput = useRef();
+
+  const image = useSelector((state) => state.image);
+  const preview = postInfo && !fileInput.current ? postInfo.img : image.preview;
 
   const [height, setHeight] = useState(preview ? 'auto' : '380px');
   const [contents, setContents] = useState({
@@ -90,17 +94,9 @@ const Write = (props) => {
     description: postInfo ? postInfo.description : '',
   });
 
-  const fileInput = useRef();
-
   const isItPossibleToAdd = () => {
     if (
-      !(
-        fileInput.current.value &&
-        contents.title &&
-        contents.artist &&
-        contents.showDate &&
-        contents.description
-      )
+      !(preview && contents.title && contents.artist && contents.showDate && contents.description)
     ) {
       return false;
     }

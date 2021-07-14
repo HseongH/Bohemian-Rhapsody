@@ -40,7 +40,7 @@ const Login = (props) => {
         margin="50px auto"
         padding="30px 40px"
         radius="20px"
-        shadow
+        shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
         tabletStyle={() => {
           return css`
             width: 95%;
@@ -63,10 +63,15 @@ const Login = (props) => {
                 setUserInfo({ ...userInfo, nickname: event.target.value });
               }}
               padding="14px 17px"
+              keyPress={(event) => {
+                if (event.key === 'Enter') {
+                  login();
+                }
+              }}
             />
           </Grid>
 
-          <Grid padding="16px 0px 50px 0px">
+          <Grid padding="16px 0px 20px 0px">
             <Input
               placeholder="패스워드를 입력해주세요."
               type="password"
@@ -74,6 +79,11 @@ const Login = (props) => {
                 setUserInfo({ ...userInfo, password: event.target.value });
               }}
               padding="14px 17px"
+              keyPress={(event) => {
+                if (event.key === 'Enter') {
+                  login();
+                }
+              }}
             />
 
             <Text fontSize="12px" lineHeight="2" textIndent="15px" color="red">

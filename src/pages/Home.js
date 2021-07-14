@@ -1,7 +1,7 @@
 // LIBRARY
 import React, { useEffect } from 'react';
 import StackGrid from 'react-stack-grid';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 // REDUX
 import { postActions } from '../redux/modules/post';

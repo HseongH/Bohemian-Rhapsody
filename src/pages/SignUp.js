@@ -109,7 +109,7 @@ const SignUp = (props) => {
         margin="50px auto"
         padding="30px 40px"
         radius="20px"
-        shadow
+        shadow="rgba(100, 100, 111, 0.2) 0px 7px 29px 0px"
         tabletStyle={() => {
           return css`
             width: 95%;

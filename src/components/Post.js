@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 // ELEMENTS
 import { Image, Favorite } from '../elements';
+import Permit from './Permit';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -39,9 +40,7 @@ const PostStyle = styled.div`
   }
 `;
 
-const Post = (props) => {
-  const post = props.post;
-
+const Post = ({ post }) => {
   return (
     <PostStyle
       onClick={() => {
@@ -50,9 +49,11 @@ const Post = (props) => {
     >
       <Image src={post.img} />
 
-      <div>
-        <Favorite postId={post.postId} />
-      </div>
+      <Permit>
+        <div>
+          <Favorite postId={post.postId} favorite={post.favorite} />
+        </div>
+      </Permit>
     </PostStyle>
   );
 };

@@ -11,7 +11,7 @@ import { Button, Grid, Image, Title, Text, Favorite } from '../elements/index';
 // COMPONENTS
 import Post from '../components/Post';
 import Permit from '../components/Permit';
-import Comment from '../components/Comment';
+import CommentBox from '../components/CommentBox';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
@@ -30,8 +30,9 @@ const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
 
-  const { postList, postInfo, commentList } = useSelector(
+  const { userId, postList, postInfo, commentList } = useSelector(
     (state) => ({
+      userId: state.user.userId,
       postList: state.post.list,
       postInfo: state.post.post,
       commentList: state.comment.list,
@@ -92,27 +93,29 @@ const Detail = ({ match }) => {
             }}
           >
             <Grid is_flex="space-between">
-              <Dropdown
-                contents={['수정', '삭제']}
-                clickEvent={[
-                  () => {
-                    history.push(`/modify/${postId}`);
-                  },
-                  () => {
-                    dispatch(postActions.deletePostDB(postId));
-                  },
-                ]}
-                icon={<MoreHorizIcon />}
-                width="40px"
-                height="40px"
-                bg="#fff"
-                hoverColor="#EFEFEF"
-                color="inherit"
-                fontSize="22px"
-              />
+              {userId === postInfo.userId && (
+                <Dropdown
+                  contents={['수정', '삭제']}
+                  clickEvent={[
+                    () => {
+                      history.push(`/modify/${postId}`);
+                    },
+                    () => {
+                      dispatch(postActions.deletePostDB(postId));
+                    },
+                  ]}
+                  icon={<MoreHorizIcon />}
+                  width="40px"
+                  height="40px"
+                  bg="#fff"
+                  hoverColor="#EFEFEF"
+                  color="inherit"
+                  fontSize="22px"
+                />
+              )}
 
               <Permit>
-                <Favorite postId={postId} />
+                <Favorite postId={postId} favorite={postInfo.favorite} />
               </Permit>
             </Grid>
 
@@ -146,7 +149,7 @@ const Detail = ({ match }) => {
               {visible ? '댓글 숨기기' : '댓글 보기'}
             </Button>
 
-            {visible ? <Comment postId={postId} commentList={commentList} /> : null}
+            {visible ? <CommentBox postId={postId} commentList={commentList} /> : null}
           </Grid>
         </Grid>
 

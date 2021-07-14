@@ -7,8 +7,8 @@ import { Button } from './index';
 // REDUX
 import { likeActions } from '../redux/modules/like';
 
-const Favorite = ({ postId }) => {
-  const [active, setActive] = useState(false);
+const Favorite = ({ postId, favorite }) => {
+  const [active, setActive] = useState(favorite === 'FALSE' ? false : true);
 
   const likePost = () => {
     likeActions.postLikeDB(postId);

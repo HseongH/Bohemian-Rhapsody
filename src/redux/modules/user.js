@@ -48,8 +48,12 @@ const loginAction = (user) => {
     instance
       .post('/api/login', user)
       .then((res) => {
-        console.log(res);
-        dispatch(checkDidIWrite(res.data));
+        const userInfo = {
+          userId: res.data.userId,
+          nickname: user.nickname,
+        };
+
+        dispatch(checkDidIWrite(userInfo));
         dispatch(logIn(res.data.token));
 
         setToken(res.data.token);
@@ -65,7 +69,9 @@ const loginAction = (user) => {
 
 const logInCheck = (token) => {
   return function (dispatch) {
-    if (token) dispatch(logIn(token));
+    if (token) {
+      dispatch(logIn(token));
+    }
   };
 };
 

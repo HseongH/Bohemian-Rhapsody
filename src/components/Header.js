@@ -48,78 +48,91 @@ const Header = (props) => {
 
   return (
     <Grid
-      bg="#fff"
-      is_flex
       height="100px"
+      bg="#fff"
+      overflow="visible"
       shadow={shadow}
-      style={{ position: 'fixed', top: 0, left: 0, zIndex: 9, minWidth: '450px' }}
-      padding="0 5%"
-      mobileStyle={() => {
-        return css`
-          padding: 0 2.5%;
-        `;
-      }}
+      style={{ position: 'fixed', top: 0, left: 0, zIndex: 9 }}
     >
-      <Button
-        clickEvent={() => {
-          history.push('/');
+      <Grid
+        is_flex
+        height="100px"
+        width="1440px"
+        overflow="visible"
+        margin="0 auto"
+        style={{ position: 'relative', minWidth: '450px' }}
+        laptoptStyle={() => {
+          return css`
+            width: 90%;
+          `;
+        }}
+        mobileStyle={() => {
+          return css`
+            width: 95%;
+          `;
         }}
       >
-        <EmojiSymbolsIcon style={{ fontSize: '35px' }} />
-      </Button>
+        <Button
+          clickEvent={() => {
+            history.push('/');
+          }}
+        >
+          <EmojiSymbolsIcon style={{ fontSize: '35px' }} />
+        </Button>
 
-      <Input
-        padding="20px 15px"
-        placeholder="Search"
-        margin="0 20px 0"
-        style={{ flex: 1 }}
-        keyPress={(event) => {
-          if (event.key === 'Enter' && event.target.value) {
-            if (!searchKeywordValidation(event.target.value)) {
-              window.alert(
-                '검색할 수 없는 단어가 포함되어 있습니다. (숫자, 문자, 공백만 사용할 수 있습니다.)'
-              );
-              return;
+        <Input
+          padding="20px 15px"
+          placeholder="Search"
+          margin="0 20px 0"
+          style={{ flex: 1 }}
+          keyPress={(event) => {
+            if (event.key === 'Enter' && event.target.value) {
+              if (!searchKeywordValidation(event.target.value)) {
+                window.alert(
+                  '검색할 수 없는 단어가 포함되어 있습니다. (숫자, 문자, 공백만 사용할 수 있습니다.)'
+                );
+                return;
+              }
+
+              history.push(`/search?keyword=${event.target.value}`);
+              dispatch(postActions.searchPostDB(event.target.value));
             }
-
-            history.push(`/search?keyword=${event.target.value}`);
-            dispatch(postActions.searchPostDB(event.target.value));
-          }
-        }}
-      />
-
-      {is_login ? (
-        <Dropdown
-          contents={['로그아웃', '즐겨찾기']}
-          clickEvent={[
-            () => {
-              dispatch(userActions.logOut({}));
-              history.push('/login');
-            },
-            () => {
-              history.push('/likes');
-            },
-          ]}
-          icon={<PersonIcon />}
-          top="83px"
-          pos="110px"
+          }}
         />
-      ) : (
-        <Dropdown
-          contents={['로그인', '회원가입']}
-          clickEvent={[
-            () => {
-              history.push('/login');
-            },
-            () => {
-              history.push('/signup');
-            },
-          ]}
-          icon={<PersonIcon />}
-          top="83px"
-          pos="110px"
-        />
-      )}
+
+        {is_login ? (
+          <Dropdown
+            contents={['로그아웃', '즐겨찾기']}
+            clickEvent={[
+              () => {
+                dispatch(userActions.logOut({}));
+                history.push('/login');
+              },
+              () => {
+                history.push('/likes');
+              },
+            ]}
+            icon={<PersonIcon />}
+            top="85px"
+            pos="110px"
+          />
+        ) : (
+          <Dropdown
+            contents={['로그인', '회원가입']}
+            clickEvent={[
+              () => {
+                history.push('/login');
+              },
+              () => {
+                history.push('/signup');
+              },
+            ]}
+            icon={<PersonIcon />}
+            top="83px"
+            pos="110px"
+          />
+        )}
+      </Grid>
     </Grid>
   );
 };

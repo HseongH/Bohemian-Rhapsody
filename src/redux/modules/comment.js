@@ -22,8 +22,9 @@ const initialState = {
 const getCommentListDB = (postId) => {
   return function (dispatch) {
     instance
-      .post('/api/comment', { postId })
+      .get(`/api/comment?postId=${postId}`)
       .then((res) => {
+        console.log(res);
         dispatch(getCommentList(res.data.result));
       })
       .catch((error) => {
@@ -33,11 +34,15 @@ const getCommentListDB = (postId) => {
 };
 
 const addCommentDB = (postId, comment) => {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    const userInfo = getState().user;
+    const nickname = userInfo.nickname;
+    const userId = userInfo.userId;
+
     instance
       .post('/api/comment', { postId, comment })
       .then((res) => {
-        dispatch(addComment(comment));
+        dispatch(addComment({ commentId: res.data.commentId, comment, userId, nickname }));
       })
       .catch((error) => {
         console.error(error);
@@ -45,12 +50,12 @@ const addCommentDB = (postId, comment) => {
   };
 };
 
-const updateCommentDB = (comemntId, comment) => {
+const updateCommentDB = (commentId, comment) => {
   return function (dispatch) {
     instance
-      .put('/api/comment', { comemntId, comment })
+      .put('/api/comment', { commentId, comment })
       .then((res) => {
-        dispatch(updateComment(comemntId, comment));
+        dispatch(updateComment(commentId, comment));
       })
       .catch((error) => {
         console.error(error);
@@ -84,7 +89,12 @@ function comment(state = initialState, action) {
     case UPDATE_COMMENT:
       const updateCommentList = state.list.map((comment) => {
         if (comment.commentId === action.commentId) {
-          return action.comment;
+          const newComment = {
+            ...comment,
+            comment: action.comment,
+          };
+
+          return newComment;
         }
 
         return comment;

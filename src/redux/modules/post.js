@@ -30,7 +30,6 @@ const getPostListDB = () => {
     instance
       .get('/api/post/posts')
       .then((res) => {
-        console.log(res);
         dispatch(getPostList(res.data.result));
       })
       .catch((error) => {
@@ -44,6 +43,7 @@ const getOnePostDB = (postId) => {
     instance
       .get(`/detail/${postId}`)
       .then((res) => {
+        console.log(res);
         dispatch(getOnePost(res.data));
       })
       .catch((error) => {
@@ -91,8 +91,7 @@ const createPostDB = (image, post) => {
         instance
           .post('/api/post', { ...postInfo })
           .then((res) => {
-            console.log(res);
-            dispatch(createPost({ img: imgUrl }));
+            dispatch(createPost({ img: imgUrl, postId: res.data.postId }));
           })
           .catch((error) => {
             console.error(error);
@@ -106,7 +105,7 @@ const updatePostDB = (postId, post, image) => {
   return function (dispatch, getState) {
     if (post.img) {
       instance
-        .put(`/api/post/:${postId}`, { ...post })
+        .put(`/api/post/${postId}`, { ...post })
         .then((res) => {
           dispatch(updatePost(postId, post));
         })
