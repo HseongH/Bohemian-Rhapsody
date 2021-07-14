@@ -52,6 +52,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Grid
         margin="0 auto"
+        padding="110px 0 0"
         overflow="visible"
         style={{ maxWidth: '1440px', position: 'relative', minHeight: '100vh' }}
         laptoptStyle={() => {

@@ -22,7 +22,6 @@ Grid.defaultProps = {
   margin: false,
   align: false,
   bg: false,
-  shadow: false,
   _onClick: () => {},
   laptoptStyle: () => {},
   tabletStyle: () => {},
@@ -34,11 +33,11 @@ const GridBox = styled.div`
   align-items: ${(props) => props.verSort};
   width: ${(props) => props.width};
   height: ${(props) => props.height};
+  box-shadow: ${(props) => props.shadow};
   ${(props) => (props.padding ? `padding: ${props.padding};` : '')}
   ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
     ${(props) => (props.align ? `text-align: ${props.align};` : '')}
     ${(props) => (props.bg ? `background-color: ${props.bg};` : '')}
-    ${(props) => (props.shadow ? `box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;` : '')}
     ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
     box-sizing: border-box;
   overflow: ${(props) => props.overflow};
