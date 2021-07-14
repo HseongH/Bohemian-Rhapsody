@@ -12,6 +12,7 @@ import Post from '../components/Post';
 const Search = (props) => {
   const keyword = window.location.search.slice(1).split('=')[1];
   const searchList = useSelector((state) => state.post.list);
+  console.log(searchList);
 
   return (
     <>
