@@ -1,13 +1,19 @@
 // LIBRARY
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
+
+//TOKEN
+import { getToken } from '../common/token';
 
 // HISTORY
 import { history } from '../redux/configStore';
 
 // ELEMENTS
 import { Grid, Button, Input, Text, Image } from '../elements/index';
+
+// COMPONENTS
+import Permit from '../components/Permit';
 
 // REDUX
 import { imgActions } from '../redux/modules/image';
@@ -151,11 +157,13 @@ const Write = (props) => {
       };
     }
   };
-
-  const isLogin = useSelector((state) => state.user.is_login);
-
-  if (isLogin) {
-    return (
+  useEffect(() => {
+    if (!getToken()) {
+      history.replace('/login');
+    }
+  }, []);
+  return (
+    <Permit>
       <Grid
         width="820px"
         is_flex="space-between"
@@ -262,9 +270,8 @@ const Write = (props) => {
           </Button>
         </Grid>
       </Grid>
-    );
-  }
-  return '로그인이 필요합니다.';
+    </Permit>
+  );
 };
 
 Write.defaultProps = {};
