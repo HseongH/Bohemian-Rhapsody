@@ -99,7 +99,6 @@ const Write = (props) => {
     showDate: postInfo ? postInfo.showDate : '',
     description: postInfo ? postInfo.description : '',
   });
-  // const [visible, setVisible] = useState(true);
 
   const isItPossibleToAdd = () => {
     if (
@@ -158,11 +157,13 @@ const Write = (props) => {
       };
     }
   };
+
   useEffect(() => {
     if (!getToken()) {
       history.replace('/login');
     }
   }, []);
+
   return (
     <Permit>
       <Grid
@@ -209,35 +210,6 @@ const Write = (props) => {
 
             <Image style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
           </Grid>
-
-          {/* <Grid margin="20px 0 0">
-            {visible ? (
-              <Button
-                width="100%"
-                height="auto"
-                padding="12px 0"
-                radius="20px"
-                bg="#EFEFEF"
-                hoverColor="#ccc"
-                color="inherit"
-                clickEvent={() => {
-                  setVisible((display) => !display);
-                }}
-              >
-                링크 공유하기
-              </Button>
-            ) : (
-              <Input
-                type="url"
-                placeholder="링크를 공유해 주세요."
-                keyPress={(event) => {
-                  if (event.key === 'Enter') {
-                    setVisible((display) => !display);
-                  }
-                }}
-              />
-            )}
-          </Grid> */}
         </Grid>
 
         <Grid
