@@ -55,3 +55,5 @@ instance.interceptors.request.use((config) => {
 - 이미지의 크기에 따라 레이아웃이 결정되는 경우 이미지 로딩 이전에 요소가 화면에 렌더링되면 부모 요소가 해당 요소의 크기를 제대로 인식하지 못해 레이아웃이 깨지는 현상이 발생한다. 이를 방지하기 위해 lazy loading(게으른 로딩) 방식을 사용해 이미지가 로드되고 난 뒤 화면에 렌더링 해주는 방식을 사용해야 한다. 이 부분은 다음 프로젝트 때 확실히 알고 넘어가자 이번엔 제대로 적용하지 못했다.
 
 [lazy-load-image](https://www.npmjs.com/package/react-lazy-load-image-component)
+
+
