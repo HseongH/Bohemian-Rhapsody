@@ -1,13 +1,11 @@
 // LIBRARY
 import React, { useEffect } from 'react';
-import StackGrid from 'react-stack-grid';
 import { useSelector, useDispatch } from 'react-redux';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
 
-// COMPONENTS
-import Post from '../components/Post';
+import InfinityScroll from '../common/infinityScroll';
 
 const Home = (props) => {
   const dispatch = useDispatch();
@@ -17,13 +15,7 @@ const Home = (props) => {
     dispatch(postActions.getPostListDB());
   }, []);
 
-  return (
-    <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-      {postList.map((post) => {
-        return <Post post={post} key={post.postId + Date.now()} />;
-      })}
-    </StackGrid>
-  );
+  return <InfinityScroll postList={postList} page="Home" />;
 };
 
 Home.defaultProps = {};

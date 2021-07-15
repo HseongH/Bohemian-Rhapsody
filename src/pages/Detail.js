@@ -1,15 +1,16 @@
 // LIBRARY
 import React, { useEffect, useState } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import StackGrid from 'react-stack-grid';
 import { css } from 'styled-components';
 import moment from 'moment';
+
+// FUNCTION
+import InfinityScroll from '../common/infinityScroll';
 
 // ELEMENTS
 import { Button, Grid, Image, Title, Text, Favorite } from '../elements/index';
 
 // COMPONENTS
-import Post from '../components/Post';
 import Permit from '../components/Permit';
 import CommentBox from '../components/CommentBox';
 
@@ -25,17 +26,20 @@ import Dropdown from '../components/Dropdown';
 
 // ICON
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
+import { likeActions } from '../redux/modules/like';
+import { searchActions } from '../redux/modules/search';
 
 const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
 
-  const { userId, postList, postInfo, commentList } = useSelector(
+  const path = window.location.search.slice(1).split('=')[1];
+
+  const { userId, postList, postInfo } = useSelector(
     (state) => ({
       userId: state.user.userId,
       postList: state.post.list,
       postInfo: state.post.post,
-      commentList: state.comment.list,
     }),
     shallowEqual
   );
@@ -48,17 +52,14 @@ const Detail = ({ match }) => {
 
     return () => {
       dispatch(postActions.getOnePost(null));
-      dispatch(commentActions.getCommentList([]));
     };
   }, [postId]);
 
-  useEffect(() => {
-    dispatch(postActions.getPostListDB());
-
-    return () => {
-      dispatch(postActions.getPostList([]));
-    };
-  }, []);
+  // useEffect(() => {
+  //   if (!path) dispatch(postActions.getPostListDB());
+  //   if (path === 'likes') dispatch(likeActions.getLikeListDB());
+  //   if (path === 'search') dispatch(searchActions.searchPostDB());
+  // }, []);
 
   if (postInfo) {
     const date = moment.utc(postInfo.showDate).format('YYYY.MM.DD');
@@ -157,17 +158,11 @@ const Detail = ({ match }) => {
               {visible ? '댓글 숨기기' : '댓글 보기'}
             </Button>
 
-            {visible ? <CommentBox postId={postId} commentList={commentList} /> : null}
+            {visible ? <CommentBox postId={postId} /> : null}
           </Grid>
         </Grid>
 
-        <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-          {postList.map((post) => {
-            if (post.postId === parseInt(postId)) return null;
-
-            return <Post post={post} key={post.postId + Date.now()} />;
-          })}
-        </StackGrid>
+        <InfinityScroll postList={postList} page="Home" />
       </>
     );
   } else {

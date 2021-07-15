@@ -12,7 +12,7 @@ const POST_UPDATE = 'POST_UPDATE';
 const POST_DELETE = 'POST_DELETE';
 
 // ACTION CREATOR
-const getPostList = (postList) => ({ type: GET_POST, postList });
+const getPostList = (postList, start) => ({ type: GET_POST, postList, start });
 const createPost = (post) => ({ type: POST_CREATE, post });
 const getOnePost = (post) => ({ type: POST_DETAIL, post });
 const updatePost = (postId, post) => ({ type: POST_UPDATE, postId, post });
@@ -22,15 +22,27 @@ const deletePost = (postId) => ({ type: POST_DELETE, postId });
 const initialState = {
   list: [],
   post: null,
+  start: 0,
 };
 
 // MIDDLEWARE
-const getPostListDB = () => {
-  return function (dispatch) {
+const getPostListDB = (limit = 6) => {
+  return function (dispatch, getState) {
+    const start = getState().post.start;
+
+    if (start === null) return;
+
     instance
-      .get('/api/post/posts')
+      .get(`/api/post/posts?start=${start}&limit=${limit + 1}`)
       .then((res) => {
-        dispatch(getPostList(res.data.result));
+        if (res.data.result.length < limit + 1) {
+          dispatch(getPostList(res.data.result, null));
+          return;
+        }
+
+        if (res.data.result.length >= limit + 1) res.data.result.pop();
+
+        dispatch(getPostList(res.data.result, start + limit));
       })
       .catch((error) => {
         console.error(error);
@@ -43,20 +55,8 @@ const getOnePostDB = (postId) => {
     instance
       .get(`/detail/${postId}`)
       .then((res) => {
+        console.log(res);
         dispatch(getOnePost(res.data));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-};
-
-const searchPostDB = (keyword) => {
-  return function (dispatch) {
-    instance
-      .get(`/api/search?keyword=${keyword}`)
-      .then((res) => {
-        dispatch(getPostList(res.data.result));
       })
       .catch((error) => {
         console.error(error);
@@ -154,7 +154,7 @@ const deletePostDB = (postId) => {
 function post(state = initialState, action) {
   switch (action.type) {
     case GET_POST:
-      return { ...state, list: action.postList };
+      return { ...state, list: [...state.list, ...action.postList], start: action.start };
 
     case POST_CREATE:
       const newPostList = [action.post, ...state.list];
@@ -196,7 +196,6 @@ export const postActions = {
   deletePost,
   getPostListDB,
   getOnePostDB,
-  searchPostDB,
   createPostDB,
   updatePostDB,
   deletePostDB,

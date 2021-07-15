@@ -10,7 +10,6 @@ import { history } from '../redux/configStore';
 
 // REDUX
 import { userActions } from '../redux/modules/user';
-import { postActions } from '../redux/modules/post';
 
 // FUNCTION
 import { getToken } from '../common/token';
@@ -58,6 +57,7 @@ function App() {
         margin="0 auto"
         padding="110px 0 0"
         width="1440px"
+        height="auto"
         style={{
           minWidth: '450px',
           position: 'relative',

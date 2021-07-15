@@ -1,57 +1,54 @@
-import React from 'react';
-import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import StackGrid from 'react-stack-grid';
 
-const InfinityScroll = (props) => {
-  const { children, callNext, is_next, loading } = props;
-  // 쓰로틀 적용하기.
-  const _handleScroll = _.throttle(() => {
-    if (loading) {
-      return;
-    }
-    const { innerHeight } = window;
-    const { scrollHeight } = document.body;
+// REDUX
+import { postActions } from '../redux/modules/post';
+import { searchActions } from '../redux/modules/search';
+import { likeActions } from '../redux/modules/like';
 
-    // 스크롤을 움직인 만큼 계산하기.
-    const scrollTop =
-      (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+// COMPONENTS
+import Post from '../components/Post';
 
-    if (scrollHeight - innerHeight - scrollTop < 200) {
-      // 로딩 중이면 다음 걸 부르면 안되겠죠!
-      if (loading) {
-        return;
+const InfinityScroll = ({ postList, page, keyword }) => {
+  const dispatch = useDispatch();
+
+  const [target, setTarget] = useState(null);
+
+  useEffect(() => {
+    const options = { threshold: 0.5 };
+
+    const infiniteScroll = ([entries], observer) => {
+      if (entries.isIntersecting) {
+        new Promise((resolve) => {
+          if (page === 'Home') resolve(dispatch(postActions.getPostListDB()));
+          if (page === 'Search') resolve(dispatch(searchActions.searchPostDB(keyword)));
+          if (page === 'Like') resolve(dispatch(likeActions.getLikeListDB()));
+        }).then((res) => {
+          observer.unobserve(entries.target);
+        });
       }
+    };
 
-      callNext();
-    }
-  }, 300);
+    const io = new IntersectionObserver(infiniteScroll, options);
+    if (target) io.observe(target);
 
-  const handleScroll = React.useCallback(_handleScroll, [loading]);
+    return () => io && io.disconnect();
+  }, [target]);
 
-  React.useEffect(() => {
-    // 로딩 중이면, return!
-    if (loading) {
-      return;
-    }
+  return (
+    <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
+      {postList.map((post, idx) => {
+        const isLast = idx === postList.length - 1;
 
-    // 다음 게 있으면 이벤트를 붙이고, 없으면 이벤트를 삭제함.
-    if (is_next) {
-      window.addEventListener('scroll', handleScroll);
-    } else {
-      window.removeEventListener('scroll', handleScroll);
-    }
-
-    // useEffect cleanup 한다. -> 화면에 없으면 구독을 해제 함.
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [is_next, loading]);
-
-  return <React.Fragment>{children}</React.Fragment>;
-};
-
-InfinityScroll.defaultProps = {
-  children: null,
-  callNext: () => {},
-  is_next: false,
-  loading: false,
+        return (
+          <div ref={isLast ? setTarget : null} key={post.postId}>
+            <Post post={post} />
+          </div>
+        );
+      })}
+    </StackGrid>
+  );
 };
 
 export default InfinityScroll;

@@ -49,6 +49,7 @@ const Post = ({ post }) => {
       onClick={() => {
         history.push(`/detail/${post.postId}`);
       }}
+      key={post.postId}
     >
       <Image src={post.img} />
 

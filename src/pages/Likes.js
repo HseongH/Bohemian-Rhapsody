@@ -1,13 +1,14 @@
 // LIBRARY
 import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import StackGrid from 'react-stack-grid';
 
 //TOKEN
 import { getToken } from '../common/token';
 
+// FUNCTION
+import InfinityScroll from '../common/infinityScroll';
+
 // COMPONENTS
-import Post from '../components/Post';
 import Permit from '../components/Permit';
 
 // ELEMENTS
@@ -66,13 +67,7 @@ const Likes = (props) => {
             </Button>
           </>
         ) : (
-          <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-            {likeList.map((post) => {
-              const postInfo = { ...post, favorite: 'TRUE' };
-
-              return <Post post={postInfo} key={post.postId + Date.now()} />;
-            })}
-          </StackGrid>
+          <InfinityScroll postList={likeList} page="Like" />
         )}
       </Grid>
     </Permit>
