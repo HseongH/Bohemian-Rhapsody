@@ -8,7 +8,7 @@ import { getToken } from '../common/token';
 
 // COMPONENTS
 import Post from '../components/Post';
-import Permit from '../components/Permit'
+import Permit from '../components/Permit';
 
 // ELEMENTS
 import { Button, Text, Grid, Title } from '../elements/index';
@@ -29,13 +29,11 @@ const Likes = (props) => {
   );
 
   useEffect(() => {
-    dispatch(likeActions.getLikeListDB());
-  }, []);
-
-  useEffect(() => {
     if (!getToken()) {
       history.replace('/login');
     }
+
+    dispatch(likeActions.getLikeListDB());
   }, []);
 
   return (
