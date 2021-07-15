@@ -3,8 +3,12 @@ import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import StackGrid from 'react-stack-grid';
 
+//TOKEN
+import { getToken } from '../common/token';
+
 // COMPONENTS
 import Post from '../components/Post';
+import Permit from '../components/Permit'
 
 // ELEMENTS
 import { Button, Text, Grid, Title } from '../elements/index';
@@ -28,44 +32,52 @@ const Likes = (props) => {
     dispatch(likeActions.getLikeListDB());
   }, []);
 
+  useEffect(() => {
+    if (!getToken()) {
+      history.replace('/login');
+    }
+  }, []);
+
   return (
-    <Grid>
-      <Title margin="80px 0" textAlign="center" fontSize="28px">
-        {nickname}
-      </Title>
+    <Permit>
+      <Grid>
+        <Title margin="80px 0" textAlign="center" fontSize="28px">
+          {nickname}
+        </Title>
 
-      <hr color="#eee" width="100%" />
+        <hr color="#eee" width="100%" />
 
-      {!likeList.length ? (
-        <>
-          <Text textAlign="center" margin="30px 0" fontSize="20px">
-            아직 저장한 게시물이 없습니다.
-          </Text>
+        {!likeList.length ? (
+          <>
+            <Text textAlign="center" margin="30px 0" fontSize="20px">
+              아직 저장한 게시물이 없습니다.
+            </Text>
 
-          <Button
-            width="200px"
-            height="auto"
-            padding="12px 18px"
-            radius="30px"
-            margin="0 auto"
-            display="flex"
-            clickEvent={() => {
-              history.push('/');
-            }}
-          >
-            게시물 추가하러 가기
-          </Button>
-        </>
-      ) : (
-        <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
-          {likeList.map((post) => {
-            const postInfo = { ...post, favorite: 'TRUE' };
+            <Button
+              width="200px"
+              height="auto"
+              padding="12px 18px"
+              radius="30px"
+              margin="0 auto"
+              display="flex"
+              clickEvent={() => {
+                history.push('/');
+              }}
+            >
+              게시물 추가하러 가기
+            </Button>
+          </>
+        ) : (
+          <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
+            {likeList.map((post) => {
+              const postInfo = { ...post, favorite: 'TRUE' };
 
-            return <Post post={postInfo} key={post.postId + Date.now()} />;
-          })}
-        </StackGrid>
-      )}
-    </Grid>
+              return <Post post={postInfo} key={post.postId + Date.now()} />;
+            })}
+          </StackGrid>
+        )}
+      </Grid>
+    </Permit>
   );
 };
 
