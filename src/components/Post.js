@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // ELEMENTS
-import { Image, Favorite } from '../elements/index';
+import { LazyImage, Favorite } from '../elements/index';
 import Permit from './Permit';
 
 // HISTORY
@@ -11,6 +11,7 @@ import { history } from '../redux/configStore';
 
 const PostStyle = styled.div`
   width: 252px;
+  height: ${(props) => props.height};
   border-radius: 20px;
   margin: 10px;
   overflow: hidden;
@@ -43,14 +44,15 @@ const PostStyle = styled.div`
   }
 `;
 
-const Post = ({ post }) => {
+const Post = ({ post, height }) => {
   const FancyPost = (
     <PostStyle
       onClick={() => {
         history.push(`/detail/${post.postId}`);
       }}
+      height={height}
     >
-      <Image src={post.img} />
+      <LazyImage src={post.img} />
 
       <Permit>
         <div>

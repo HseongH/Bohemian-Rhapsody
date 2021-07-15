@@ -10,7 +10,7 @@ import { getToken } from '../common/token';
 import { history } from '../redux/configStore';
 
 // ELEMENTS
-import { Grid, Button, Input, Text, Image } from '../elements/index';
+import { Grid, Button, Input, Text, LazyImage } from '../elements/index';
 
 // COMPONENTS
 import Permit from '../components/Permit';
@@ -208,7 +208,7 @@ const Write = (props) => {
               onChange={selectFile}
             />
 
-            <Image style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
+            <LazyImage style={{ position: 'absolute', left: 0, top: 0 }} src={preview} />
           </Grid>
         </Grid>
 

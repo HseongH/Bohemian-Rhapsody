@@ -8,13 +8,11 @@ const ImageStyle = styled.img`
   cursor: pointer;
 `;
 
-const Image = (props) => {
+const LazyImage = (props) => {
   const { src, alt } = props;
 
   if (src) return <ImageStyle src={src} alt={alt} />;
   else return null;
 };
 
-Image.defaultProps = {};
-
-export default Image;
+export default LazyImage;

@@ -8,7 +8,7 @@ import moment from 'moment';
 import InfinityScroll from '../common/infinityScroll';
 
 // ELEMENTS
-import { Button, Grid, Image, Title, Text, Favorite } from '../elements/index';
+import { Button, Grid, LazyImage, Title, Text, Favorite } from '../elements/index';
 
 // COMPONENTS
 import Permit from '../components/Permit';
@@ -85,7 +85,7 @@ const Detail = ({ match }) => {
           }}
         >
           <Grid width="350px" margin="0 30px 0 0" radius="20px">
-            <Image src={postInfo.img} />
+            <LazyImage src={postInfo.img} />
           </Grid>
 
           <Grid
