@@ -3,12 +3,14 @@ import instance from '../../common/axios';
 
 // ACTION
 const GET_COMMENT = 'GET_COMMENT';
+const MORE_COMMENT = 'MORE_COMMENT';
 const ADD_COMMENT = 'ADD_COMMENT';
 const UPDATE_COMMENT = 'UPDATE_COMMENT';
 const DEL_COMMENT = 'DEL_COMMENT';
 
 // ACTION CREATER
 const getCommentList = (commentList, start) => ({ type: GET_COMMENT, commentList, start });
+const getMoreCommnet = (commentList, start) => ({ type: MORE_COMMENT, commentList, start });
 const addComment = (comment) => ({ type: ADD_COMMENT, comment });
 const updateComment = (commentId, comment) => ({ type: UPDATE_COMMENT, commentId, comment });
 const delComment = (commentId) => ({ type: DEL_COMMENT, commentId, comment });
@@ -21,6 +23,26 @@ const initialState = {
 
 // MIDDLEWARE
 const getCommentListDB = (postId, limit = 3) => {
+  return function (dispatch) {
+    instance
+      .get(`/api/comment?postId=${postId}&start=0&limit=${limit + 1}`)
+      .then((res) => {
+        if (res.data.result.length < limit + 1) {
+          dispatch(getCommentList(res.data.result, null));
+          return;
+        }
+
+        if (res.data.result.length >= limit + 1) res.data.result.pop();
+
+        dispatch(getCommentList(res.data.result, limit));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+const getMoreCommentDB = (postId, limit = 3) => {
   return function (dispatch, getState) {
     const start = getState().comment.start;
 
@@ -30,13 +52,13 @@ const getCommentListDB = (postId, limit = 3) => {
       .get(`/api/comment?postId=${postId}&start=${start}&limit=${limit + 1}`)
       .then((res) => {
         if (res.data.result.length < limit + 1) {
-          dispatch(getCommentList(res.data.result, null));
+          dispatch(getMoreCommnet(res.data.result, null));
           return;
         }
 
         if (res.data.result.length >= limit + 1) res.data.result.pop();
 
-        dispatch(getCommentList(res.data.result, start + limit));
+        dispatch(getMoreCommnet(res.data.result, start + limit));
       })
       .catch((error) => {
         console.error(error);
@@ -91,6 +113,9 @@ const delCommentDB = (commentId) => {
 function comment(state = initialState, action) {
   switch (action.type) {
     case GET_COMMENT:
+      return { list: action.commentList, start: action.start };
+
+    case MORE_COMMENT:
       return { list: [...state.list, ...action.commentList], start: action.start };
 
     case ADD_COMMENT:
@@ -133,6 +158,7 @@ export const commentActions = {
   updateComment,
   delComment,
   getCommentListDB,
+  getMoreCommentDB,
   addCommentDB,
   updateCommentDB,
   delCommentDB,

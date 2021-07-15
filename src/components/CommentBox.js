@@ -1,5 +1,5 @@
 // LIBRARY
-import React from 'react';
+import React, { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -50,6 +50,14 @@ const CommentBox = ({ postId }) => {
     dispatch(commentActions.addCommentDB(postId, contents));
   };
 
+  useEffect(() => {
+    dispatch(commentActions.getCommentListDB(postId));
+
+    return () => {
+      dispatch(commentActions.getCommentList([], 0));
+    };
+  }, [postId]);
+
   return (
     <>
       <Input
@@ -78,7 +86,7 @@ const CommentBox = ({ postId }) => {
             margin="30px 0 20px"
             hoverColor="none"
             clickEvent={() => {
-              dispatch(commentActions.getCommentListDB(postId));
+              dispatch(commentActions.getMoreCommentDB(postId));
             }}
           >
             댓글 더 보기

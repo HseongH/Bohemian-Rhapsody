@@ -48,7 +48,6 @@ const Detail = ({ match }) => {
 
   useEffect(() => {
     dispatch(postActions.getOnePostDB(postId));
-    dispatch(commentActions.getCommentListDB(postId));
 
     return () => {
       dispatch(postActions.getOnePost(null));
