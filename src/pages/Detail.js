@@ -51,11 +51,11 @@ const Detail = ({ match }) => {
     };
   }, [postId]);
 
-  // useEffect(() => {
-  //   if (!path) dispatch(postActions.getPostListDB());
-  //   if (path === 'likes') dispatch(likeActions.getLikeListDB());
-  //   if (path === 'search') dispatch(searchActions.searchPostDB());
-  // }, []);
+  useEffect(() => {
+    dispatch(postActions.getPostListDB());
+    // if (path === 'likes') dispatch(likeActions.getLikeListDB());
+    // if (path === 'search') dispatch(searchActions.searchPostDB());
+  }, []);
 
   if (postInfo) {
     const date = moment.utc(postInfo.showDate).format('YYYY.MM.DD');
@@ -158,7 +158,7 @@ const Detail = ({ match }) => {
           </Grid>
         </Grid>
 
-        <InfinityScroll postList={postList} page="Home" />
+        <InfinityScroll postList={postList} page="Home" postId={postId} />
       </>
     );
   } else {

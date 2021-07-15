@@ -10,7 +10,7 @@ import { likeActions } from '../redux/modules/like';
 // COMPONENTS
 import Post from '../components/Post';
 
-const InfinityScroll = ({ postList, page, keyword }) => {
+const InfinityScroll = ({ postList, page, keyword, postId }) => {
   const dispatch = useDispatch();
 
   const [target, setTarget] = useState(null);
@@ -40,6 +40,8 @@ const InfinityScroll = ({ postList, page, keyword }) => {
     <StackGrid columnWidth={272} style={{ paddingBottom: '80px' }}>
       {postList.map((post, idx) => {
         const isLast = idx === postList.length - 1;
+
+        if (post.postId === parseInt(postId)) return null;
 
         return (
           <div ref={isLast ? setTarget : null} key={post.postId}>
