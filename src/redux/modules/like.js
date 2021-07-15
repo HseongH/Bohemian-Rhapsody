@@ -3,10 +3,12 @@ import instance from '../../common/axios';
 
 // ACTION
 const GET_LIKE_LIST = 'GET_LIKE_LIST';
+const GET_MORE_LIKE_LIST = 'GET_MORE_LIKE_LIST';
 const REMOVE_LIKE_POST = 'REMOVE_LIKE_POST';
 
 // ACTION CREATOR
 const getLikeList = (likeList, start) => ({ type: GET_LIKE_LIST, likeList, start });
+const getMoreLikeList = (likeList, start) => ({ type: GET_MORE_LIKE_LIST, likeList, start });
 const removeLikePost = (postId) => ({ type: REMOVE_LIKE_POST, postId });
 
 // INITIAL STATE
@@ -17,6 +19,26 @@ const initialState = {
 
 // MIDDLEWARE
 const getLikeListDB = (limit = 6) => {
+  return function (dispatch) {
+    instance
+      .get(`/api/like?start=0&limit=${limit + 1}`)
+      .then((res) => {
+        if (res.data.result.length < limit + 1) {
+          dispatch(getLikeList(res.data.result, null));
+          return;
+        }
+
+        if (res.data.result.length >= limit + 1) res.data.result.pop();
+
+        dispatch(getLikeList(res.data.result, limit));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+};
+
+const getMoreLikeListDB = (limit = 6) => {
   return function (dispatch, getState) {
     const start = getState().like.start;
 
@@ -26,13 +48,13 @@ const getLikeListDB = (limit = 6) => {
       .get(`/api/like?start=${start}&limit=${limit + 1}`)
       .then((res) => {
         if (res.data.result.length < limit + 1) {
-          dispatch(getLikeList(res.data.result, null));
+          dispatch(getMoreLikeList(res.data.result, null));
           return;
         }
 
         if (res.data.result.length >= limit + 1) res.data.result.pop();
 
-        dispatch(getLikeList(res.data.result, start + limit));
+        dispatch(getMoreLikeList(res.data.result, start + limit));
       })
       .catch((error) => {
         console.error(error);
@@ -63,6 +85,9 @@ const postRemoveLikeDB = (postId) => {
 function like(state = initialState, action) {
   switch (action.type) {
     case GET_LIKE_LIST:
+      return { list: action.likeList, start: action.start };
+
+    case GET_MORE_LIKE_LIST:
       return { list: [...state.list, ...action.likeList], start: action.start };
 
     case REMOVE_LIKE_POST:
@@ -78,7 +103,9 @@ function like(state = initialState, action) {
 export default like;
 
 export const likeActions = {
+  getLikeList,
   getLikeListDB,
+  getMoreLikeListDB,
   postLikeDB,
   postRemoveLikeDB,
 };

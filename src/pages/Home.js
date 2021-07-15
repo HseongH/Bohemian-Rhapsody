@@ -13,6 +13,10 @@ const Home = (props) => {
 
   useEffect(() => {
     dispatch(postActions.getPostListDB());
+
+    return () => {
+      dispatch(postActions.getPostList([], 0));
+    };
   }, []);
 
   return <InfinityScroll postList={postList} page="Home" />;

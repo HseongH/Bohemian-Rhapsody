@@ -21,9 +21,9 @@ const InfinityScroll = ({ postList, page, keyword }) => {
     const infiniteScroll = ([entries], observer) => {
       if (entries.isIntersecting) {
         new Promise((resolve) => {
-          if (page === 'Home') resolve(dispatch(postActions.getPostListDB()));
-          if (page === 'Search') resolve(dispatch(searchActions.searchPostDB(keyword)));
-          if (page === 'Like') resolve(dispatch(likeActions.getLikeListDB()));
+          if (page === 'Home') resolve(dispatch(postActions.getMorePostListDB()));
+          if (page === 'Search') resolve(dispatch(searchActions.searchMorePostDB(keyword)));
+          if (page === 'Like') resolve(dispatch(likeActions.getMoreLikeListDB()));
         }).then((res) => {
           observer.unobserve(entries.target);
         });

@@ -16,7 +16,6 @@ import CommentBox from '../components/CommentBox';
 
 // REDUX
 import { postActions } from '../redux/modules/post';
-import { commentActions } from '../redux/modules/comment';
 
 // HISTORY
 import { history } from '../redux/configStore';
@@ -32,8 +31,6 @@ import { searchActions } from '../redux/modules/search';
 const Detail = ({ match }) => {
   const { postId } = match.params;
   const dispatch = useDispatch();
-
-  const path = window.location.search.slice(1).split('=')[1];
 
   const { userId, postList, postInfo } = useSelector(
     (state) => ({

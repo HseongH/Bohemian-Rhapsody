@@ -35,6 +35,10 @@ const Likes = (props) => {
     }
 
     dispatch(likeActions.getLikeListDB());
+
+    return () => {
+      dispatch(likeActions.getLikeList([], 0));
+    };
   }, []);
 
   return (

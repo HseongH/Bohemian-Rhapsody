@@ -19,6 +19,10 @@ const Search = (props) => {
 
   useEffect(() => {
     dispatch(searchActions.searchPostDB(keyword));
+
+    return () => {
+      dispatch(searchActions.getSearchList([], 0));
+    };
   }, [keyword]);
 
   return (
