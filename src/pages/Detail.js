@@ -25,8 +25,6 @@ import Dropdown from '../components/Dropdown';
 
 // ICON
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import { likeActions } from '../redux/modules/like';
-import { searchActions } from '../redux/modules/search';
 
 const Detail = ({ match }) => {
   const { postId } = match.params;
@@ -53,8 +51,10 @@ const Detail = ({ match }) => {
 
   useEffect(() => {
     dispatch(postActions.getPostListDB());
-    // if (path === 'likes') dispatch(likeActions.getLikeListDB());
-    // if (path === 'search') dispatch(searchActions.searchPostDB());
+
+    return () => {
+      dispatch(postActions.getPostList([], 0));
+    };
   }, []);
 
   if (postInfo) {

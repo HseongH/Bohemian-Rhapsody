@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 // ELEMENTS
-import { Image, Favorite } from '../elements';
+import { Image, Favorite } from '../elements/index';
 import Permit from './Permit';
 
 // HISTORY
@@ -44,12 +44,11 @@ const PostStyle = styled.div`
 `;
 
 const Post = ({ post }) => {
-  return (
+  const FancyPost = (
     <PostStyle
       onClick={() => {
         history.push(`/detail/${post.postId}`);
       }}
-      key={post.postId}
     >
       <Image src={post.img} />
 
@@ -60,6 +59,14 @@ const Post = ({ post }) => {
       </Permit>
     </PostStyle>
   );
+
+  switch (document.readyState) {
+    case 'complete':
+      return FancyPost;
+
+    default:
+      return null;
+  }
 };
 
 Post.defaultProps = {};
