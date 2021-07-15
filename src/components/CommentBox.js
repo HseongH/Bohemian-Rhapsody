@@ -13,7 +13,7 @@ import { Button, Input } from '../elements/index';
 import Comment from './Comment';
 
 const CommentWrapStyle = styled.div`
-  max-height: 200px;
+  max-height: 350px;
   overflow: auto;
 
   &::-webkit-scrollbar {
