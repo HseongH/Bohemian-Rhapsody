@@ -58,7 +58,11 @@ function App() {
         margin="0 auto"
         padding="110px 0 0"
         width="1440px"
-        style={{ minWidth: '450px', position: 'relative', minHeight: '100vh' }}
+        style={{
+          minWidth: '450px',
+          position: 'relative',
+          transition: 'height 480ms ease-out 0s',
+        }}
         laptoptStyle={() => {
           return css`
             max-width: none;

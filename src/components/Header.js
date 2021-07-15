@@ -103,7 +103,7 @@ const Header = (props) => {
             contents={['로그아웃', '즐겨찾기']}
             clickEvent={[
               () => {
-                dispatch(userActions.logOut({}));
+                dispatch(userActions.logOut());
                 history.push('/login');
               },
               () => {
