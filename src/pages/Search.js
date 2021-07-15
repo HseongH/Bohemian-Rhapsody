@@ -1,7 +1,10 @@
 // LIBRARY
-import React from 'react';
+import React, { useEffect } from 'react';
 import StackGrid from 'react-stack-grid';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+// REDUXS
+import { postActions } from '../redux/modules/post';
 
 // ELEMENTS
 import { Text } from '../elements/index';
@@ -10,9 +13,14 @@ import { Text } from '../elements/index';
 import Post from '../components/Post';
 
 const Search = (props) => {
+  const dispatch = useDispatch();
+
   const keyword = window.location.search.slice(1).split('=')[1];
   const searchList = useSelector((state) => state.post.list);
-  console.log(searchList);
+
+  useEffect(() => {
+    dispatch(postActions.searchPostDB(keyword));
+  }, [keyword]);
 
   return (
     <>

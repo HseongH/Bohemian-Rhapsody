@@ -14,7 +14,6 @@ import { history } from '../redux/configStore';
 //REDUX-ACTION & REACT-HOOK
 import { userActions } from '../redux/modules/user';
 import { useSelector, useDispatch } from 'react-redux';
-import { postActions } from '../redux/modules/post';
 
 // FUNCTION
 import { searchKeywordValidation } from '../common/validation';
@@ -95,7 +94,6 @@ const Header = (props) => {
               }
 
               history.push(`/search?keyword=${event.target.value}`);
-              dispatch(postActions.searchPostDB(event.target.value));
             }
           }}
         />
