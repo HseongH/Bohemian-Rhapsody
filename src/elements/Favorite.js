@@ -17,7 +17,7 @@ const Favorite = ({ postId, favorite }) => {
   };
 
   const removeLike = () => {
-    dispatch(likeActions.postRemoveListDB(postId));
+    dispatch(likeActions.postRemoveLikeDB(postId));
   };
 
   return (

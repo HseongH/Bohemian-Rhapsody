@@ -11,7 +11,7 @@ const POST_DETAIL = 'POST_DETAIL';
 const POST_UPDATE = 'POST_UPDATE';
 const POST_DELETE = 'POST_DELETE';
 
-// ACTION CREATER
+// ACTION CREATOR
 const getPostList = (postList) => ({ type: GET_POST, postList });
 const createPost = (post) => ({ type: POST_CREATE, post });
 const getOnePost = (post) => ({ type: POST_DETAIL, post });
@@ -43,7 +43,6 @@ const getOnePostDB = (postId) => {
     instance
       .get(`/detail/${postId}`)
       .then((res) => {
-        console.log(res);
         dispatch(getOnePost(res.data));
       })
       .catch((error) => {
@@ -56,19 +55,6 @@ const searchPostDB = (keyword) => {
   return function (dispatch) {
     instance
       .get(`/api/search?keyword=${keyword}`)
-      .then((res) => {
-        dispatch(getPostList(res.data.result));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
-};
-
-const getLikeListDB = () => {
-  return function (dispatch) {
-    instance
-      .get('/api/like')
       .then((res) => {
         dispatch(getPostList(res.data.result));
       })
@@ -211,7 +197,6 @@ export const postActions = {
   getPostListDB,
   getOnePostDB,
   searchPostDB,
-  getLikeListDB,
   createPostDB,
   updatePostDB,
   deletePostDB,

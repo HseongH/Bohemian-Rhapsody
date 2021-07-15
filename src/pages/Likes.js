@@ -11,7 +11,7 @@ import { Button, Text, Grid, Title } from '../elements/index';
 
 // HISTORY
 import { history } from '../redux/configStore';
-import { postActions } from '../redux/modules/post';
+import { likeActions } from '../redux/modules/like';
 
 const Likes = (props) => {
   const dispatch = useDispatch();
@@ -19,13 +19,13 @@ const Likes = (props) => {
   const { nickname, likeList } = useSelector(
     (state) => ({
       nickname: state.user.nickname,
-      likeList: state.post.list,
+      likeList: state.like.list,
     }),
     shallowEqual
   );
 
   useEffect(() => {
-    dispatch(postActions.getLikeListDB());
+    dispatch(likeActions.getLikeListDB());
   }, []);
 
   return (

@@ -9,6 +9,7 @@ import User from './modules/user';
 import post from './modules/post';
 import image from './modules/image';
 import comment from './modules/comment';
+import like from './modules/like';
 
 // HISTORY
 export const history = createBrowserHistory();
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   post,
   image,
   comment,
+  like,
   router: connectRouter(history),
 });
 
