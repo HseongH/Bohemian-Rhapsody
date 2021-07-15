@@ -38,7 +38,7 @@
 
 ### axios를 이용한 서버 통신
 
-- axios의 interceptors를 이용해 서버에 정보 요청 이전에 헤더에 토큰을 담아 보냉 수 있다. interceptors는 서버 요청 이전에 동작을 가로채서 다른 동작을 수행하게 해준다.
+- axios의 interceptors를 이용해 서버에 정보 요청 이전에 헤더에 토큰을 담아 보낼 수 있다. interceptors는 서버 요청 이전에 동작을 가로채서 다른 동작을 수행하게 해준다.
 
 ```javascript
 instance.interceptors.request.use((config) => {
