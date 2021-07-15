@@ -17,7 +17,7 @@ const CHECK_DUP = 'CHECK_DUP';
 // ACTION CREATORS
 const checkDidIWrite = createAction(DID_I_WRITE, (userInfo) => ({ userInfo }));
 const logIn = createAction(LOG_IN, (token) => ({ token }));
-const logOut = createAction(LOG_OUT, (user) => ({ user }));
+const logOut = createAction(LOG_OUT);
 const checkDup = createAction(CHECK_DUP, (nickname) => ({ nickname }));
 
 // INITIAL STATE
@@ -94,9 +94,6 @@ const signupDB = (id, pwd, pwdCheck) => {
   return function () {
     instance
       .post('/api/sign', { nickname: id, password: pwd, confirmPassword: pwdCheck })
-      .then((res) => {
-        console.log(res);
-      })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -105,6 +102,7 @@ const signupDB = (id, pwd, pwdCheck) => {
       });
   };
 };
+
 // REDUCER
 export default handleActions(
   {
