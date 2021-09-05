@@ -1,6 +1,6 @@
 # Bohemian Rhapsody
 
-[사이트 링크 바로가기](http://bohemianrhapsody.shop/) / [시연 영상 보기](https://www.youtube.com/watch?v=lUjD6D7hPKA&feature=youtu.be)
+[시연 영상 보기](https://www.youtube.com/watch?v=lUjD6D7hPKA&feature=youtu.be)
 
 ## 목차
 
